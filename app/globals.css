@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-slate-100 text-gray-800;
+    @apply relative bg-white text-gray-800;
   }
 }
 

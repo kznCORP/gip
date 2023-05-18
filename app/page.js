@@ -1,6 +1,53 @@
+"use client";
+
 import { MdOutlineAdd } from "react-icons/md";
 
 import { currencyFormatter } from "../lib/utils";
+import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
+
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
+const DEFAULT_DATA = [
+  {
+    id: 1,
+    title: "Food",
+    total: 300.0,
+    color: "#00c8ff",
+  },
+  {
+    id: 2,
+    title: "Entertainment",
+    total: 500.0,
+    color: "#ff3700",
+  },
+  {
+    id: 3,
+    title: "Gas",
+    total: 250.0,
+    color: "#46dfb4",
+  },
+  {
+    id: 4,
+    title: "Shopping",
+    total: 1000.0,
+    color: "#ff00c8",
+  },
+  {
+    id: 5,
+    title: "Rentals",
+    total: 450.0,
+    color: "#0000ff",
+  },
+  {
+    id: 6,
+    title: "AirBnB",
+    total: 1150.0,
+    color: "#ff9d2c",
+  },
+];
 
 export default function Home() {
   return (
@@ -10,42 +57,55 @@ export default function Home() {
           <h2 className="text-4xl font-bold">Expenses</h2>
           <div className="my-5">
             <small className="text-md text-gray-400">Total Amt. Spent</small>
-            <p>{currencyFormatter(1234.56)}</p>
+            <p>{currencyFormatter(2345.78)}</p>
           </div>
         </section>
 
         <section>
-          <button className="text-md my-5 flex   items-center   gap-2 rounded-lg bg-blue-600 p-3 font-medium text-white">
+          <button className="text-md mb-10 mt-5 flex   items-center   gap-2 rounded-lg bg-blue-600 p-3 font-medium text-white">
             Add Expense <MdOutlineAdd className="text-xl" />
           </button>
         </section>
 
         {/* List of Expenses */}
         <section>
-          <h3 className="text-xl text-gray-400">List of expenses</h3>
+          <h3 className="mb-6 text-lg text-gray-500">List of expenses</h3>
+          <div className="mb-4 flex justify-between px-4 ">
+            <small className=" font-light text-gray-400 ">Category</small>
+            <small className=" font-light text-gray-400 ">Total</small>
+          </div>
+          {/* Expense Container */}
+          <div className="flex flex-col gap-4">
+            {DEFAULT_DATA.map((expense) => (
+              <ExpenseCategoryItem
+                key={expense.id}
+                title={expense.title}
+                {...expense}
+              />
+            ))}
+          </div>
+        </section>
 
-          {/* Expense Item */}
-          <div className="flex items-center justify-between rounded-lg bg-slate-600 px-2 py-3 text-white">
-            {/* Price */}
-            <div>
-              <p className="text-sm">{currencyFormatter(500)}</p>
-            </div>
+        {/* Charts */}
+        <section className="py-10">
+          <h3 className="mb-6 text-lg text-gray-500">Charts</h3>
 
-            {/* Name */}
-            <div>
-              <p className="text-sm">Marukame Udon</p>
-            </div>
-
-            {/* Categories */}
-            <div className="flex items-center gap-2">
-              <div className="h-[15px] w-[15px] rounded-full bg-red-400 " />
-              <p className="text-sm font-medium">Food</p>
-            </div>
-
-            {/* Date */}
-            <div>
-              <p className="text-sm">May 17, 2023</p>
-            </div>
+          <div>
+            <Doughnut
+              data={{
+                labels: DEFAULT_DATA.map((expense) => expense.title),
+                datasets: [
+                  {
+                    label: "Expenses",
+                    data: DEFAULT_DATA.map((expense) => expense.total),
+                    backgroundColor: DEFAULT_DATA.map(
+                      (expense) => expense.color
+                    ),
+                    hoverOffset: 4,
+                  },
+                ],
+              }}
+            />
           </div>
         </section>
       </main>
