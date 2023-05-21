@@ -1,17 +1,19 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import { MdOutlineAdd } from "react-icons/md";
+import { MdAdd } from "react-icons/md";
 
 import { currencyFormatter } from "@/lib/utils";
 import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
 import { Modal } from "@/components/Modal";
 
-import { addNewExpense, getAllExpenses } from "@/lib/firebase/firestore";
+import { getAllExpenses } from "@/lib/firebase/firestore";
+
 import { AllExpenseItems } from "@/components/Expenses/AllExpenseItems";
+import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -60,22 +62,6 @@ export default function Home() {
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [showAllExpenseModal, setShowAllExpenseModal] = useState(false);
 
-  const amountRef = useRef();
-  const title = useRef();
-
-  // Add a new Expense to Firebase
-  const addExpenseHandler = (e) => {
-    e.preventDefault();
-
-    const newExpense = {
-      title: title.current.value,
-      amount: amountRef.current.value,
-      date: new Date(),
-    };
-
-    addNewExpense(newExpense.title, newExpense.amount, newExpense.date);
-  };
-
   // View all Expenses from Firebase
   useEffect(() => {
     const fetchAllExpenses = async () => {
@@ -88,42 +74,16 @@ export default function Home() {
 
   return (
     <>
-      {/* Add Expenses */}
-      <Modal onShow={showAddExpenseModal} onClose={setShowAddExpenseModal}>
-        <form onSubmit={addExpenseHandler} className="flex flex-col gap-4">
-          <div className="flex flex-col gap-1">
-            <label htmlFor="title">Name of Expense</label>
-            <input
-              type="text"
-              name="title"
-              ref={title}
-              placeholder="Enter the name of the expense"
-              required
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="amount">Amount</label>
-            <input
-              type="number"
-              name="amount"
-              ref={amountRef}
-              min={0.01}
-              step={0.01}
-              placeholder="Enter Amount"
-              required
-            />
-          </div>
-          <button type="submit" className="text-md bg-blue-600 p-3">
-            Submit
-          </button>
-        </form>
-      </Modal>
+      <AddExpenseModal
+        onShow={showAddExpenseModal}
+        onClose={() => setShowAddExpenseModal(false)}
+      />
 
       {/* View All Expenses */}
       <Modal onShow={showAllExpenseModal} onClose={setShowAllExpenseModal}>
         <h3>All Expenses will be viewed here.</h3>
-        {allExpenses.map((expense) => (
-          <AllExpenseItems key={expense.id} expense={expense} />
+        {allExpenses.map((e) => (
+          <AllExpenseItems key={e.id} expense={e} />
         ))}
       </Modal>
 
@@ -145,7 +105,7 @@ export default function Home() {
               className="text-md mb-10  flex   items-center   gap-2 rounded-lg bg-blue-600 p-3 font-medium text-white"
               onClick={() => setShowAddExpenseModal(true)}
             >
-              Add Expense <MdOutlineAdd className="text-xl" />
+              Add Expense <MdAdd className="text-xl" />
             </button>
             <button
               data-modal-target="authentication-modal"
