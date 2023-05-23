@@ -3,7 +3,7 @@ import "./globals.css";
 import { AuthUserProvider } from "@/lib/firebase/auth";
 import { FinanceContextProvider } from "@/lib/financeContext";
 
-import Navigation from "@/components/Navigation";
+import Navigation from "../components/Navigation";
 
 export const metadata = {
   title: "GIP - Group Itinerary Planner",
