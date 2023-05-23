@@ -1,13 +1,14 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import { Modal } from "../Modal";
-import { addNewExpense } from "@/lib/firebase/firestore";
+import { financeContext } from "@/lib/financeContext";
 
 export const AddExpenseModal = ({ onShow, onClose }) => {
   const amountRef = useRef();
   const titleRef = useRef();
+  const { addExpenseItem } = useContext(financeContext);
 
   // Add a new Expense to Firebase
-  const addExpenseHandler = (e) => {
+  const addExpenseHandler = async (e) => {
     e.preventDefault();
 
     const newExpense = {
@@ -16,11 +17,14 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
       date: new Date(),
     };
 
-    addNewExpense(newExpense.title, newExpense.amount, newExpense.date);
-
-    // Reset form fields
-    amountRef.current.value = "";
-    titleRef.current.value = "";
+    try {
+      await addExpenseItem(newExpense);
+      // Reset form fields
+      amountRef.current.value = "";
+      titleRef.current.value = "";
+    } catch (e) {
+      console.log("Error in Adding Expense Modal: ", e);
+    }
   };
 
   return (
@@ -48,6 +52,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
             required
           />
         </div>
+
         <button type="submit" className="text-md bg-blue-600 p-3">
           Submit
         </button>

@@ -1,6 +1,6 @@
-# Welcome to GIP - Group Itinerary Application
+# Welcome to GIP - Group Itinerary Planner
 
-Make planning a trip easy so all you have to do is just show up. 
+Make planning a trip easy so all you have to do is just show up.
 Have everyone on the same page using.
 
 Features
@@ -10,6 +10,5 @@ Features
 - Poll your Group
 - Broadcast information through e-mail.
 - Packing lists.
-- Budgeting 
+- Budgeting
 - Links that convert to Apple Maps / Google Maps
-
