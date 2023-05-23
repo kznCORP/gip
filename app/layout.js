@@ -1,6 +1,9 @@
 import "./globals.css";
 
-import Navigation from "@/components/navigation";
+import { AuthUserProvider } from "@/lib/firebase/auth";
+import { FinanceContextProvider } from "@/lib/financeContext";
+
+import Navigation from "@/components/Navigation";
 
 export const metadata = {
   title: "GIP - Group Itinerary Planner",
@@ -12,8 +15,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Navigation />
-        {children}
+        <AuthUserProvider>
+          <FinanceContextProvider>
+            <Navigation />
+            {children}
+          </FinanceContextProvider>
+        </AuthUserProvider>
       </body>
     </html>
   );

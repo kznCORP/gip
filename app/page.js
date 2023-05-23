@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
@@ -8,12 +8,9 @@ import { MdAdd } from "react-icons/md";
 
 import { currencyFormatter } from "@/lib/utils";
 import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
-import { Modal } from "@/components/Modal";
 
-import { getAllExpenses } from "@/lib/firebase/firestore";
-
-import { AllExpenseItems } from "@/components/Expenses/AllExpenseItems";
 import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
+import ViewExpenseHistoryModal from "@/components/Expenses/ViewExpenseHistoryModal";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -57,20 +54,8 @@ const DEFAULT_DATA = [
 ];
 
 export default function Home() {
-  const [allExpenses, setAllExpenses] = useState([]);
-
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [showAllExpenseModal, setShowAllExpenseModal] = useState(false);
-
-  // View all Expenses from Firebase
-  useEffect(() => {
-    const fetchAllExpenses = async () => {
-      const unsubscribe = await getAllExpenses(setAllExpenses);
-
-      return () => unsubscribe();
-    };
-    fetchAllExpenses();
-  }, [setAllExpenses]);
 
   return (
     <>
@@ -79,13 +64,10 @@ export default function Home() {
         onClose={() => setShowAddExpenseModal(false)}
       />
 
-      {/* View All Expenses */}
-      <Modal onShow={showAllExpenseModal} onClose={setShowAllExpenseModal}>
-        <h3>All Expenses will be viewed here.</h3>
-        {allExpenses.map((e) => (
-          <AllExpenseItems key={e.id} expense={e} />
-        ))}
-      </Modal>
+      <ViewExpenseHistoryModal
+        onShow={showAllExpenseModal}
+        onClose={() => setShowAllExpenseModal(false)}
+      />
 
       {/* Main  */}
       <main className="px-4">
