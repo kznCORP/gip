@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
@@ -8,54 +8,18 @@ import { MdAdd } from "react-icons/md";
 
 import { currencyFormatter } from "@/lib/utils";
 import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
-
 import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
-import ViewExpenseHistoryModal from "@/components/Expenses/ViewExpenseHistoryModal";
+import { ViewExpenseHistoryModal } from "@/components/Expenses/ViewExpenseHistoryModal";
+
+import { financeContext } from "@/lib/financeContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
-
-const DEFAULT_DATA = [
-  {
-    id: 1,
-    title: "Food",
-    total: 300.0,
-    color: "#00c8ff",
-  },
-  {
-    id: 2,
-    title: "Entertainment",
-    total: 500.0,
-    color: "#ff3700",
-  },
-  {
-    id: 3,
-    title: "Gas",
-    total: 250.0,
-    color: "#46dfb4",
-  },
-  {
-    id: 4,
-    title: "Shopping",
-    total: 1000.0,
-    color: "#ff00c8",
-  },
-  {
-    id: 5,
-    title: "Rentals",
-    total: 450.0,
-    color: "#0000ff",
-  },
-  {
-    id: 6,
-    title: "AirBnB",
-    total: 1150.0,
-    color: "#ff9d2c",
-  },
-];
 
 export default function Home() {
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [showAllExpenseModal, setShowAllExpenseModal] = useState(false);
+
+  const { expenses, expCategory } = useContext(financeContext);
 
   return (
     <>
@@ -108,7 +72,7 @@ export default function Home() {
           </div>
           {/* Expense Container */}
           <div className="flex flex-col gap-4">
-            {DEFAULT_DATA.map((expense) => (
+            {expenses.map((expense) => (
               <ExpenseCategoryItem
                 key={expense.id}
                 title={expense.title}
@@ -125,12 +89,12 @@ export default function Home() {
           <div>
             <Doughnut
               data={{
-                labels: DEFAULT_DATA.map((expense) => expense.title),
+                labels: expCategory.map((expense) => expense.title),
                 datasets: [
                   {
-                    label: "Expenses",
-                    data: DEFAULT_DATA.map((expense) => expense.total),
-                    backgroundColor: DEFAULT_DATA.map(
+                    label: "expenses",
+                    data: expCategory.map((expense) => expense.total),
+                    backgroundColor: expCategory.map(
                       (expense) => expense.color
                     ),
                     hoverOffset: 4,
