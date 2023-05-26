@@ -9,7 +9,6 @@ import { MdAdd } from "react-icons/md";
 import { currencyFormatter } from "@/lib/utils";
 import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
 import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
-import { ViewExpenseHistoryModal } from "@/components/Expenses/ViewExpenseHistoryModal";
 
 import { financeContext } from "@/lib/financeContext";
 
@@ -17,20 +16,13 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Home() {
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
-  const [showAllExpenseModal, setShowAllExpenseModal] = useState(false);
-
-  const { expenses, expCategory } = useContext(financeContext);
+  const { expCategory } = useContext(financeContext);
 
   return (
     <>
       <AddExpenseModal
         onShow={showAddExpenseModal}
         onClose={() => setShowAddExpenseModal(false)}
-      />
-
-      <ViewExpenseHistoryModal
-        onShow={showAllExpenseModal}
-        onClose={() => setShowAllExpenseModal(false)}
       />
 
       {/* Main  */}
@@ -53,13 +45,6 @@ export default function Home() {
             >
               Add Expense <MdAdd className="text-xl" />
             </button>
-            <button
-              data-modal-target="authentication-modal"
-              className="text-md mb-10  flex   items-center   gap-2 rounded-lg p-3 font-medium text-blue-600 underline"
-              onClick={() => setShowAllExpenseModal(true)}
-            >
-              View All Expenses
-            </button>
           </div>
         </section>
 
@@ -73,11 +58,7 @@ export default function Home() {
           {/* Expense Container */}
           <div className="flex flex-col gap-4">
             {expCategory.map((expense) => (
-              <ExpenseCategoryItem
-                key={expense.id}
-                title={expense.title}
-                {...expense}
-              />
+              <ExpenseCategoryItem key={expense.id} expense={expense} />
             ))}
           </div>
         </section>
