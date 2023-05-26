@@ -8,13 +8,15 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
   const amountRef = useRef();
   const nameRef = useRef();
 
-  const { expenses, expCategory, addExpenseItem } = useContext(financeContext);
+  const { expCategory, addExpenseItem } = useContext(financeContext);
 
-  console.log(expCategory);
+  // console.log(expCategory);
 
   // Add a new Expense to Firebase
-  const addExpenseHandler = async () => {
-    const expense = expenses.find((e) => {
+  const addExpenseHandler = async (e) => {
+    e.preventDefault();
+
+    const expense = expCategory.find((e) => {
       return e.id === selectedCategory;
     });
 
@@ -33,13 +35,12 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
       ],
     };
 
+    console.log(newExpense);
+
     try {
-      await addExpenseItem(newExpense);
-      // Reset form fields
-      amountRef.current.value = "";
-      nameRef.current.value = "";
+      await addExpenseItem(selectedCategory, newExpense);
     } catch (e) {
-      console.log("Error in Adding Expense Modal: ", e);
+      console.log("Error in Adding Item in Modal: ", e);
     }
   };
 
@@ -70,11 +71,31 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
           />
         </div>
 
-        <div className="flex flex-col gap-1">
-          {expenses.map((category) => (
-            <button key={category.id}>
-              <div>
-                <p>{category.title}</p>
+        <div className="flex flex-col gap-4">
+          <h4>Categories</h4>
+          {expCategory.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setSelectedCategory(category.id)}
+            >
+              <div
+                className="flex items-center justify-between rounded-2xl bg-slate-500 px-3 py-3"
+                style={{
+                  border:
+                    category.id === selectedCategory
+                      ? "1px solid white"
+                      : "none",
+                }}
+              >
+                <div className="flex items-center gap-4">
+                  <div
+                    className="h-[15px] w-[15px] rounded-full"
+                    style={{ backgroundColor: category.color }}
+                  ></div>
+                  <div className="">
+                    <h4 className="capitalize">{category.title}</h4>
+                  </div>
+                </div>
               </div>
             </button>
           ))}

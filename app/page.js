@@ -6,6 +6,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { MdAdd } from "react-icons/md";
 
+import { Navigation } from "@/components/Navigation";
 import { currencyFormatter } from "@/lib/utils";
 import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
 import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
@@ -23,6 +24,8 @@ export default function Home() {
 
   return (
     <>
+      <Navigation />
+
       <AddExpenseModal
         onShow={showAddExpenseModal}
         onClose={() => setShowAddExpenseModal(false)}
@@ -72,7 +75,7 @@ export default function Home() {
           </div>
           {/* Expense Container */}
           <div className="flex flex-col gap-4">
-            {expenses.map((expense) => (
+            {expCategory.map((expense) => (
               <ExpenseCategoryItem
                 key={expense.id}
                 title={expense.title}

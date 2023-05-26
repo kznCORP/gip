@@ -1,7 +1,7 @@
 import React from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-const Navigation = () => {
+export const Navigation = () => {
   return (
     <header className="px-4 py-4">
       <div className="flex items-center justify-between">
@@ -28,5 +28,3 @@ const Navigation = () => {
     </header>
   );
 };
-
-export default Navigation;
