@@ -6,7 +6,6 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { MdAdd } from "react-icons/md";
 
-import { Navigation } from "@/components/Navigation";
 import { currencyFormatter } from "@/lib/utils";
 import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
 import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
@@ -24,8 +23,6 @@ export default function Home() {
 
   return (
     <>
-      <Navigation />
-
       <AddExpenseModal
         onShow={showAddExpenseModal}
         onClose={() => setShowAddExpenseModal(false)}
