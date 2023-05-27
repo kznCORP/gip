@@ -5,12 +5,13 @@ import { currencyFormatter } from "@/lib/utils";
 import { financeContext } from "@/lib/financeContext";
 
 export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
-  const { deleteExpenseItem, deleteCategory } = useContext(financeContext);
+  const { deleteExpenseItem, deleteExpenseCategory } =
+    useContext(financeContext);
 
   //Delete Expense Category in Firebase
   const deleteExpenseCategoryHandler = async () => {
     try {
-      await deleteCategory(expense.id);
+      await deleteExpenseCategory(expense.id);
     } catch (e) {
       console.log("Error in deleting Expense Category", e);
     }
@@ -27,7 +28,7 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
         total: expense.total - item.amount,
       };
 
-      await deleteExpenseItem(updatedExpense, expense.id);
+      await deleteExpenseItem(expense.id, updatedExpense);
     } catch (e) {
       console.log("Error in deleting Expense Item", e);
     }

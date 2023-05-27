@@ -13,7 +13,8 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
   const ctgNameRef = useRef();
   const ctgColorRef = useRef();
 
-  const { expenses, addExpenseItem, addCategory } = useContext(financeContext);
+  const { expenses, addExpenseItem, addExpenseCategory } =
+    useContext(financeContext);
 
   // Add a new Expense to Firebase
   const addExpenseHandler = async (e) => {
@@ -44,8 +45,6 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
 
     try {
       await addExpenseItem(selectedCategory, newExpense);
-      setIsSubmitClicked(false);
-      onClose();
     } catch (e) {
       console.log("Error in Adding Item in Modal: ", e);
     }
@@ -59,7 +58,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
     const color = ctgColorRef.current.value;
 
     try {
-      await addCategory({ title, color, total: 0 });
+      await addExpenseCategory({ title, color, total: 0 });
       setShowCategories(false);
     } catch (e) {
       console.log("Error in Adding Category in Modal", e);
