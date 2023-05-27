@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
@@ -16,7 +16,16 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Home() {
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
-  const { expCategory } = useContext(financeContext);
+  const [balance, setBalance] = useState(0);
+  const { expenses } = useContext(financeContext);
+
+  useEffect(() => {
+    const newBalance = expenses.reduce((total, e) => {
+      return (total += e.total);
+    }, 0);
+
+    setBalance(newBalance);
+  }, [expenses]);
 
   return (
     <>
@@ -31,7 +40,7 @@ export default function Home() {
           <h2 className="text-4xl font-bold">Expenses</h2>
           <div className="my-5">
             <small className="text-md text-gray-400">Total Amt. Spent</small>
-            <p className="text-lg font-bold">{currencyFormatter(2345.78)}</p>
+            <p className="text-lg font-bold">{currencyFormatter(balance)}</p>
           </div>
         </section>
 
@@ -57,7 +66,7 @@ export default function Home() {
           </div>
           {/* Expense Container */}
           <div className="flex flex-col gap-4">
-            {expCategory.map((expense) => (
+            {expenses.map((expense) => (
               <ExpenseCategoryItem key={expense.id} expense={expense} />
             ))}
           </div>
@@ -70,14 +79,12 @@ export default function Home() {
           <div>
             <Doughnut
               data={{
-                labels: expCategory.map((expense) => expense.title),
+                labels: expenses.map((expense) => expense.title),
                 datasets: [
                   {
                     label: "expenses",
-                    data: expCategory.map((expense) => expense.total),
-                    backgroundColor: expCategory.map(
-                      (expense) => expense.color
-                    ),
+                    data: expenses.map((expense) => expense.total),
+                    backgroundColor: expenses.map((expense) => expense.color),
                     hoverOffset: 4,
                   },
                 ],

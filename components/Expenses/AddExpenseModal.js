@@ -13,8 +13,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
   const ctgNameRef = useRef();
   const ctgColorRef = useRef();
 
-  const { expCategory, addExpenseItem, addCategory } =
-    useContext(financeContext);
+  const { expenses, addExpenseItem, addCategory } = useContext(financeContext);
 
   // Add a new Expense to Firebase
   const addExpenseHandler = async (e) => {
@@ -24,7 +23,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
       return;
     }
 
-    const expense = expCategory.find((e) => {
+    const expense = expenses.find((e) => {
       return e.id === selectedCategory;
     });
 
@@ -45,6 +44,8 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
 
     try {
       await addExpenseItem(selectedCategory, newExpense);
+      setIsSubmitClicked(false);
+      onClose();
     } catch (e) {
       console.log("Error in Adding Item in Modal: ", e);
     }
@@ -129,7 +130,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
             </div>
           )}
 
-          {expCategory.map((category) => (
+          {expenses.map((category) => (
             <button
               key={category.id}
               onClick={() => {
