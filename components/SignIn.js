@@ -1,10 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { AuthUserContext } from "@/lib/firebase/authContext";
 import { FcGoogle } from "react-icons/fc";
 
 export const SignIn = () => {
-  const { googleLoginHandler } = useContext(AuthUserContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { signInWithEmailHandler, googleLoginHandler } =
+    useContext(AuthUserContext);
+
+  const signInWithEmail = async (e) => {
+    e.preventDefault();
+
+    try {
+      await signInWithEmailHandler(email, password);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
   return (
     <main>
@@ -12,21 +26,45 @@ export const SignIn = () => {
         <div className="h-1/3 w-full bg-blue-200">
           <h2>Image + Logo</h2>
         </div>
-        <div className="h-1/5 w-full bg-red-200">
-          <h2>Title + Desc</h2>
-        </div>
+
         {/* Login + SignUp */}
         <div className="flex h-1/2 flex-col items-center justify-center gap-5">
-          <button className="w-1/2 rounded-3xl bg-blue-600 p-3 font-medium text-white">
-            Create Account
-          </button>
+          <form className="w-1/2" onSubmit={signInWithEmail}>
+            <div className="flex flex-col gap-1">
+              <label>Email</label>
+              <input
+                name="email"
+                type="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="border border-black"
+              />
+            </div>
+
+            <div className="flex flex-col gap-1">
+              <label>Password</label>
+              <input
+                name="password"
+                type="password"
+                placeholder="Password..."
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="border border-black"
+              />
+            </div>
+
+            <button className="mt-3 w-full rounded-3xl bg-blue-600 p-3 font-medium text-white">
+              Sign In
+            </button>
+          </form>
 
           <button
             className="flex w-1/2 items-center justify-center gap-4 rounded-3xl border border-black p-3 font-medium text-black"
             onClick={googleLoginHandler}
           >
             <FcGoogle className="text-xl" />
-            Sign In With Google
+            Continue With Google
           </button>
         </div>
       </section>
