@@ -1,6 +1,6 @@
 import React, { useRef, useContext, useState } from "react";
 import { Modal } from "../Modal";
-import { financeContext } from "@/lib/financeContext";
+import { FinanceContext } from "@/lib/financeContext";
 import { v4 as uuidv4 } from "uuid";
 
 export const AddExpenseModal = ({ onShow, onClose }) => {
@@ -14,7 +14,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
   const ctgColorRef = useRef();
 
   const { expenses, addExpenseItem, addExpenseCategory } =
-    useContext(financeContext);
+    useContext(FinanceContext);
 
   // Add a new Expense to Firebase
   const addExpenseHandler = async (e) => {

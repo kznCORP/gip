@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { Modal } from "../Modal";
 import { MdDelete } from "react-icons/md";
 import { currencyFormatter } from "@/lib/utils";
-import { financeContext } from "@/lib/financeContext";
+import { FinanceContext } from "@/lib/financeContext";
 
 export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
   const { deleteExpenseItem, deleteExpenseCategory } =
-    useContext(financeContext);
+    useContext(FinanceContext);
 
   //Delete Expense Category in Firebase
   const deleteExpenseCategoryHandler = async () => {
@@ -48,20 +48,22 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
 
       <div>
         <h3>History</h3>
-        {expense.items.map((item) => {
-          return (
-            <div
-              key={item.id}
-              className="flex items-center justify-between gap-4 bg-slate-300 text-black"
-            >
-              <h3>{item.name}</h3>
-              <p>{currencyFormatter(item.amount)}</p>
-              <button onClick={() => deleteExpenseItemHandler(item)}>
-                <MdDelete />
-              </button>
-            </div>
-          );
-        })}
+        {expense &&
+          expense.items &&
+          expense.items.map((item) => {
+            return (
+              <div
+                key={item.id}
+                className="flex items-center justify-between gap-4 bg-slate-300 text-black"
+              >
+                <h3>{item.name}</h3>
+                <p>{currencyFormatter(item.amount)}</p>
+                <button onClick={() => deleteExpenseItemHandler(item)}>
+                  <MdDelete />
+                </button>
+              </div>
+            );
+          })}
       </div>
     </Modal>
   );

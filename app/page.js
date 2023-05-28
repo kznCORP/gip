@@ -6,18 +6,23 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import { MdAdd } from "react-icons/md";
 
-import { currencyFormatter } from "@/lib/utils";
-import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
-import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
+import { Navigation } from "@/components/navigation";
 
-import { financeContext } from "@/lib/financeContext";
+import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
+import { currencyFormatter } from "@/lib/utils";
+import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
+import { SignIn } from "@/components/SignIn";
+
+import { FinanceContext } from "@/lib/financeContext";
+import { AuthUserContext } from "@/lib/firebase/authContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Home() {
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [balance, setBalance] = useState(0);
-  const { expenses } = useContext(financeContext);
+  const { expenses } = useContext(FinanceContext);
+  const { user } = useContext(AuthUserContext);
 
   useEffect(() => {
     const newBalance = expenses.reduce((total, e) => {
@@ -27,8 +32,14 @@ export default function Home() {
     setBalance(newBalance);
   }, [expenses]);
 
+  if (!user) {
+    return <SignIn />;
+  }
+
   return (
     <>
+      <Navigation />
+
       <AddExpenseModal
         onShow={showAddExpenseModal}
         onClose={() => setShowAddExpenseModal(false)}
