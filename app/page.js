@@ -11,7 +11,7 @@ import { Navigation } from "@/components/navigation";
 import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
 import { currencyFormatter } from "@/lib/utils";
 import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
-import { SignIn } from "@/components/SignIn";
+import { AuthGateway } from "@/components/Auth/AuthGateway";
 
 import { FinanceContext } from "@/lib/financeContext";
 import { AuthUserContext } from "@/lib/firebase/authContext";
@@ -33,7 +33,7 @@ export default function Home() {
   }, [expenses]);
 
   if (!user) {
-    return <SignIn />;
+    return <AuthGateway />;
   }
 
   return (
