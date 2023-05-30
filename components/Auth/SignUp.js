@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext, useState } from "react";
 
 import { AuthUserContext } from "@/lib/firebase/authContext";
@@ -6,6 +8,7 @@ import { FcGoogle } from "react-icons/fc";
 export const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
 
   const { registerEmailHandler, googleLoginHandler } =
     useContext(AuthUserContext);
@@ -14,7 +17,7 @@ export const SignUp = () => {
     e.preventDefault();
 
     try {
-      await registerEmailHandler(email, password);
+      await registerEmailHandler(email, password, name);
     } catch (e) {
       console.log(e.message);
     }
@@ -23,13 +26,21 @@ export const SignUp = () => {
   return (
     <main>
       <section className="z-10 h-screen w-screen overflow-hidden bg-white">
-        <div className="flex h-1/3 w-full items-center justify-center bg-blue-200">
-          <h2>Image + Logo</h2>
-        </div>
-
         {/* Login + SignUp */}
-        <div className="flex h-1/2 flex-col items-center justify-center gap-5">
+        <div className="flex h-full flex-col items-center justify-center gap-5">
           <form className="w-1/2" onSubmit={registerAccount}>
+            <div className="flex flex-col gap-1">
+              <label>Name</label>
+              <input
+                name="Name"
+                type="Name"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="border border-black"
+              />
+            </div>
+
             <div className="flex flex-col gap-1">
               <label>Email</label>
               <input

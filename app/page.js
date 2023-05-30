@@ -77,8 +77,8 @@ export default function Home() {
           </div>
           {/* Expense Container */}
           <div className="flex flex-col gap-4">
-            {expenses.map((expense) => (
-              <ExpenseCategoryItem key={expense.id} expense={expense} />
+            {expenses.map((expense, index) => (
+              <ExpenseCategoryItem key={index} expense={expense} />
             ))}
           </div>
         </section>

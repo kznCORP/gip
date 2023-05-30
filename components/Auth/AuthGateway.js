@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 
 import { SignIn } from "./SignIn";
@@ -6,14 +8,6 @@ import { SignUp } from "./SignUp";
 export const AuthGateway = () => {
   const [showSignIn, setShowSignIn] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
-
-  const signInHandler = () => {
-    setShowSignIn(true);
-  };
-
-  const registerHandler = () => {
-    setShowRegister(true);
-  };
 
   if (showSignIn) {
     return <SignIn />;
