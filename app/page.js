@@ -11,7 +11,7 @@ import { Navigation } from "@/components/navigation";
 import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
 import { currencyFormatter } from "@/lib/utils";
 import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
-import { SignIn } from "@/components/SignIn";
+import { AuthGateway } from "@/components/Auth/AuthGateway";
 
 import { FinanceContext } from "@/lib/financeContext";
 import { AuthUserContext } from "@/lib/firebase/authContext";
@@ -33,7 +33,7 @@ export default function Home() {
   }, [expenses]);
 
   if (!user) {
-    return <SignIn />;
+    return <AuthGateway />;
   }
 
   return (
@@ -77,8 +77,8 @@ export default function Home() {
           </div>
           {/* Expense Container */}
           <div className="flex flex-col gap-4">
-            {expenses.map((expense) => (
-              <ExpenseCategoryItem key={expense.id} expense={expense} />
+            {expenses.map((expense, index) => (
+              <ExpenseCategoryItem key={index} expense={expense} />
             ))}
           </div>
         </section>

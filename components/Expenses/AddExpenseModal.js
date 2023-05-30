@@ -45,6 +45,12 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
 
     try {
       await addExpenseItem(selectedCategory, newExpense);
+      expAmountRef.current.value = "";
+      expNameRef.current.value = "";
+      ctgNameRef.current.value = "";
+      ctgColorRef.current.value = "";
+      setSelectedCategory(null);
+      onClose();
     } catch (e) {
       console.log("Error in Adding Item in Modal: ", e);
     }
@@ -58,8 +64,19 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
     const color = ctgColorRef.current.value;
 
     try {
-      await addExpenseCategory({ title, color, total: 0 });
-      setShowCategories(false);
+      // Check if the category already exists
+      const existingCategory = expenses.find(
+        (category) => category.title === title
+      );
+      if (existingCategory) {
+        console.log("Category already exists");
+        return;
+      }
+
+      if (showCategories) {
+        setShowCategories(false);
+        await addExpenseCategory({ title, color, total: 0 });
+      }
     } catch (e) {
       console.log("Error in Adding Category in Modal", e);
     }

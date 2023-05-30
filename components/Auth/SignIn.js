@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useContext, useState } from "react";
 
 import { AuthUserContext } from "@/lib/firebase/authContext";
@@ -7,14 +9,13 @@ export const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { signInWithEmailHandler, googleLoginHandler } =
-    useContext(AuthUserContext);
+  const { emailLoginHandler, googleLoginHandler } = useContext(AuthUserContext);
 
   const signInWithEmail = async (e) => {
     e.preventDefault();
 
     try {
-      await signInWithEmailHandler(email, password);
+      await emailLoginHandler(email, password);
     } catch (e) {
       console.log(e.message);
     }
@@ -23,7 +24,7 @@ export const SignIn = () => {
   return (
     <main>
       <section className="z-10 h-screen w-screen overflow-hidden bg-white">
-        <div className="h-1/3 w-full bg-blue-200">
+        <div className="flex h-1/3 w-full items-center justify-center bg-blue-200">
           <h2>Image + Logo</h2>
         </div>
 
