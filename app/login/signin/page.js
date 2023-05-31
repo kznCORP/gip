@@ -1,15 +1,18 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { AuthUserContext } from "@/lib/firebase/authContext";
 import { FcGoogle } from "react-icons/fc";
+import { useRouter } from "next/navigation";
 
-export const SignIn = () => {
+export default function SignIn() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { emailLoginHandler, googleLoginHandler } = useContext(AuthUserContext);
+  const { user, emailLoginHandler, googleLoginHandler } =
+    useContext(AuthUserContext);
 
   const signInWithEmail = async (e) => {
     e.preventDefault();
@@ -20,6 +23,12 @@ export const SignIn = () => {
       console.log(e.message);
     }
   };
+
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    }
+  }, [user, router]);
 
   return (
     <main>
@@ -71,4 +80,4 @@ export const SignIn = () => {
       </section>
     </main>
   );
-};
+}

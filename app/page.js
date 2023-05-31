@@ -1,6 +1,7 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
@@ -11,7 +12,6 @@ import { Navigation } from "@/components/navigation";
 import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
 import { currencyFormatter } from "@/lib/utils";
 import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
-import { AuthGateway } from "@/components/Auth/AuthGateway";
 
 import { FinanceContext } from "@/lib/financeContext";
 import { AuthUserContext } from "@/lib/firebase/authContext";
@@ -19,22 +19,24 @@ import { AuthUserContext } from "@/lib/firebase/authContext";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Home() {
+  const router = useRouter();
+
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [balance, setBalance] = useState(0);
   const { expenses } = useContext(FinanceContext);
   const { user } = useContext(AuthUserContext);
 
   useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+
     const newBalance = expenses.reduce((total, e) => {
       return (total += e.total);
     }, 0);
 
     setBalance(newBalance);
-  }, [expenses]);
-
-  if (!user) {
-    return <AuthGateway />;
-  }
+  }, [expenses, router, user]);
 
   return (
     <>
