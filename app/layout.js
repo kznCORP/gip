@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import { AuthContextProvider } from "@/lib/firebase/authContext";
+import { AuthContextProvider } from "@/lib/authContext";
 import { FinanceContextProvider } from "@/lib/financeContext";
 
 export const metadata = {

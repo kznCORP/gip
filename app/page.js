@@ -14,7 +14,7 @@ import { currencyFormatter } from "@/lib/utils";
 import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
 
 import { FinanceContext } from "@/lib/financeContext";
-import { AuthUserContext } from "@/lib/firebase/authContext";
+import { AuthUserContext } from "@/lib/authContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -24,10 +24,10 @@ export default function Home() {
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [balance, setBalance] = useState(0);
   const { expenses } = useContext(FinanceContext);
-  const { user } = useContext(AuthUserContext);
+  const { user, loading } = useContext(AuthUserContext);
 
   useEffect(() => {
-    if (!user) {
+    if (!user && !loading) {
       router.push("/login");
     }
 
@@ -36,7 +36,7 @@ export default function Home() {
     }, 0);
 
     setBalance(newBalance);
-  }, [expenses, router, user]);
+  }, [expenses, router, user, loading]);
 
   return (
     <>

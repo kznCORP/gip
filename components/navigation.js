@@ -3,7 +3,7 @@
 import React, { useContext, useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-import { AuthUserContext } from "@/lib/firebase/authContext";
+import { AuthUserContext } from "@/lib/authContext";
 
 export const Navigation = () => {
   const [showSideBar, setShowSideBar] = useState(false);

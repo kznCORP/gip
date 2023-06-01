@@ -8,15 +8,15 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
   const [showCategories, setShowCategories] = useState(false);
   const [isSubmitClicked, setIsSubmitClicked] = useState(false);
 
-  const expAmountRef = useRef();
-  const expNameRef = useRef();
+  const [expenseAmount, setExpenseAmount] = useState("");
+  const [expenseName, setExpenseName] = useState("");
+
   const ctgNameRef = useRef();
   const ctgColorRef = useRef();
 
   const { expenses, addExpenseItem, addExpenseCategory } =
     useContext(FinanceContext);
 
-  // Add a new Expense to Firebase
   const addExpenseHandler = async (e) => {
     e.preventDefault();
 
@@ -28,15 +28,20 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
       return e.id === selectedCategory;
     });
 
+    if (!expense) {
+      console.log("Selected category not found");
+      return;
+    }
+
     const newExpense = {
       color: expense.color,
       title: expense.title,
-      total: expense.total + +expAmountRef.current.value,
+      total: expense.total + +expenseAmount,
       items: [
         ...expense.items,
         {
-          amount: +expAmountRef.current.value,
-          name: expNameRef.current.value,
+          amount: +expenseAmount,
+          name: expenseName,
           date: new Date(),
           id: uuidv4(),
         },
@@ -45,14 +50,13 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
 
     try {
       await addExpenseItem(selectedCategory, newExpense);
-      expAmountRef.current.value = "";
-      expNameRef.current.value = "";
-      ctgNameRef.current.value = "";
-      ctgColorRef.current.value = "";
+      setExpenseAmount("");
+      setExpenseName("");
       setSelectedCategory(null);
+      setIsSubmitClicked(false);
       onClose();
     } catch (e) {
-      console.log("Error in Adding Item in Modal: ", e);
+      throw e;
     }
   };
 
@@ -90,7 +94,9 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
           <input
             type="text"
             name="title"
-            ref={expNameRef}
+            // ref={expNameRef}
+            value={expenseName}
+            onChange={(e) => setExpenseName(e.target.value)}
             placeholder="Enter the name of the expense"
             id="title"
             required
@@ -102,7 +108,9 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
           <input
             type="number"
             name="amount"
-            ref={expAmountRef}
+            // ref={expAmountRef}
+            value={expenseAmount}
+            onChange={(e) => setExpenseAmount(e.target.value)}
             min={0.01}
             step={0.01}
             placeholder="Enter Amount"

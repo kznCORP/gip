@@ -2,7 +2,7 @@
 
 import React, { useContext, useEffect, useState } from "react";
 
-import { AuthUserContext } from "@/lib/firebase/authContext";
+import { AuthUserContext } from "@/lib/authContext";
 import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/navigation";
 
