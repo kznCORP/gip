@@ -18,11 +18,11 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const Expenses = () => {
   const router = useRouter();
+  const { expenses } = useContext(FinanceContext);
+  const { user, loading } = useContext(AuthUserContext);
 
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [balance, setBalance] = useState(0);
-  const { expenses } = useContext(FinanceContext);
-  const { user, loading } = useContext(AuthUserContext);
 
   useEffect(() => {
     if (!user && !loading) {
