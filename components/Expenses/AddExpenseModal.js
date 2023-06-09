@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useState } from "react";
+import { useRef, useContext, useState, useEffect } from "react";
 import { Modal } from "../Modal";
 import { FinanceContext } from "@/lib/financeContext";
 import { v4 as uuidv4 } from "uuid";
@@ -94,7 +94,6 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
           <input
             type="text"
             name="title"
-            // ref={expNameRef}
             value={expenseName}
             onChange={(e) => setExpenseName(e.target.value)}
             placeholder="Enter the name of the expense"
@@ -108,7 +107,6 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
           <input
             type="number"
             name="amount"
-            // ref={expAmountRef}
             value={expenseAmount}
             onChange={(e) => setExpenseAmount(e.target.value)}
             min={0.01}

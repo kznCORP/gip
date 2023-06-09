@@ -2,6 +2,7 @@ import "./globals.css";
 
 import { AuthContextProvider } from "@/lib/authContext";
 import { FinanceContextProvider } from "@/lib/financeContext";
+import { PackingContextProvider } from "@/lib/packingContext";
 
 export const metadata = {
   title: "GIP - Group Itinerary Planner",
@@ -14,7 +15,9 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <AuthContextProvider>
-          <FinanceContextProvider>{children}</FinanceContextProvider>
+          <FinanceContextProvider>
+            <PackingContextProvider> {children} </PackingContextProvider>
+          </FinanceContextProvider>
         </AuthContextProvider>
       </body>
     </html>

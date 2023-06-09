@@ -8,14 +8,7 @@ import { Navigation } from "@/components/navigation";
 import { Expenses } from "@/components/Expenses/Expenses";
 import AddPackItemModal from "@/components/Packing/AddPackItemModal";
 
-import { MdAdd } from "react-icons/md";
-import { PackingContext } from "@/lib/packingContext";
-
 export default function Home() {
-  const router = useRouter();
-  const { user, loading } = useContext(AuthUserContext);
-  const { packingItems } = useContext(PackingContext);
-
   const [showAddPackListModal, setShowAddPackListModal] = useState("");
 
   useEffect(() => {
