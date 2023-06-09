@@ -1,24 +1,34 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import { Modal } from "../Modal";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "@/lib/firebase/firebase";
+import { PackingContext } from "@/lib/packingContext";
 
 const AddPackItemModal = ({ onShow, onClose }) => {
-  const [packingItem, setPackingItem] = useState("");
-  const [checkboxValues, setCheckboxValues] = useState([]);
+  const { packingItems, addPackingCategory } = useContext(PackingContext);
+  const [packingCategory, setPackingCategory] = useState("");
 
-  // You left off here
-  const addPackItemHandler = async (e) => {
+  /**
+   * You left off here
+   *
+   * What to do tomorrow:
+   * [x] Create a Packing Categroy similar to Expenses
+   * [ ] Add item to an array of items within a Packing Category
+   * [ ] Delete Packing Category
+   * [ ] Delete an item from an array of items in Packing Category
+   *
+   */
+
+  const addPackingCategoryHandler = async (e) => {
     e.preventDefault();
 
     try {
-      if (packingItem !== "") {
-        const collectionRef = collection(db, "packing-items");
-        await addDoc(collectionRef, { packingItem, checked: false });
-        setPackingItem("");
+      if (packingCategory !== "") {
+        await addPackingCategory({ packingCategory });
+        setPackingCategory("");
       }
     } catch (e) {
       console.log("Error in adding a Packing Item to Firebase", e);
@@ -28,22 +38,16 @@ const AddPackItemModal = ({ onShow, onClose }) => {
   return (
     <Modal onShow={onShow} onClose={onClose}>
       <h1>Packing List</h1>
-      <form onSubmit={addPackItemHandler} className="mt-6 flex gap-2">
-        <input
-          type="checkbox"
-          name="status"
-          value={checkboxValues}
-          onChange={(e) => setCheckboxValues(e.target.checked)}
-        />
+      <form onSubmit={addPackingCategoryHandler} className="mt-6 flex gap-2">
         <input
           type="text"
           name="name"
-          value={packingItem}
-          onChange={(e) => setPackingItem(e.target.value)}
+          value={packingCategory}
+          onChange={(e) => setPackingCategory(e.target.value)}
           placeholder="Enter the name of the expense"
           id="name"
           required
-          className="w-1/2"
+          className="w-full"
         />
         <button type="submit" className="text-md bg-blue-600 p-3">
           Submit

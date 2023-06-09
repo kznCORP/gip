@@ -1,4 +1,4 @@
-import { useRef, useContext, useState } from "react";
+import { useRef, useContext, useState, useEffect } from "react";
 import { Modal } from "../Modal";
 import { FinanceContext } from "@/lib/financeContext";
 import { v4 as uuidv4 } from "uuid";
