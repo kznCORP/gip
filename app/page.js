@@ -1,14 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { AuthUserContext } from "@/lib/authContext";
+
 import { Navigation } from "@/components/navigation";
 import { Expenses } from "@/components/Expenses/Expenses";
-
-import { MdAdd } from "react-icons/md";
 import AddPackItemModal from "@/components/Packing/AddPackItemModal";
 
+import { MdAdd } from "react-icons/md";
+import { PackingContext } from "@/lib/packingContext";
+
 export default function Home() {
+  const router = useRouter();
+  const { user, loading } = useContext(AuthUserContext);
+  const { packingItems } = useContext(PackingContext);
+
   const [showAddPackListModal, setShowAddPackListModal] = useState("");
+
+  useEffect(() => {
+    if (!user && !loading) {
+      router.push("/login");
+    }
+  }, [router, user, loading]);
 
   return (
     <>
@@ -38,6 +52,9 @@ export default function Home() {
             </button>
           </div>
         </section>
+
+        {/* Packing List */}
+        <section></section>
       </main>
     </>
   );
