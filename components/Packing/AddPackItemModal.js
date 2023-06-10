@@ -1,28 +1,62 @@
 "use client";
 
-import { useContext, useEffect, useRef, useState } from "react";
-
+import { useContext, useState } from "react";
 import { Modal } from "../Modal";
-import { addDoc, collection } from "firebase/firestore";
-import { db } from "@/lib/firebase/firebase";
 import { PackingContext } from "@/lib/packingContext";
+import { v4 as uuidv4 } from "uuid";
 
 const AddPackItemModal = ({ onShow, onClose }) => {
-  const { packingItems, addPackingCategory } = useContext(PackingContext);
+  const { packingItems, addPackingCategory, addPackingItem } =
+    useContext(PackingContext);
+
   const [packingCategory, setPackingCategory] = useState("");
+  const [itemTitle, setItemTitle] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [showCategories, setShowCategories] = useState(false);
 
   /**
    * You left off here
    *
    * What to do tomorrow:
-   * [x] Create a Packing Categroy similar to Expenses
-   * [ ] Read data from Firebase, store into app -> display UI
+   * [x] Create a Packing Categroy similar to Expensesf
+   * [x] Read data from Firebase, store into app -> display UI
+   * [x] Add item to an array of items within a Packing Category
    *
-   * [ ] Add item to an array of items within a Packing Category
    * [ ] Delete Packing Category
    * [ ] Delete an item from an array of items in Packing Category
    *
    */
+
+  const addPackingItemHandler = async (e) => {
+    e.preventDefault();
+
+    const packingItem = packingItems.find((e) => {
+      return e.id === selectedCategory;
+    });
+
+    if (!packingItem) {
+      console.log("Selected category not found");
+      return;
+    }
+
+    const newItem = {
+      items: [
+        ...packingItem.items,
+        {
+          id: uuidv4(),
+          name: itemTitle,
+          checked: false,
+        },
+      ],
+    };
+
+    try {
+      await addPackingItem(selectedCategory, newItem);
+      setSelectedCategory(null);
+    } catch (e) {
+      console.log("Error in adding a Packing Item Modal", e);
+    }
+  };
 
   const addPackingCategoryHandler = async (e) => {
     e.preventDefault();
@@ -31,29 +65,102 @@ const AddPackItemModal = ({ onShow, onClose }) => {
       if (packingCategory !== "") {
         await addPackingCategory({ packingCategory });
         setPackingCategory("");
+        setShowCategories(false);
       }
     } catch (e) {
-      console.log("Error in adding a Packing Item to Firebase", e);
+      console.log("Error in adding a Packing Category Modal", e);
     }
   };
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
       <h1>Packing List</h1>
-      <form onSubmit={addPackingCategoryHandler} className="mt-6 flex gap-2">
-        <input
-          type="text"
-          name="name"
-          value={packingCategory}
-          onChange={(e) => setPackingCategory(e.target.value)}
-          placeholder="Enter the name of the expense"
-          id="name"
-          required
-          className="w-full"
-        />
-        <button type="submit" className="text-md bg-blue-600 p-3">
-          Submit
-        </button>
+      <form onSubmit={addPackingItemHandler} className="mt-6 ">
+        <div className="mb-6 flex flex-col gap-1">
+          <label>Item</label>
+          <input
+            type="text"
+            name="name"
+            value={itemTitle}
+            onChange={(e) => setItemTitle(e.target.value)}
+            placeholder="Enter the name of the expense"
+            id="name"
+            required
+            className="w-full"
+          />
+          <button
+            className="text-md bg-blue-600 p-3"
+            onClick={addPackingItemHandler}
+          >
+            Add Item
+          </button>
+        </div>
+
+        <div className="">
+          <div className="flex items-center justify-between ">
+            <h4>Categories</h4>
+            <button
+              type="button"
+              className="text-lime-400"
+              onClick={() => setShowCategories(true)}
+            >
+              + New Category
+            </button>
+          </div>
+
+          {showCategories && (
+            <div className="mb-3 mt-3 flex items-center justify-between gap-4">
+              <input
+                type="text"
+                name="name"
+                value={packingCategory}
+                onChange={(e) => setPackingCategory(e.target.value)}
+                placeholder="Enter the name of the expense"
+                id="name"
+                required
+                className="w-full"
+              />
+              <button
+                type="button"
+                className="rounded-3xl bg-blue-600 p-1 text-xs text-white"
+                onClick={addPackingCategoryHandler}
+              >
+                Create
+              </button>
+              <button
+                type="button"
+                className="rounded-3xl bg-red-600 p-1 text-xs text-white"
+                onClick={() => setShowCategories(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          )}
+        </div>
+
+        <div className="mt-3 flex flex-col gap-4">
+          {packingItems.map((category) => (
+            <button
+              type="button"
+              key={category.id}
+              onClick={() => setSelectedCategory(category.id)}
+            >
+              <div
+                className="flex items-center justify-between rounded-2xl bg-slate-500 px-3 py-3"
+                style={{
+                  border:
+                    category.id === selectedCategory
+                      ? "1px solid white"
+                      : "none",
+                }}
+              >
+                <div>
+                  <h4 className="capitalize">{category.packingCategory}</h4>
+                </div>
+              </div>
+            </button>
+          ))}
+        </div>
       </form>
     </Modal>
   );

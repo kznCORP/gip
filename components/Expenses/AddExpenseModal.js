@@ -1,4 +1,4 @@
-import { useRef, useContext, useState, useEffect } from "react";
+import { useRef, useContext, useState } from "react";
 import { Modal } from "../Modal";
 import { FinanceContext } from "@/lib/financeContext";
 import { v4 as uuidv4 } from "uuid";
@@ -40,10 +40,10 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
       items: [
         ...expense.items,
         {
+          id: uuidv4(),
           amount: +expenseAmount,
           name: expenseName,
           date: new Date(),
-          id: uuidv4(),
         },
       ],
     };
@@ -154,6 +154,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
 
           {expenses.map((category) => (
             <button
+              type="button"
               key={category.id}
               onClick={() => {
                 setSelectedCategory(category.id);
@@ -173,7 +174,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
                     className="h-[15px] w-[15px] rounded-full"
                     style={{ backgroundColor: category.color }}
                   ></div>
-                  <div className="">
+                  <div>
                     <h4 className="capitalize">{category.title}</h4>
                   </div>
                 </div>

@@ -54,7 +54,17 @@ export default function Home() {
         </section>
 
         {/* Packing List */}
-        <section></section>
+        <section>
+          <h3 className="mb-6 text-lg text-gray-500">List of Items</h3>
+          {/* Expense Container */}
+          <div className="flex flex-col gap-4">
+            {packingItems.map((item) => (
+              <div key={item.id}>
+                <h1>{item.packingCategory}</h1>
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
     </>
   );
