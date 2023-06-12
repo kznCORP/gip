@@ -27,6 +27,7 @@ const AddPackItemModal = ({ onShow, onClose }) => {
     }
 
     const newItem = {
+      packingCategory: packingItem.packingCategory,
       items: [
         ...packingItem.items,
         {

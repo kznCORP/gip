@@ -13,19 +13,19 @@ import { PackingContext } from "@/lib/packingContext";
 import { ViewPackingItemsModal } from "@/components/Packing/ViewPackingItemsModal";
 
 /**
- * You left off here
+ * Be proud of what you've done.
  *
- * What to do tomorrow:
  * [x] Create a Packing Categroy similar to Expensesf
  * [x] Read data from Firebase, store into app -> display UI
  * [x] Add item to an array of items within a Packing Category
+ * [x] Delete Packing Category
  * [x] Delete an item from an array of items in Packing Category
  *
- * [ ] Delete Packing Category
  *
- *
- * Bug fixes
- * [ ] Packing Category disappears when adding a new item to category
+ * Up Next...
+ * [ ] Stress test the feature, find any bugs
+ * [ ] Improve UI
+ * [?] Optimize code for minimal read and writes to Firebase.
  *
  */
 

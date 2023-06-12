@@ -3,7 +3,16 @@ import { PackingContext } from "@/lib/packingContext";
 import { MdDelete } from "react-icons/md";
 
 export const ViewPackingItemsModal = ({ packingItem }) => {
-  const { deletePackingItem } = useContext(PackingContext);
+  const { deletePackingItem, deletePackingCategory } =
+    useContext(PackingContext);
+
+  const deletePackingCategoryHandler = async () => {
+    try {
+      await deletePackingCategory(packingItem.id);
+    } catch (e) {
+      console.log("Error in deleting Packing Category", e);
+    }
+  };
 
   const deletePackingItemHandler = async (item) => {
     try {
@@ -22,8 +31,14 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
 
   return (
     <>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center gap-4">
         <h2 className="text-xl font-bold">{packingItem?.packingCategory}</h2>
+        <button
+          type="button"
+          onClick={() => deletePackingCategoryHandler(packingItem.id)}
+        >
+          <MdDelete />
+        </button>
       </div>
 
       <div>
