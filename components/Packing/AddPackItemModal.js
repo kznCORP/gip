@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Modal } from "../Modal";
 import { PackingContext } from "@/lib/packingContext";
 import { v4 as uuidv4 } from "uuid";
@@ -13,19 +13,6 @@ const AddPackItemModal = ({ onShow, onClose }) => {
   const [itemTitle, setItemTitle] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showCategories, setShowCategories] = useState(false);
-
-  /**
-   * You left off here
-   *
-   * What to do tomorrow:
-   * [x] Create a Packing Categroy similar to Expensesf
-   * [x] Read data from Firebase, store into app -> display UI
-   * [x] Add item to an array of items within a Packing Category
-   *
-   * [ ] Delete Packing Category
-   * [ ] Delete an item from an array of items in Packing Category
-   *
-   */
 
   const addPackingItemHandler = async (e) => {
     e.preventDefault();
@@ -64,7 +51,6 @@ const AddPackItemModal = ({ onShow, onClose }) => {
     try {
       if (packingCategory !== "") {
         await addPackingCategory({ packingCategory });
-        setPackingCategory("");
         setShowCategories(false);
       }
     } catch (e) {

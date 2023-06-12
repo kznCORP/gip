@@ -10,6 +10,24 @@ import AddPackItemModal from "@/components/Packing/AddPackItemModal";
 
 import { MdAdd } from "react-icons/md";
 import { PackingContext } from "@/lib/packingContext";
+import { ViewPackingItemsModal } from "@/components/Packing/ViewPackingItemsModal";
+
+/**
+ * You left off here
+ *
+ * What to do tomorrow:
+ * [x] Create a Packing Categroy similar to Expensesf
+ * [x] Read data from Firebase, store into app -> display UI
+ * [x] Add item to an array of items within a Packing Category
+ * [x] Delete an item from an array of items in Packing Category
+ *
+ * [ ] Delete Packing Category
+ *
+ *
+ * Bug fixes
+ * [ ] Packing Category disappears when adding a new item to category
+ *
+ */
 
 export default function Home() {
   const router = useRouter();
@@ -58,10 +76,8 @@ export default function Home() {
           <h3 className="mb-6 text-lg text-gray-500">List of Items</h3>
           {/* Expense Container */}
           <div className="flex flex-col gap-4">
-            {packingItems.map((item) => (
-              <div key={item.id}>
-                <h1>{item.packingCategory}</h1>
-              </div>
+            {packingItems.map((item, index) => (
+              <ViewPackingItemsModal key={index} packingItem={item} />
             ))}
           </div>
         </section>
