@@ -23,6 +23,7 @@ import { ViewPackingItemsModal } from "@/components/Packing/ViewPackingItemsModa
  *
  *
  * Up Next...
+ * [ ] Add Checkbox state to Packing Items (Progress is in ViewPackingItemsModal)
  * [ ] Stress test the feature, find any bugs
  * [ ] Improve UI
  * [?] Optimize code for minimal read and writes to Firebase.

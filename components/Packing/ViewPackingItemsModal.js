@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { PackingContext } from "@/lib/packingContext";
 import { MdDelete } from "react-icons/md";
 
 export const ViewPackingItemsModal = ({ packingItem }) => {
-  const { deletePackingItem, deletePackingCategory } =
+  const { deletePackingItem, deletePackingCategory, updateCheckbox } =
     useContext(PackingContext);
 
   const deletePackingCategoryHandler = async () => {
@@ -16,7 +16,6 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
 
   const deletePackingItemHandler = async (item) => {
     try {
-      // Remove item from list
       const updatedItems = packingItem.items.filter((i) => i.id !== item.id);
 
       const updatedPackingItems = {
@@ -26,6 +25,18 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
       await deletePackingItem(packingItem.id, updatedPackingItems);
     } catch (e) {
       console.log("Error in deleting Packing Item", e);
+    }
+  };
+
+  const checkBoxHandler = async (item) => {
+    try {
+      const updatedItem = {
+        ...item,
+        checked: !item.checked,
+      };
+      await updateCheckbox(packingItem.id, updatedItem);
+    } catch (e) {
+      console.log("Error in item checkbox", e);
     }
   };
 
@@ -50,6 +61,12 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
                 key={item.id}
                 className="mb-2 flex items-center justify-between gap-4 bg-slate-300 text-black"
               >
+                <input
+                  type="checkbox"
+                  name="check"
+                  checked={item.checked}
+                  onChange={() => checkBoxHandler(item)}
+                />
                 <h3>{item.name}</h3>
                 <button
                   type="button"
