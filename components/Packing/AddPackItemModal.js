@@ -1,11 +1,11 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Modal } from "../Modal";
 import { PackingContext } from "@/lib/packingContext";
 import { v4 as uuidv4 } from "uuid";
 
-const AddPackItemModal = ({ onShow, onClose }) => {
+export const AddPackItemModal = ({ onShow, onClose }) => {
   const { packingItems, addPackingCategory, addPackingItem } =
     useContext(PackingContext);
 
@@ -152,5 +152,3 @@ const AddPackItemModal = ({ onShow, onClose }) => {
     </Modal>
   );
 };
-
-export default AddPackItemModal;

@@ -43,8 +43,7 @@ export const Expenses = () => {
         onClose={() => setShowAddExpenseModal(false)}
       />
 
-      {/* Main  */}
-      <main className="px-4">
+      <section className="px-4">
         <section>
           <h2 className="text-4xl font-bold">Expenses</h2>
           <div className="my-5">
@@ -104,7 +103,7 @@ export const Expenses = () => {
             />
           </div>
         </section>
-      </main>
+      </section>
     </>
   );
 };

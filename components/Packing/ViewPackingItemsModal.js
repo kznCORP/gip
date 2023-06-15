@@ -68,12 +68,12 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
                     type="checkbox"
                     name="check"
                     checked={item.checked}
-                    className="h-5 w-5 rounded border text-white checked:bg-blue-600 hover:ring-2 hover:ring-blue-600"
+                    className="h-5 w-5 rounded border text-white checked:bg-blue-600 hover:appearance-none hover:ring-2 hover:ring-blue-600"
                     onChange={() => checkBoxHandler(item)}
                   />
                   <h3>{item.name}</h3>
                 </div>
-                <h3>{user.displayName}</h3>
+                <h3>{user?.displayName}</h3>
                 <button
                   type="button"
                   onClick={() => deletePackingItemHandler(item)}
