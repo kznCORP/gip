@@ -23,7 +23,7 @@ import { ViewPackingItemsModal } from "@/components/Packing/ViewPackingItemsModa
  *
  *
  * Up Next...
- * [ ] Add Checkbox state to Packing Items (Progress is in ViewPackingItemsModal)
+ * [x] Add Checkbox state to Packing Items (Progress is in ViewPackingItemsModal)
  * [ ] Stress test the feature, find any bugs
  * [ ] Improve UI
  * [?] Optimize code for minimal read and writes to Firebase.
@@ -64,17 +64,20 @@ export default function Home() {
           <div className="flex gap-4">
             <button
               data-modal-target="authentication-modal"
-              className="text-md mb-10  flex   items-center   gap-2 rounded-lg bg-blue-600 p-3 font-medium text-white"
+              className="text-md mb-5  flex   items-center   gap-2 rounded-lg bg-blue-600 p-3 font-medium text-white"
               onClick={() => setShowAddPackListModal(true)}
             >
-              Add Packing Item <MdAdd className="text-xl" />
+              Add Item <MdAdd className="text-xl" />
             </button>
           </div>
         </section>
 
         {/* Packing List */}
         <section>
-          <h3 className="mb-6 text-lg text-gray-500">List of Items</h3>
+          <small className="text-md text-gray-400">
+            Pack light, wander bright! Discover new horizons with the essentials
+            in sight.
+          </small>
           {/* Expense Container */}
           <div className="flex flex-col gap-4">
             {packingItems.map((item, index) => (

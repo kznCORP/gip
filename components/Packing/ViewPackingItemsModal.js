@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import { PackingContext } from "@/lib/packingContext";
+import { AuthUserContext } from "@/lib/authContext";
 import { MdDelete } from "react-icons/md";
 
 export const ViewPackingItemsModal = ({ packingItem }) => {
   const { deletePackingItem, deletePackingCategory, updateCheckbox } =
     useContext(PackingContext);
+  const { user } = useContext(AuthUserContext);
 
   const deletePackingCategoryHandler = async () => {
     try {
@@ -42,8 +44,8 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
 
   return (
     <>
-      <div className="flex items-center gap-4">
-        <h2 className="text-xl font-bold">{packingItem?.packingCategory}</h2>
+      <div className="flex items-center gap-4 border-b p-4">
+        <h2 className="text-xl font-bold ">{packingItem?.packingCategory}</h2>
         <button
           type="button"
           onClick={() => deletePackingCategoryHandler(packingItem.id)}
@@ -59,15 +61,19 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
             return (
               <div
                 key={item.id}
-                className="mb-2 flex items-center justify-between gap-4 bg-slate-300 text-black"
+                className="mb-2 flex items-center justify-between gap-4"
               >
-                <input
-                  type="checkbox"
-                  name="check"
-                  checked={item.checked}
-                  onChange={() => checkBoxHandler(item)}
-                />
-                <h3>{item.name}</h3>
+                <div className="flex items-center gap-4">
+                  <input
+                    type="checkbox"
+                    name="check"
+                    checked={item.checked}
+                    className="h-5 w-5 rounded border text-white checked:bg-blue-600 hover:ring-2 hover:ring-blue-600"
+                    onChange={() => checkBoxHandler(item)}
+                  />
+                  <h3>{item.name}</h3>
+                </div>
+                <h3>{user.displayName}</h3>
                 <button
                   type="button"
                   onClick={() => deletePackingItemHandler(item)}

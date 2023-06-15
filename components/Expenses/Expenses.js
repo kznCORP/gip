@@ -58,7 +58,7 @@ export const Expenses = () => {
           <div className="flex gap-4">
             <button
               data-modal-target="authentication-modal"
-              className="text-md mb-10  flex   items-center   gap-2 rounded-lg bg-blue-600 p-3 font-medium text-white"
+              className="text-md mb-5  flex   items-center   gap-2 rounded-lg bg-blue-600 p-3 font-medium text-white"
               onClick={() => setShowAddExpenseModal(true)}
             >
               Add Expense <MdAdd className="text-xl" />
@@ -68,8 +68,11 @@ export const Expenses = () => {
 
         {/* List of Expenses */}
         <section>
-          <h3 className="mb-6 text-lg text-gray-500">List of expenses</h3>
-          <div className="mb-4 flex justify-between ">
+          <p className="leading-2 text-xs text-gray-400">
+            Track with ease, save with peace! Stay on top of expenses and watch
+            your savings increase.
+          </p>
+          <div className="my-8 flex justify-between ">
             <small className=" text-md text-gray-400">Category</small>
             <small className=" text-md text-gray-400 ">Total</small>
           </div>
