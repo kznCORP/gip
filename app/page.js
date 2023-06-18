@@ -9,6 +9,7 @@ import { Expenses } from "@/components/Expenses/Expenses";
 import { PackingList } from "@/components/Packing/PackingList";
 
 import { DatePickerWithRange } from "@/components/ui/datepicker";
+import { Location } from "@/components/Schedule/Location";
 
 /**
  * Be proud of what you've done.
@@ -59,7 +60,7 @@ export default function Home() {
       <section className="mb-24 mt-5 px-4">
         <section>
           <h2 className="text-4xl font-bold">Schedule</h2>
-          <p className="leading-2 mt-4 text-xs text-gray-400">
+          <p className="leading-2 my-4 text-xs text-gray-400">
             Make planning an event so easy all you have to do is just show up.
           </p>
         </section>
@@ -67,9 +68,7 @@ export default function Home() {
         {/* Modal Toggle */}
         <section>
           <form>
-            {title && (
-              <label className="leading-2 text-xs text-gray-400">Title</label>
-            )}
+            <label className="leading-2 text-xs text-gray-400">Title</label>
             <div className="my-2 flex items-center gap-4">
               <input
                 type="text"
@@ -81,36 +80,33 @@ export default function Home() {
             </div>
 
             {/* Activity Title */}
-            {title && (
-              <>
-                <label className="leading-2 text-xs text-gray-400">
-                  Location
-                </label>
-                <div className="mt-2 flex items-center gap-4">
-                  <input
-                    type="text"
-                    placeholder="Where to?..."
-                    value={searchInput}
-                    onChange={(e) => setSearchInput(e.target.value)}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-2"
-                  />
-                  <button
-                    type="button"
-                    className="rounded-lg bg-blue-600 px-4 py-2 text-white "
-                  >
-                    Search
-                  </button>
-                </div>
-              </>
-            )}
+            <label className="leading-2 text-xs text-gray-400">Location</label>
+            <div className="mt-2 flex items-center gap-4">
+              <input
+                type="text"
+                placeholder="Where to?..."
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                className="w-full rounded-lg border border-gray-300 px-4 py-2"
+              />
+              <button
+                type="button"
+                className="rounded-lg bg-blue-600 px-4 py-2 text-white "
+              >
+                Search
+              </button>
+            </div>
+
+            {/* MapBox */}
+            <div className="mt-4 h-[250px] rounded-lg">
+              <Location />
+            </div>
 
             {/* Search Results */}
-            {title && searchInput && (
-              <div className="mt-4">
-                <p className="leading-2 mb-2 text-xs text-gray-400">Dates</p>
-                <DatePickerWithRange />
-              </div>
-            )}
+            <div className="mt-4">
+              <p className="leading-2 mb-2 text-xs text-gray-400">Dates</p>
+              <DatePickerWithRange />
+            </div>
           </form>
         </section>
       </section>
