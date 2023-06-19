@@ -89,7 +89,3 @@
   * This will create a rounded blue button with white text for each element that has className="btn"
   */
 }
-
-[mapboxgl-children] {
-  display: none;
-}

@@ -19,7 +19,7 @@ export const Navigation = () => {
             </button>
 
             {showSideBar && (
-              <div className="z-99 fixed inset-0 flex h-full w-1/3 flex-col items-center justify-between bg-slate-500 text-center text-white">
+              <div className="z-50 fixed inset-0 flex h-full w-1/3 flex-col items-center justify-between bg-slate-500 text-center text-white">
                 <button
                   className="fixed left-5 top-5"
                   onClick={() => setShowSideBar(false)}

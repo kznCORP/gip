@@ -25,17 +25,20 @@ import { Location } from "@/components/Schedule/Location";
  * Up Next.
  *
  * [ ] Create the Schedule feature
- *    [x] Location
- *    [x] Pick Dates and Range
- *    [ ]
- * [ ] Take user input from client and store into Firebase
+ *    [x] Title form
+ *    [x] Location form
+ *    [ ] Search addresses based on location input
+ *        [ ] Apple Maps / Google Maps clickable link
+ *
+ * [ ] Read user input from client (title, location, dates, etc.) and store into Firebase
  * [ ] Read data from Firebase and display UI
  *
  *
- * Always Look To.
- * [ ] Stress test the feature, find any bugs
- * [ ] Improve UI
- * [ ] Optimize code for minimal read and writes to Firebase.
+ *
+ * To-Do today:
+ * [ ] Install @react-google-maps/api
+ * [ ] Load Google Maps onto the website
+ * [ ] Apply Search
  *
  */
 
@@ -57,18 +60,15 @@ export default function Home() {
     <>
       <Navigation />
 
-      <section className="mb-24 mt-5 px-4">
+      <section className="mb-24 mt-4 px-4">
         <section>
           <h2 className="text-4xl font-bold">Schedule</h2>
-          <p className="leading-2 my-4 text-xs text-gray-400">
-            Make planning an event so easy all you have to do is just show up.
-          </p>
         </section>
 
         {/* Modal Toggle */}
-        <section>
+        <section className="mt-4">
           <form>
-            <label className="leading-2 text-xs text-gray-400">Title</label>
+            <label className="leading-2 text-xs">Title</label>
             <div className="my-2 flex items-center gap-4">
               <input
                 type="text"
@@ -80,7 +80,7 @@ export default function Home() {
             </div>
 
             {/* Activity Title */}
-            <label className="leading-2 text-xs text-gray-400">Location</label>
+            <label className="leading-2 text-xs">Location</label>
             <div className="mt-2 flex items-center gap-4">
               <input
                 type="text"
@@ -104,7 +104,7 @@ export default function Home() {
 
             {/* Search Results */}
             <div className="mt-4">
-              <p className="leading-2 mb-2 text-xs text-gray-400">Dates</p>
+              <p className="leading-2 mb-2 text-xs">Dates</p>
               <DatePickerWithRange />
             </div>
           </form>

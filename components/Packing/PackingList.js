@@ -47,10 +47,6 @@ export const PackingList = () => {
 
         {/* Packing List */}
         <section>
-          <p className="leading-2 text-xs text-gray-400">
-            Pack light, wander bright! Discover new horizons with the essentials
-            in sight.
-          </p>
           {/* Expense Container */}
           <div className="flex flex-col gap-4">
             {packingItems.map((item, index) => (

@@ -67,10 +67,6 @@ export const Expenses = () => {
 
         {/* List of Expenses */}
         <section>
-          <p className="leading-2 text-xs text-gray-400">
-            Track with ease, save with peace! Stay on top of expenses and watch
-            your savings increase.
-          </p>
           <div className="my-8 flex justify-between ">
             <small className=" text-md text-gray-400">Category</small>
             <small className=" text-md text-gray-400 ">Total</small>
