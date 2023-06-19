@@ -9,17 +9,15 @@ import { Expenses } from "@/components/Expenses/Expenses";
 import { PackingList } from "@/components/Packing/PackingList";
 
 import { DatePickerWithRange } from "@/components/ui/datepicker";
-import { Location } from "@/components/Schedule/Location";
+import { Map } from "@/components/Schedule/Map";
 
 /**
- * Be proud of what you've done.
  *
- * [x] Create a Packing Categroy similar to Expenses
- * [x] Read data from Firebase, store into app -> display UI
- * [x] Add item to an array of items within a Packing Category
- * [x] Delete Packing Category
- * [x] Delete an item from an array of items in Packing Category
- * [x] Add Checkbox state to Packing Items
+ * To-Do today:
+ *
+ * [x] Install @react-google-maps/api & use-places-autocomplete
+ * [x] Load Google Maps onto the website
+ * [ ] Apply Searchbox Input and generate Places
  *
  *
  * Up Next.
@@ -28,17 +26,11 @@ import { Location } from "@/components/Schedule/Location";
  *    [x] Title form
  *    [x] Location form
  *    [ ] Search addresses based on location input
+ *        [x] Display an Interactive Map
  *        [ ] Apple Maps / Google Maps clickable link
  *
  * [ ] Read user input from client (title, location, dates, etc.) and store into Firebase
  * [ ] Read data from Firebase and display UI
- *
- *
- *
- * To-Do today:
- * [ ] Install @react-google-maps/api
- * [ ] Load Google Maps onto the website
- * [ ] Apply Search
  *
  */
 
@@ -48,7 +40,6 @@ export default function Home() {
 
   const [title, setTitle] = useState("");
   const [searchInput, setSearchInput] = useState("");
-  const [date, setDate] = useState(null);
 
   useEffect(() => {
     if (!user && !loading) {
@@ -98,8 +89,8 @@ export default function Home() {
             </div>
 
             {/* MapBox */}
-            <div className="mt-4 h-[250px] rounded-lg">
-              <Location />
+            <div className="mt-4 h-full w-full">
+              <Map />
             </div>
 
             {/* Search Results */}
@@ -116,3 +107,14 @@ export default function Home() {
     </>
   );
 }
+
+/**
+ * Be proud of what you've done.
+ *
+ * [x] Create a Packing Categroy similar to Expenses
+ * [x] Read data from Firebase, store into app -> display UI
+ * [x] Add item to an array of items within a Packing Category
+ * [x] Delete Packing Category
+ * [x] Delete an item from an array of items in Packing Category
+ * [x] Add Checkbox state to Packing Items
+ */
