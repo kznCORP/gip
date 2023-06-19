@@ -18,7 +18,7 @@ export const Map = () => {
 
   return (
     <>
-      <div>
+      <div className="my-2">
         <PlacesAutocomplete setSelected={setSelected} />
       </div>
 

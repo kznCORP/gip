@@ -20,18 +20,6 @@ import { Map } from "@/components/Schedule/Map";
  * [ ] Apply Searchbox Input and generate Places
  *
  *
- * Up Next.
- *
- * [ ] Create the Schedule feature
- *    [x] Title form
- *    [x] Location form
- *    [ ] Search addresses based on location input
- *        [x] Display an Interactive Map
- *        [ ] Apple Maps / Google Maps clickable link
- *
- * [ ] Read user input from client (title, location, dates, etc.) and store into Firebase
- * [ ] Read data from Firebase and display UI
- *
  */
 
 export default function Home() {
@@ -39,7 +27,6 @@ export default function Home() {
   const { user, loading } = useContext(AuthUserContext);
 
   const [title, setTitle] = useState("");
-  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     if (!user && !loading) {
@@ -70,26 +57,9 @@ export default function Home() {
               />
             </div>
 
-            {/* Activity Title */}
+            {/* Maps & Places API */}
             <label className="leading-2 text-xs">Location</label>
-            <div className="mt-2 flex items-center gap-4">
-              <input
-                type="text"
-                placeholder="Where to?..."
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2"
-              />
-              <button
-                type="button"
-                className="rounded-lg bg-blue-600 px-4 py-2 text-white "
-              >
-                Search
-              </button>
-            </div>
-
-            {/* MapBox */}
-            <div className="mt-4 h-full w-full">
+            <div className="h-full w-full">
               <Map />
             </div>
 
@@ -109,6 +79,7 @@ export default function Home() {
 }
 
 /**
+ *
  * Be proud of what you've done.
  *
  * [x] Create a Packing Categroy similar to Expenses
@@ -117,4 +88,17 @@ export default function Home() {
  * [x] Delete Packing Category
  * [x] Delete an item from an array of items in Packing Category
  * [x] Add Checkbox state to Packing Items
+ *
+ *
+ * Up Next.
+ *
+ * [ ] Create the Schedule feature
+ *    [x] Title form
+ *    [x] Location form
+ *    [ ] Search addresses based on location input
+ *        [x] Display an Interactive Map
+ *        [ ] Apple Maps / Google Maps clickable link
+ *
+ * [ ] Read user input from client (title, location, dates, etc.) and store into Firebase
+ * [ ] Read data from Firebase and display UI
  */
