@@ -8,6 +8,7 @@ import { Navigation } from "@/components/navigation";
 import { Expenses } from "@/components/Expenses/Expenses";
 import { PackingList } from "@/components/Packing/PackingList";
 
+import { Input } from "@/components/ui/input";
 import { DatePickerWithRange } from "@/components/ui/datepicker";
 import { Map } from "@/components/Schedule/Map";
 
@@ -17,8 +18,9 @@ import { Map } from "@/components/Schedule/Map";
  *
  * [x] Install @react-google-maps/api & use-places-autocomplete
  * [x] Load Google Maps onto the website
- * [ ] Apply Searchbox Input and generate Places
+ * [x] Apply Searchbox Input and generate Places
  *
+ * [ ] Store data into Firebase
  *
  */
 
@@ -48,12 +50,11 @@ export default function Home() {
           <form>
             <label className="leading-2 text-xs">Title</label>
             <div className="my-2 flex items-center gap-4">
-              <input
+              <Input
                 type="text"
                 placeholder="What are you thinking of doing?..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2"
               />
             </div>
 
