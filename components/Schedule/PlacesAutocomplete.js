@@ -1,13 +1,10 @@
-import React from "react";
-
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
 import { Input } from "../ui/input";
-import { MapPin } from "lucide-react";
 
-export const PlacesAutocomplete = ({ setSelected }) => {
+export const PlacesAutocomplete = ({ setSelectedLocation }) => {
   const {
     value,
     setValue,
@@ -22,11 +19,11 @@ export const PlacesAutocomplete = ({ setSelected }) => {
     const results = await getGeocode({ address });
     const { lat, lng } = await getLatLng(results[0]);
 
-    setSelected({ lat, lng });
+    setSelectedLocation({ lat, lng });
   };
 
   return (
-    <>
+    <div className="my-2">
       <Input
         type="text"
         placeholder="Search for a location..."
@@ -47,7 +44,7 @@ export const PlacesAutocomplete = ({ setSelected }) => {
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 };
 
