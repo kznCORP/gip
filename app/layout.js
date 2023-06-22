@@ -3,6 +3,27 @@ import "./globals.css";
 import { AuthContextProvider } from "@/lib/authContext";
 import { FinanceContextProvider } from "@/lib/financeContext";
 import { PackingContextProvider } from "@/lib/packingContext";
+import { ScheduleContextProvider } from "@/lib/scheduleContext";
+
+const allComponents = [
+  AuthContextProvider,
+  FinanceContextProvider,
+  PackingContextProvider,
+  ScheduleContextProvider,
+];
+
+function AllProviders({ components = [], children }) {
+  return (
+    <>
+      {components.reduceRight((acc, Comp) => {
+        const [GivenComponent, givenProps] = Array.isArray(Comp)
+          ? Comp
+          : [Comp, {}];
+        return <GivenComponent {...givenProps}>{acc}</GivenComponent>;
+      }, children)}
+    </>
+  );
+}
 
 export const metadata = {
   title: "GIP - Group Itinerary Planner",
@@ -14,11 +35,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <AuthContextProvider>
-          <FinanceContextProvider>
-            <PackingContextProvider> {children} </PackingContextProvider>
-          </FinanceContextProvider>
-        </AuthContextProvider>
+        <AllProviders components={allComponents}>{children}</AllProviders>
       </body>
     </html>
   );

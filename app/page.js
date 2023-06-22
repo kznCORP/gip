@@ -3,14 +3,17 @@
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AuthUserContext } from "@/lib/authContext";
+import { ScheduleContext } from "@/lib/scheduleContext";
 
-import { Navigation } from "@/components/navigation";
+import { Navigation } from "@/components/Navigation";
 import { Expenses } from "@/components/Expenses/Expenses";
 import { PackingList } from "@/components/Packing/PackingList";
 
 import { Input } from "@/components/ui/input";
 import { DatePickerWithRange } from "@/components/ui/datepicker";
-import { Map } from "@/components/Schedule/Map";
+import { Location } from "@/components/Schedule/Location";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 /**
  *
@@ -27,14 +30,26 @@ import { Map } from "@/components/Schedule/Map";
 export default function Home() {
   const router = useRouter();
   const { user, loading } = useContext(AuthUserContext);
+  const { schedule, addSchedule } = useContext(ScheduleContext);
 
   const [title, setTitle] = useState("");
+  const [notes, setNotes] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [selectedDates, setSelectedDates] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await addSchedule({ title, selectedLocation, notes });
+  };
+
+  console.log(schedule);
 
   useEffect(() => {
     if (!user && !loading) {
       router.push("/login");
     }
-  }, [router, user, loading]);
+  }, [router, user, loading, schedule]);
 
   return (
     <>
@@ -47,7 +62,7 @@ export default function Home() {
 
         {/* Modal Toggle */}
         <section className="mt-4">
-          <form>
+          <form onSubmit={handleSubmit}>
             <label className="leading-2 text-xs">Title</label>
             <div className="my-2 flex items-center gap-4">
               <Input
@@ -59,16 +74,32 @@ export default function Home() {
             </div>
 
             {/* Maps & Places API */}
-            <label className="leading-2 text-xs">Location</label>
             <div className="h-full w-full">
-              <Map />
+              <label className="leading-2 text-xs">Location</label>
+              <Location
+                selectedLocation={selectedLocation}
+                setSelectedLocation={setSelectedLocation}
+              />
             </div>
 
             {/* Search Results */}
             <div className="mt-4">
               <p className="leading-2 mb-2 text-xs">Dates</p>
-              <DatePickerWithRange />
+              <DatePickerWithRange setSelectedDates={setSelectedDates} />
             </div>
+
+            {/* Text Area */}
+            <div className="mt-4">
+              <p className="leading-2 mb-2 text-xs">Notes</p>
+              <Textarea
+                placeholder="Additional notes..."
+                maxLength="250"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+              />
+            </div>
+
+            <Button type="submit">Submit</Button>
           </form>
         </section>
       </section>
