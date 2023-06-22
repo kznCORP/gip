@@ -6,7 +6,7 @@ import { AuthUserContext } from "@/lib/authContext";
 import { ScheduleContext } from "@/lib/scheduleContext";
 
 // Deleted Build Cache, try #5.
-import { Navigation } from "@/components/Navigation.js";
+import { Navigation } from "@/components/navigation.js";
 import { Expenses } from "@/components/Expenses/Expenses";
 import { PackingList } from "@/components/Packing/PackingList";
 
