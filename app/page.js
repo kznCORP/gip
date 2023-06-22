@@ -5,8 +5,7 @@ import { useRouter } from "next/navigation";
 import { AuthUserContext } from "@/lib/authContext";
 import { ScheduleContext } from "@/lib/scheduleContext";
 
-// Fixed Import
-import { Navigation } from "@/components/Navigation"; 
+import { Navigation } from "@/components/Navigation";
 import { Expenses } from "@/components/Expenses/Expenses";
 import { PackingList } from "@/components/Packing/PackingList";
 
