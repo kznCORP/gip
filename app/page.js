@@ -6,7 +6,7 @@ import { AuthUserContext } from "@/lib/authContext";
 import { ScheduleContext } from "@/lib/scheduleContext";
 
 // Deleted Build Cache, try #5.
-import { Navigation } from "@/components/navigation.js";
+import { Navigation } from "@/components/Navigation.js";
 import { Expenses } from "@/components/Expenses/Expenses";
 import { PackingList } from "@/components/Packing/PackingList";
 
@@ -16,6 +16,9 @@ import { Location } from "@/components/Schedule/Location";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
+import { cn } from "@/lib/utils";
+import { dateFormatter } from "@/lib/utils";
+
 /**
  *
  * To-Do today:
@@ -24,7 +27,8 @@ import { Button } from "@/components/ui/button";
  * [x] Load Google Maps onto the website
  * [x] Apply Searchbox Input and generate Places
  *
- * [ ] Store data into Firebase
+ * [x] Store data into Firebase
+ * [x] Read data from Firebase
  *
  */
 
@@ -40,17 +44,14 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    await addSchedule({ title, selectedLocation, notes });
+    await addSchedule({ title, selectedLocation, selectedDates, notes });
   };
-
-  console.log(schedule);
 
   useEffect(() => {
     if (!user && !loading) {
       router.push("/login");
     }
-  }, [router, user, loading, schedule]);
+  }, [router, user, loading]);
 
   return (
     <>
@@ -100,9 +101,33 @@ export default function Home() {
               />
             </div>
 
-            <Button type="submit">Submit</Button>
+            <Button className={cn("mt-4 w-full")} type="submit">
+              Submit
+            </Button>
           </form>
         </section>
+
+        {/* List of Schedules */}
+
+        {schedule &&
+          schedule.map((item) => (
+            <div key={item.id} className="mt-5 flex flex-col bg-slate-300 p-2">
+              {/* Title */}
+              <h2>{item.title}</h2>
+
+              <p>{item.selectedLocation.address}</p>
+
+              {/* Dates */}
+              <div className="flex gap-2">
+                <p>{dateFormatter(item.selectedDates.from)}</p>
+                <p> - </p>
+                <p>{dateFormatter(item.selectedDates.to)}</p>
+              </div>
+
+              {/* Text Area */}
+              <p>{item.notes}</p>
+            </div>
+          ))}
       </section>
 
       <Expenses />

@@ -47,7 +47,6 @@ export const PackingList = () => {
 
         {/* Packing List */}
         <section>
-          {/* Expense Container */}
           <div className="flex flex-col gap-4">
             {packingItems.map((item, index) => (
               <ViewPackingItemsModal key={index} packingItem={item} />

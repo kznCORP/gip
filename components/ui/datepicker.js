@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { addDays, format, startOfDay } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { DateRange } from "react-day-picker";
@@ -14,15 +14,24 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 
-export function DatePickerWithRange({ className }) {
+export function DatePickerWithRange({ setSelectedDates }) {
   const today = startOfDay(new Date());
   const [date, setDate] = useState({
     from: today,
-    to: addDays(today, 7),
+    to: addDays(today, 2),
   });
 
+  const handleSelect = async (selectedDate) => {
+    setDate(selectedDate);
+    setSelectedDates(selectedDate);
+  };
+
+  useEffect(() => {
+    setSelectedDates(date);
+  }, [date, setSelectedDates]);
+
   return (
-    <div className={cn("grid gap-2", className)}>
+    <div className={cn("grid gap-2")}>
       <Popover className={cn("flex items-center justify-center")}>
         <PopoverTrigger asChild>
           <Button
@@ -54,7 +63,7 @@ export function DatePickerWithRange({ className }) {
             mode="range"
             defaultMonth={date?.from}
             selected={date}
-            onSelect={setDate}
+            onSelect={(date) => handleSelect(date)}
             numberOfMonths={1}
           />
         </PopoverContent>
