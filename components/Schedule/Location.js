@@ -14,10 +14,13 @@ export const Location = ({ selectedLocation, setSelectedLocation }) => {
   const [center, setCenter] = useState(initialCenter);
 
   useEffect(() => {
+    setSelectedLocation(center);
+
     if (selectedLocation) {
       setCenter(selectedLocation);
+      setSelectedLocation(selectedLocation);
     }
-  }, [selectedLocation]);
+  }, [center, selectedLocation, setSelectedLocation]);
 
   if (!isLoaded) {
     return <h2>Loading...</h2>;

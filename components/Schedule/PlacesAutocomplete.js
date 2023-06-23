@@ -19,7 +19,7 @@ export const PlacesAutocomplete = ({ setSelectedLocation }) => {
     const results = await getGeocode({ address });
     const { lat, lng } = await getLatLng(results[0]);
 
-    setSelectedLocation({ lat, lng });
+    setSelectedLocation({ lat, lng, address });
   };
 
   return (
