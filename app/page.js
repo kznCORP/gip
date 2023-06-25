@@ -16,20 +16,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 import { cn } from "@/lib/utils";
-import { dateFormatter } from "@/lib/utils";
-
-/**
- *
- * To-Do today:
- *
- * [x] Install @react-google-maps/api & use-places-autocomplete
- * [x] Load Google Maps onto the website
- * [x] Apply Searchbox Input and generate Places
- *
- * [x] Store data into Firebase
- * [x] Read data from Firebase
- *
- */
+import { ViewSchedules } from "@/components/Schedule/ViewSchedules";
 
 export default function Home() {
   const router = useRouter();
@@ -109,23 +96,8 @@ export default function Home() {
         {/* List of Schedules */}
 
         {schedule &&
-          schedule.map((item) => (
-            <div key={item.id} className="mt-5 flex flex-col bg-slate-300 p-2">
-              {/* Title */}
-              <h2>{item.title}</h2>
-
-              <p>{item.selectedLocation.address}</p>
-
-              {/* Dates */}
-              <div className="flex gap-2">
-                <p>{dateFormatter(item.selectedDates.from)}</p>
-                <p> - </p>
-                <p>{dateFormatter(item.selectedDates.to)}</p>
-              </div>
-
-              {/* Text Area */}
-              <p>{item.notes}</p>
-            </div>
+          schedule.map((item, index) => (
+            <ViewSchedules key={index} schedule={item} />
           ))}
       </section>
 
@@ -149,13 +121,23 @@ export default function Home() {
  *
  * Up Next.
  *
+ * [x] Install @react-google-maps/api & use-places-autocomplete
+ * [x] Load Google Maps onto the website
+ * [x] Apply Searchbox Input and generate Places
+ *
+ *
  * [ ] Create the Schedule feature
  *    [x] Title form
  *    [x] Location form
- *    [ ] Search addresses based on location input
+ *    [x] Search addresses based on location input
  *        [x] Display an Interactive Map
  *        [ ] Apple Maps / Google Maps clickable link
  *
- * [ ] Read user input from client (title, location, dates, etc.) and store into Firebase
- * [ ] Read data from Firebase and display UI
+ *    [x] Delete a Schedule
+ *    [ ] Edit the Schedule
+ *
+ *
+ * [x] Read user input from client (title, location, dates, etc.) and store into Firebase
+ * [x] Read data from Firebase and display UI
+ * [ ] Stress test, bug hunt; refactor and fix.
  */

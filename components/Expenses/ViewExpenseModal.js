@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Modal } from "../Modal";
-import { MdDelete } from "react-icons/md";
+import { Trash2 } from "lucide-react";
 import { currencyFormatter } from "@/lib/utils";
 import { FinanceContext } from "@/lib/financeContext";
 
@@ -59,7 +59,7 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
                 <h3>{item.name}</h3>
                 <p>{currencyFormatter(item.amount)}</p>
                 <button onClick={() => deleteExpenseItemHandler(item)}>
-                  <MdDelete />
+                  <Trash2 />
                 </button>
               </div>
             );

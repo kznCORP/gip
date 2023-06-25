@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useContext, useState } from "react";
-import { RxHamburgerMenu } from "react-icons/rx";
+import { Menu } from "lucide-react";
 
 import { AuthUserContext } from "@/lib/authContext";
 
@@ -15,7 +15,7 @@ export const Navigation = () => {
         <div className="flex items-center justify-between">
           <nav>
             <button onClick={() => setShowSideBar(true)}>
-              <RxHamburgerMenu className="text-xl" />
+              <Menu className="text-xl" />
             </button>
 
             {showSideBar && (

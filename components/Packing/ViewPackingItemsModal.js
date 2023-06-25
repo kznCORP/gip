@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { PackingContext } from "@/lib/packingContext";
 import { AuthUserContext } from "@/lib/authContext";
-import { MdDelete } from "react-icons/md";
+import { Trash2 } from "lucide-react";
 
 export const ViewPackingItemsModal = ({ packingItem }) => {
   const { deletePackingItem, deletePackingCategory, updateCheckbox } =
@@ -50,7 +50,7 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
           type="button"
           onClick={() => deletePackingCategoryHandler(packingItem.id)}
         >
-          <MdDelete />
+          <Trash2 />
         </button>
       </div>
 
@@ -78,7 +78,7 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
                   type="button"
                   onClick={() => deletePackingItemHandler(item)}
                 >
-                  <MdDelete />
+                  <Trash2 />
                 </button>
               </div>
             );

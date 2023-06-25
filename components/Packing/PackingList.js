@@ -6,7 +6,7 @@ import { PackingContext } from "@/lib/packingContext";
 import { AddPackItemModal } from "@/components/Packing/AddPackItemModal";
 import { ViewPackingItemsModal } from "@/components/Packing/ViewPackingItemsModal";
 
-import { MdAdd } from "react-icons/md";
+import { PlusCircle } from "lucide-react";
 
 export const PackingList = () => {
   const router = useRouter();
@@ -40,7 +40,7 @@ export const PackingList = () => {
               className="text-md mb-5  flex   items-center   gap-2 rounded-lg bg-blue-600 p-3 font-medium text-white"
               onClick={() => setShowAddPackListModal(true)}
             >
-              Add Item <MdAdd className="text-xl" />
+              Add Item <PlusCircle className="text-xl" />
             </button>
           </div>
         </section>

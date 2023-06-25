@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import { MdAdd } from "react-icons/md";
+import { PlusCircle } from "lucide-react";
 
 import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
 import { currencyFormatter } from "@/lib/utils";
@@ -60,7 +60,7 @@ export const Expenses = () => {
               className="text-md mb-5  flex   items-center   gap-2 rounded-lg bg-blue-600 p-3 font-medium text-white"
               onClick={() => setShowAddExpenseModal(true)}
             >
-              Add Expense <MdAdd className="text-xl" />
+              Add Expense <PlusCircle className="text-xl" />
             </button>
           </div>
         </section>
