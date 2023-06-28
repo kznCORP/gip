@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useContext, useEffect, useState } from "react";
-import Image from "next/image";
 
 import { ScheduleContext } from "@/lib/scheduleContext";
 
@@ -25,7 +24,8 @@ export const ViewSchedules = ({ schedule }) => {
       <div className="mt-5 flex flex-col gap-3 rounded-xl border border-gray-300 ">
         {/* Image Wrapper */}
         <div>
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={schedule.selectedLocation?.photoUrl}
             blurDataURL={schedule.selectedLocation?.photoUrl}
             alt={`${schedule.selectedLocation?.name} Google Review image.`}
