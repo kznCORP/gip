@@ -30,7 +30,15 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await addSchedule({ title, selectedLocation, selectedDates, notes });
+
+    const scheduleData = {
+      title,
+      selectedLocation,
+      selectedDates,
+      notes,
+    };
+
+    await addSchedule(scheduleData);
   };
 
   useEffect(() => {

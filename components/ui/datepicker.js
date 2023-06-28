@@ -22,8 +22,14 @@ export function DatePickerWithRange({ setSelectedDates }) {
   });
 
   const handleSelect = async (selectedDate) => {
-    setDate(selectedDate);
-    setSelectedDates(selectedDate);
+    try {
+      const fromDate = selectedDate?.from || "";
+      const toDate = selectedDate?.to || "";
+      setDate({ from: fromDate, to: toDate });
+      setSelectedDates({ from: fromDate, to: toDate });
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   useEffect(() => {

@@ -1,6 +1,7 @@
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
+  getDetails,
 } from "use-places-autocomplete";
 import { Input } from "../ui/input";
 
@@ -16,10 +17,40 @@ export const PlacesAutocomplete = ({ setSelectedLocation }) => {
     setValue(address, false);
     clearSuggestions();
 
-    const results = await getGeocode({ address });
-    const { lat, lng } = await getLatLng(results[0]);
+    try {
+      const results = await getGeocode({ address });
+      const placeId = results[0].place_id;
 
-    setSelectedLocation({ lat, lng, address });
+      const details = await getDetails({ placeId });
+      const { name, photos, rating, url } = details;
+
+      const { lat, lng } = await getLatLng(results[0]);
+
+      const selectedLocation = {
+        lat: lat || "",
+        lng: lng || "",
+        address: address || "",
+        name: name || "",
+        photoUrl: photos[0].getUrl() || [],
+        rating: rating || "",
+        url: url || "",
+      };
+
+      const isInvalidData =
+        !selectedLocation.lat ||
+        !selectedLocation.lng ||
+        !selectedLocation.address ||
+        !selectedLocation.name;
+
+      if (isInvalidData) {
+        console.log("Invalid location data:", selectedLocation);
+        return;
+      }
+
+      setSelectedLocation(selectedLocation);
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   return (

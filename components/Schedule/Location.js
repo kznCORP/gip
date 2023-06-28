@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { PlacesAutocomplete } from "./PlacesAutocomplete";
@@ -14,13 +16,14 @@ export const Location = ({ selectedLocation, setSelectedLocation }) => {
   const [center, setCenter] = useState(initialCenter);
 
   useEffect(() => {
-    setSelectedLocation(center);
-
-    if (selectedLocation) {
+    if (
+      selectedLocation &&
+      (center.lat !== selectedLocation.lat ||
+        center.lng !== selectedLocation.lng)
+    ) {
       setCenter(selectedLocation);
-      setSelectedLocation(selectedLocation);
     }
-  }, [center, selectedLocation, setSelectedLocation]);
+  }, [center, selectedLocation]);
 
   if (!isLoaded) {
     return <h2>Loading...</h2>;
