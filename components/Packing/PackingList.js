@@ -28,20 +28,20 @@ export const PackingList = () => {
         onClose={() => setShowAddPackListModal(false)}
       />
       <section className="my-12 px-4">
-        <section>
-          <h2 className="my-5 text-4xl font-bold">Packing List</h2>
-        </section>
-
-        {/* Modal Toggle */}
-        <section>
-          <div className="flex gap-4">
-            <button
-              data-modal-target="authentication-modal"
-              className="text-md mb-5  flex   items-center   gap-2 rounded-lg bg-blue-600 p-3 font-medium text-white"
-              onClick={() => setShowAddPackListModal(true)}
-            >
-              Add Item <PlusCircle className="text-xl" />
-            </button>
+        {/* Add Packing Item */}
+        <section className="sticky top-0 pt-4 backdrop-blur-sm">
+          <div className="mb-5 flex items-center justify-between border-b border-gray-300 pb-3 ">
+            <h2 className="text-xl font-medium">Packing List</h2>
+            <div className="flex gap-4">
+              {/* Modal Toggle */}
+              <button
+                data-modal-target="authentication-modal"
+                className="flex  items-center   gap-2   rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
+                onClick={() => setShowAddExpenseModal(true)}
+              >
+                <PlusCircle className="h-5 w-5" /> Add Item
+              </button>
+            </div>
           </div>
         </section>
 

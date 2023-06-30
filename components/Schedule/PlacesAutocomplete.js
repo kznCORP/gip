@@ -22,6 +22,8 @@ export const PlacesAutocomplete = ({ setSelectedLocation }) => {
       const placeId = results[0].place_id;
 
       const details = await getDetails({ placeId });
+
+      console.log(details);
       const { name, photos, rating, url } = details;
 
       const { lat, lng } = await getLatLng(results[0]);

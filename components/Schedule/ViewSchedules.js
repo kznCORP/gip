@@ -9,6 +9,7 @@ import { dateFormatter } from "@/lib/utils";
 import { Trash2, Map, CalendarClock, StickyNote, Star } from "lucide-react";
 
 export const ViewSchedules = ({ schedule }) => {
+
   const { deleteSchedule } = useContext(ScheduleContext);
 
   const deleteScheduleHandler = async (scheduleId) => {
@@ -27,7 +28,6 @@ export const ViewSchedules = ({ schedule }) => {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={schedule.selectedLocation?.photoUrl}
-            blurDataURL={schedule.selectedLocation?.photoUrl}
             alt={`${schedule.selectedLocation?.name} Google Review image.`}
             className="w-full rounded-t-xl object-cover"
             width={200}
@@ -71,9 +71,9 @@ export const ViewSchedules = ({ schedule }) => {
           </div>
 
           {/* Dates */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             <CalendarClock className="h-4 w-4  flex-shrink-0" />
-            <p className="text-sm font-light">
+            <p className="ml-2 text-sm font-light">
               {dateFormatter(schedule?.selectedDates.from)}
             </p>
             {schedule.selectedDates.to && (

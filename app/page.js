@@ -8,6 +8,7 @@ import { ScheduleContext } from "@/lib/scheduleContext";
 import { Navigation } from "@/components/navigation.js";
 import { Expenses } from "@/components/Expenses/Expenses";
 import { PackingList } from "@/components/Packing/PackingList";
+import { ViewSchedules } from "@/components/Schedule/ViewSchedules";
 
 import { Input } from "@/components/ui/input";
 import { DatePickerWithRange } from "@/components/ui/datepicker";
@@ -15,8 +16,7 @@ import { Location } from "@/components/Schedule/Location";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-import { cn } from "@/lib/utils";
-import { ViewSchedules } from "@/components/Schedule/ViewSchedules";
+import { cn, dateFormatter } from "@/lib/utils";
 
 export default function Home() {
   const router = useRouter();
@@ -27,6 +27,7 @@ export default function Home() {
   const [notes, setNotes] = useState("");
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedDates, setSelectedDates] = useState(null);
+  const [filterDates, setFilterDates] = useState([]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,11 +42,16 @@ export default function Home() {
     await addSchedule(scheduleData);
   };
 
+  // const filterDatesByDay = (day) => {
+  //   const filteredDates = selectedDates.filter((date) => date.getDay() === day);
+  //   setFilterDates(filteredDates);
+  // };
+
   useEffect(() => {
     if (!user && !loading) {
       router.push("/login");
     }
-  }, [router, user, loading]);
+  }, [router, user, loading, schedule]);
 
   return (
     <>
