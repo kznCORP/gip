@@ -27,7 +27,18 @@ export default function Home() {
   const [notes, setNotes] = useState("");
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedDates, setSelectedDates] = useState(null);
-  const [filterDates, setFilterDates] = useState([]);
+
+  const [filteredDates, setFilteredDates] = useState([]);
+  const [filteredSchedules, setFilteredSchedules] = useState([]);
+  const [filterApplied, setFilterApplied] = useState(false);
+
+  /**
+   * Filtered Schedules
+   *
+   * [x] Filter dates & display only filteredDate chosen
+   *
+   * [ ] FIX filteredSchedules not re-rendering when a schedule is created / deleted
+   */
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,16 +53,33 @@ export default function Home() {
     await addSchedule(scheduleData);
   };
 
-  // const filterDatesByDay = (day) => {
-  //   const filteredDates = selectedDates.filter((date) => date.getDay() === day);
-  //   setFilterDates(filteredDates);
-  // };
+  const handleFilter = (date) => {
+    const filteredResult = schedule.filter((item) => {
+      const formattedDate = dateFormatter(item.selectedDates.from);
+      return filteredDates.includes(formattedDate) && formattedDate === date;
+    });
+    setFilteredSchedules(filteredResult);
+    setFilterApplied(true);
+  };
 
   useEffect(() => {
     if (!user && !loading) {
       router.push("/login");
     }
-  }, [router, user, loading, schedule]);
+
+    const populateFilterDates = () => {
+      if (schedule) {
+        const uniqueDates = new Set();
+        schedule.forEach((item) => {
+          const formattedDate = dateFormatter(item.selectedDates.from);
+          uniqueDates.add(formattedDate);
+        });
+        setFilteredDates(Array.from(uniqueDates));
+      }
+    };
+
+    populateFilterDates();
+  }, [router, user, loading, schedule, filteredSchedules]);
 
   return (
     <>
@@ -60,6 +88,20 @@ export default function Home() {
       <section className="mb-24 mt-4 px-4">
         <section>
           <h2 className="text-4xl font-bold">Schedule</h2>
+        </section>
+
+        <section>
+          <button onClick={() => setFilterApplied(false)}>All</button>
+          {filteredDates &&
+            filteredDates.map((date, index) => (
+              <button
+                onClick={() => handleFilter(date)}
+                key={index}
+                type="button"
+              >
+                <div>{date}</div>
+              </button>
+            ))}
         </section>
 
         {/* Modal Toggle */}
@@ -108,11 +150,13 @@ export default function Home() {
         </section>
 
         {/* List of Schedules */}
-
-        {schedule &&
-          schedule.map((item, index) => (
-            <ViewSchedules key={index} schedule={item} />
-          ))}
+        {filterApplied
+          ? filteredSchedules.map((item, index) => (
+              <ViewSchedules key={index} schedule={item} />
+            ))
+          : schedule.map((item, index) => (
+              <ViewSchedules key={index} schedule={item} />
+            ))}
       </section>
 
       <Expenses />

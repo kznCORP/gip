@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { currencyFormatter } from "@/lib/utils";
 import { ViewExpenseModal } from "./ViewExpenseModal";
 
@@ -22,7 +22,11 @@ export const ExpenseCategoryItem = ({ expense }) => {
             />
             <div className="flex flex-col items-start">
               <p className="text-md font-medium">{expense.title}</p>
-              <p className="text-xs  text-gray-400">(x) Transactions </p>
+              <p className="text-xs text-gray-400">
+                {expense?.items.length <= 1
+                  ? `${expense?.items.length} Transaction`
+                  : `${expense?.items.length} Transactions`}
+              </p>
             </div>
           </div>
 
