@@ -147,7 +147,7 @@ export default function Home() {
                 key={index}
                 type="button"
               >
-                <div className="self-center border p-6">{date}</div>
+                <div className="flex border p-6">{date}</div>
               </button>
             ))}
         </section>
