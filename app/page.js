@@ -21,7 +21,8 @@ import { cn, dateFormatter } from "@/lib/utils";
 export default function Home() {
   const router = useRouter();
   const { user, loading } = useContext(AuthUserContext);
-  const { schedule, addSchedule } = useContext(ScheduleContext);
+  const { schedule, addSchedule, filteredSchedules, applyFilter } =
+    useContext(ScheduleContext);
 
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
@@ -29,15 +30,13 @@ export default function Home() {
   const [selectedDates, setSelectedDates] = useState(null);
 
   const [filteredDates, setFilteredDates] = useState([]);
-  const [filteredSchedules, setFilteredSchedules] = useState([]);
   const [filterApplied, setFilterApplied] = useState(false);
 
   /**
    * Filtered Schedules
    *
    * [x] Filter dates & display only filteredDate chosen
-   *
-   * [ ] FIX filteredSchedules not re-rendering when a schedule is created / deleted
+   * [ ] Fix filteredSchedules not re-rendering when a schedule is created / deleted
    */
 
   const handleSubmit = async (e) => {
@@ -58,7 +57,8 @@ export default function Home() {
       const formattedDate = dateFormatter(item.selectedDates.from);
       return filteredDates.includes(formattedDate) && formattedDate === date;
     });
-    setFilteredSchedules(filteredResult);
+
+    applyFilter(filteredResult);
     setFilterApplied(true);
   };
 
@@ -79,7 +79,7 @@ export default function Home() {
     };
 
     populateFilterDates();
-  }, [router, user, loading, schedule, filteredSchedules]);
+  }, [router, user, loading, schedule]);
 
   return (
     <>
@@ -88,20 +88,6 @@ export default function Home() {
       <section className="mb-24 mt-4 px-4">
         <section>
           <h2 className="text-4xl font-bold">Schedule</h2>
-        </section>
-
-        <section>
-          <button onClick={() => setFilterApplied(false)}>All</button>
-          {filteredDates &&
-            filteredDates.map((date, index) => (
-              <button
-                onClick={() => handleFilter(date)}
-                key={index}
-                type="button"
-              >
-                <div>{date}</div>
-              </button>
-            ))}
         </section>
 
         {/* Modal Toggle */}
@@ -147,6 +133,23 @@ export default function Home() {
               Submit
             </Button>
           </form>
+        </section>
+
+        {/* Date Filters */}
+        <section className="mt-4  flex gap-4">
+          <button onClick={() => setFilterApplied(false)}>
+            <div className="self-center border p-6 ">All</div>
+          </button>
+          {filteredDates &&
+            filteredDates.map((date, index) => (
+              <button
+                onClick={() => handleFilter(date)}
+                key={index}
+                type="button"
+              >
+                <div className="self-center border p-6">{date}</div>
+              </button>
+            ))}
         </section>
 
         {/* List of Schedules */}
