@@ -18,7 +18,7 @@ export function DatePickerWithRange({ setSelectedDates }) {
   const today = startOfDay(new Date());
   const [date, setDate] = useState({
     from: today,
-    to: addDays(today, 2),
+    to: addDays(today, 1),
   });
 
   const handleSelect = async (selectedDate) => {

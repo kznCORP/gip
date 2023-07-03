@@ -17,69 +17,59 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 import { cn, dateFormatter } from "@/lib/utils";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Home() {
   const router = useRouter();
   const { user, loading } = useContext(AuthUserContext);
-  const { schedule, addSchedule, filteredSchedules, applyFilter } =
-    useContext(ScheduleContext);
+  const { schedules, addDate, addSchedule } = useContext(ScheduleContext);
 
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedDates, setSelectedDates] = useState(null);
 
-  const [filteredDates, setFilteredDates] = useState([]);
-  const [filterApplied, setFilterApplied] = useState(false);
-
-  /**
-   * Filtered Schedules
-   *
-   * [x] Filter dates & display only filteredDate chosen
-   * [ ] Fix filteredSchedules not re-rendering when a schedule is created / deleted
-   */
-
-  const handleSubmit = async (e) => {
+  const addDateHandler = async (e) => {
     e.preventDefault();
 
-    const scheduleData = {
-      title,
-      selectedLocation,
-      selectedDates,
-      notes,
-    };
-
-    await addSchedule(scheduleData);
+    try {
+      await addDate({ selectedDates });
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
-  const handleFilter = (date) => {
-    const filteredResult = schedule.filter((item) => {
-      const formattedDate = dateFormatter(item.selectedDates.from);
-      return filteredDates.includes(formattedDate) && formattedDate === date;
-    });
+  const addScheduleHandler = async (e) => {
+    e.preventDefault();
 
-    applyFilter(filteredResult);
-    setFilterApplied(true);
+    if (!selectedDates) {
+      console.log("No selected dates");
+      return;
+    }
+
+    const newActivity = {
+      id: uuidv4(),
+      title: title,
+      selectedLocation: selectedLocation,
+      notes: notes,
+    };
+
+    try {
+      await addSchedule(selectedDates, newActivity);
+      // Reset the form fields
+      setTitle("");
+      setNotes("");
+      setSelectedLocation(null);
+    } catch (e) {
+      console.log("Error in Adding Activity: ", e);
+    }
   };
 
   useEffect(() => {
     if (!user && !loading) {
       router.push("/login");
     }
-
-    const populateFilterDates = () => {
-      if (schedule) {
-        const uniqueDates = new Set();
-        schedule.forEach((item) => {
-          const formattedDate = dateFormatter(item.selectedDates.from);
-          uniqueDates.add(formattedDate);
-        });
-        setFilteredDates(Array.from(uniqueDates));
-      }
-    };
-
-    populateFilterDates();
-  }, [router, user, loading, schedule]);
+  }, [router, user, loading]);
 
   return (
     <>
@@ -92,7 +82,7 @@ export default function Home() {
 
         {/* Modal Toggle */}
         <section className="mt-4">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={addScheduleHandler}>
             <label className="leading-2 text-xs">Title</label>
             <div className="my-2 flex items-center gap-4">
               <Input
@@ -135,31 +125,11 @@ export default function Home() {
           </form>
         </section>
 
-        {/* Date Filters */}
-        <section className="mt-4  flex gap-4">
-          <button onClick={() => setFilterApplied(false)}>
-            <div className="self-center border p-6 ">All</div>
-          </button>
-          {filteredDates &&
-            filteredDates.map((date, index) => (
-              <button
-                onClick={() => handleFilter(date)}
-                key={index}
-                type="button"
-              >
-                <div className="flex border p-6">{date}</div>
-              </button>
-            ))}
-        </section>
-
         {/* List of Schedules */}
-        {filterApplied
-          ? filteredSchedules.map((item, index) => (
-              <ViewSchedules key={index} schedule={item} />
-            ))
-          : schedule.map((item, index) => (
-              <ViewSchedules key={index} schedule={item} />
-            ))}
+        {schedules &&
+          schedules.map((item, index) => (
+            <ViewSchedules key={index} schedule={item} />
+          ))}
       </section>
 
       <Expenses />
