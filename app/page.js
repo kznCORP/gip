@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AuthUserContext } from "@/lib/authContext";
 import { ScheduleContext } from "@/lib/scheduleContext";
@@ -16,7 +16,8 @@ import { Location } from "@/components/Schedule/Location";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
-import { cn, dateFormatter } from "@/lib/utils";
+import { PlusCircle } from "lucide-react";
+import { cn, filterDateFormatter } from "@/lib/utils";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Home() {
@@ -28,6 +29,10 @@ export default function Home() {
   const [notes, setNotes] = useState("");
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedDates, setSelectedDates] = useState(null);
+
+  const [filteredDates, setFilteredDates] = useState([]);
+  const [filteredSchedules, setFilteredSchedules] = useState([]);
+  const [isFilterApplied, setIsFilterApplied] = useState(false);
 
   const addDateHandler = async (e) => {
     e.preventDefault();
@@ -65,11 +70,35 @@ export default function Home() {
     }
   };
 
+  const applyFilter = async (data) => {
+    const filteredSchedule = schedules.filter((schedule) => {
+      const formattedDate = filterDateFormatter(schedule);
+      return (
+        formattedDate.month === data.month && formattedDate.day === data.day
+      );
+    });
+    setFilteredSchedules(filteredSchedule);
+    setIsFilterApplied(true);
+  };
+
   useEffect(() => {
     if (!user && !loading) {
       router.push("/login");
     }
-  }, [router, user, loading]);
+
+    const populateFilterDates = () => {
+      if (schedules) {
+        const uniqueDates = new Set();
+        schedules.forEach((item) => {
+          const formattedDate = filterDateFormatter(item);
+          uniqueDates.add(formattedDate);
+        });
+        setFilteredDates(Array.from(uniqueDates));
+      }
+    };
+
+    populateFilterDates();
+  }, [router, user, loading, schedules, filteredSchedules]);
 
   return (
     <>
@@ -125,11 +154,57 @@ export default function Home() {
           </form>
         </section>
 
+        {/* Date Filters */}
+        <section className="mt-4 flex items-center gap-2" type="button">
+          <button onClick={() => setIsFilterApplied(false)}>
+            <div className="flex h-[75px] items-center justify-center rounded-xl border px-6">
+              <p className="text-md font-medium text-black">All</p>
+            </div>
+          </button>
+
+          {filteredDates &&
+            filteredDates.map((date, index) => {
+              return (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => applyFilter(date)}
+                >
+                  <div className="flex h-[75px] flex-col items-center justify-center rounded-xl border px-6">
+                    <p className="text-lg font-medium uppercase">{date.day}</p>
+                    <p className="text-xs font-medium uppercase">
+                      {date.month}
+                    </p>
+                  </div>
+                </button>
+              );
+            })}
+
+          <button type="button">
+            <div className="flex h-[75px] items-center justify-center rounded-xl border px-6">
+              <p className="text-sm font-medium uppercase ">
+                <PlusCircle className="h-5 w-5 stroke-2 text-gray-400" />
+              </p>
+            </div>
+          </button>
+        </section>
+
         {/* List of Schedules */}
-        {schedules &&
-          schedules.map((item, index) => (
-            <ViewSchedules key={index} schedule={item} />
-          ))}
+        <section>
+          <div className="mb-8 mt-10 flex justify-between ">
+            <h4 className="text-md font-medium  text-gray-800">
+              All activities •
+            </h4>
+          </div>
+
+          {isFilterApplied
+            ? filteredSchedules.map((item, index) => (
+                <ViewSchedules key={index} schedule={item} />
+              ))
+            : schedules.map((item, index) => (
+                <ViewSchedules key={index} schedule={item} />
+              ))}
+        </section>
       </section>
 
       <Expenses />
@@ -157,7 +232,7 @@ export default function Home() {
  * [x] Apply Searchbox Input and generate Places
  *
  *
- * [ ] Create the Schedule feature
+ * [x] Create the Schedule feature
  *    [x] Title form
  *    [x] Location form
  *    [x] Search addresses based on location input

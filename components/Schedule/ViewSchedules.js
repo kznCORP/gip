@@ -2,17 +2,28 @@
 
 import React, { useContext, useEffect, useState } from "react";
 import { ScheduleContext } from "@/lib/scheduleContext";
-import { Trash2, Map, CalendarClock, StickyNote, Star } from "lucide-react";
+import {
+  Trash2,
+  Navigation,
+  CalendarClock,
+  StickyNote,
+  Star,
+} from "lucide-react";
 
 export const ViewSchedules = ({ schedule }) => {
-  const { deleteDate } = useContext(ScheduleContext);
-  const { title, selectedLocation, notes } = schedule;
+  const { deleteSchedule } = useContext(ScheduleContext);
 
-  const deleteScheduleHandler = async (scheduleId) => {
+  // Delete Expense from Items Array in Firebase
+  const deleteActivityHandler = async (activityId) => {
     try {
-      await deleteDate(scheduleId);
+      const updatedItems = schedule.activities.filter(
+        (activity) => activity.id !== activityId
+      );
+      const updatedActivities = { activities: updatedItems };
+
+      await deleteSchedule(schedule.id, activityId);
     } catch (e) {
-      console.log("Error in deleting Schedule Modal", e);
+      console.log("Error in deleting Expense Item", e);
     }
   };
 
@@ -46,22 +57,22 @@ export const ViewSchedules = ({ schedule }) => {
 
                   <button
                     type="button"
-                    onClick={() => deleteScheduleHandler(schedule?.id)}
+                    onClick={() => deleteActivityHandler(activity.id)}
                   >
                     <Trash2 className="h-4 w-4 " />
                   </button>
                 </div>
 
                 {/* Location / Address */}
-                <div className="flex w-full items-start justify-between ">
+                <div className="flex w-full items-center justify-between ">
                   <div className="flex items-start gap-2">
-                    <Map className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600 " />
+                    <Navigation className="stroke-3 mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600 " />
                     <p className="text-sm font-medium text-blue-600">
                       {activity.selectedLocation?.name}
                     </p>
                   </div>
 
-                  <p className="text-sm font-light text-gray-400">
+                  <p className="text-xs font-light text-gray-400">
                     More information
                   </p>
                 </div>

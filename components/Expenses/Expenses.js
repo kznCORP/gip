@@ -89,7 +89,7 @@ export const Expenses = () => {
         {/* List of Expenses */}
         <section>
           <div className="mb-8 mt-10 flex justify-between ">
-            <h4 className="text-md  text-gray-800">Categories •</h4>
+            <h4 className="text-md font-medium  text-gray-800">Categories •</h4>
           </div>
           {/* Expense Container */}
           <div className="flex flex-col border-t">
@@ -101,7 +101,7 @@ export const Expenses = () => {
 
         {/* Charts */}
         <section className="my-10">
-          <h4 className="text-md  text-gray-800">Charts •</h4>
+          <h4 className="text-md font-medium  text-gray-800">Charts •</h4>
 
           <div className="mt-8">
             <Doughnut
