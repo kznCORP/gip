@@ -27,6 +27,8 @@ export const ViewSchedules = ({ schedule }) => {
     }
   };
 
+  // useEffect() => {  schedule dependency.  }
+
   return (
     <>
       {schedule.activities &&

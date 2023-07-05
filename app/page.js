@@ -17,22 +17,27 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 import { PlusCircle } from "lucide-react";
-import { cn, filterDateFormatter } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Home() {
   const router = useRouter();
   const { user, loading } = useContext(AuthUserContext);
-  const { schedules, addDate, addSchedule } = useContext(ScheduleContext);
+  const {
+    schedules,
+    addDate,
+    addSchedule,
+    filteredDates,
+    filteredSchedules,
+    isFilterApplied,
+    applyFilter,
+    setIsFilterApplied,
+  } = useContext(ScheduleContext);
 
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedDates, setSelectedDates] = useState(null);
-
-  const [filteredDates, setFilteredDates] = useState([]);
-  const [filteredSchedules, setFilteredSchedules] = useState([]);
-  const [isFilterApplied, setIsFilterApplied] = useState(false);
 
   const addDateHandler = async (e) => {
     e.preventDefault();
@@ -60,7 +65,7 @@ export default function Home() {
     };
 
     try {
-      await addSchedule(selectedDates, newActivity);
+      await addSchedule(selectedDates, newActivity, user.uid);
       // Reset the form fields
       setTitle("");
       setNotes("");
@@ -70,35 +75,11 @@ export default function Home() {
     }
   };
 
-  const applyFilter = async (data) => {
-    const filteredSchedule = schedules.filter((schedule) => {
-      const formattedDate = filterDateFormatter(schedule);
-      return (
-        formattedDate.month === data.month && formattedDate.day === data.day
-      );
-    });
-    setFilteredSchedules(filteredSchedule);
-    setIsFilterApplied(true);
-  };
-
   useEffect(() => {
     if (!user && !loading) {
       router.push("/login");
     }
-
-    const populateFilterDates = () => {
-      if (schedules) {
-        const uniqueDates = new Set();
-        schedules.forEach((item) => {
-          const formattedDate = filterDateFormatter(item);
-          uniqueDates.add(formattedDate);
-        });
-        setFilteredDates(Array.from(uniqueDates));
-      }
-    };
-
-    populateFilterDates();
-  }, [router, user, loading, schedules, filteredSchedules]);
+  }, [router, user, loading, schedules]);
 
   return (
     <>
