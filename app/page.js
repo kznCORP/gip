@@ -10,23 +10,23 @@ import { Expenses } from "@/components/Expenses/Expenses";
 import { PackingList } from "@/components/Packing/PackingList";
 import { ViewSchedules } from "@/components/Schedule/ViewSchedules";
 
-import { Input } from "@/components/ui/input";
-import { DatePickerWithRange } from "@/components/ui/datepicker";
-import { Location } from "@/components/Schedule/Location";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-
+import { AddScheduleModal } from "@/components/Schedule/AddScheduleModal";
 import { PlusCircle } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { v4 as uuidv4 } from "uuid";
+
+// import { Input } from "@/components/ui/input";
+// import { DatePickerWithRange } from "@/components/ui/datepicker";
+// import { Location } from "@/components/Schedule/Location";
+// import { Textarea } from "@/components/ui/textarea";
+// import { Button } from "@/components/ui/button";
+
+// import { cn } from "@/lib/utils";
+// import { v4 as uuidv4 } from "uuid";
 
 export default function Home() {
   const router = useRouter();
   const { user, loading } = useContext(AuthUserContext);
   const {
     schedules,
-    addDate,
-    addSchedule,
     filteredDates,
     filteredSchedules,
     isFilterApplied,
@@ -34,105 +34,39 @@ export default function Home() {
     setIsFilterApplied,
   } = useContext(ScheduleContext);
 
-  const [title, setTitle] = useState("");
-  const [notes, setNotes] = useState("");
-  const [selectedLocation, setSelectedLocation] = useState(null);
-  const [selectedDates, setSelectedDates] = useState(null);
-
-  const addDateHandler = async (e) => {
-    e.preventDefault();
-
-    try {
-      await addDate({ selectedDates });
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
-
-  const addScheduleHandler = async (e) => {
-    e.preventDefault();
-
-    if (!selectedDates) {
-      console.log("No selected dates");
-      return;
-    }
-
-    const newActivity = {
-      id: uuidv4(),
-      title: title,
-      selectedLocation: selectedLocation,
-      notes: notes,
-    };
-
-    try {
-      await addSchedule(selectedDates, newActivity, user.uid);
-      // Reset the form fields
-      setTitle("");
-      setNotes("");
-      setSelectedLocation(null);
-    } catch (e) {
-      console.log("Error in Adding Activity: ", e);
-    }
-  };
+  const [showAddScheduleModal, setShowAddScheduleModal] = useState(false);
 
   useEffect(() => {
     if (!user && !loading) {
       router.push("/login");
     }
-  }, [router, user, loading, schedules]);
+  }, [router, user, loading]);
 
   return (
     <>
       <Navigation />
 
+      <AddScheduleModal
+        onShow={showAddScheduleModal}
+        onClose={() => setShowAddScheduleModal(false)}
+      />
+
       <section className="mb-24 mt-4 px-4">
-        <section>
-          <h2 className="text-4xl font-bold">Schedule</h2>
-        </section>
-
-        {/* Modal Toggle */}
-        <section className="mt-4">
-          <form onSubmit={addScheduleHandler}>
-            <label className="leading-2 text-xs">Title</label>
-            <div className="my-2 flex items-center gap-4">
-              <Input
-                type="text"
-                placeholder="What are you thinking of doing?..."
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
+        {/* Add Schedule */}
+        <section className="sticky top-0 pt-4 backdrop-blur-sm">
+          <div className="mb-5 flex items-center justify-between pb-3 ">
+            <h2 className="text-xl font-medium">Schedule</h2>
+            <div className="flex gap-4">
+              {/* Modal Toggle */}
+              <button
+                data-modal-target="authentication-modal"
+                className="flex  items-center   gap-2   rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
+                onClick={() => setShowAddScheduleModal(true)}
+              >
+                <PlusCircle className="h-5 w-5" /> Add Event
+              </button>
             </div>
-
-            {/* Maps & Places API */}
-            <div className="h-full w-full">
-              <label className="leading-2 text-xs">Location</label>
-              <Location
-                selectedLocation={selectedLocation}
-                setSelectedLocation={setSelectedLocation}
-              />
-            </div>
-
-            {/* Search Results */}
-            <div className="mt-4">
-              <p className="leading-2 mb-2 text-xs">Dates</p>
-              <DatePickerWithRange setSelectedDates={setSelectedDates} />
-            </div>
-
-            {/* Text Area */}
-            <div className="mt-4">
-              <p className="leading-2 mb-2 text-xs">Notes</p>
-              <Textarea
-                placeholder="Additional notes..."
-                maxLength="250"
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-              />
-            </div>
-
-            <Button className={cn("mt-4 w-full")} type="submit">
-              Submit
-            </Button>
-          </form>
+          </div>
         </section>
 
         {/* Date Filters */}
@@ -205,26 +139,33 @@ export default function Home() {
  * [x] Delete an item from an array of items in Packing Category
  * [x] Add Checkbox state to Packing Items
  *
- *
- * Up Next.
- *
  * [x] Install @react-google-maps/api & use-places-autocomplete
  * [x] Load Google Maps onto the website
  * [x] Apply Searchbox Input and generate Places
  *
- *
  * [x] Create the Schedule feature
- *    [x] Title form
- *    [x] Location form
- *    [x] Search addresses based on location input
- *        [x] Display an Interactive Map
- *        [ ] Apple Maps / Google Maps clickable link
+ *    [x] Schedule Input
+ *        [x] Title form
+ *        [x] Location form
+ *        [x] Search addresses based on location input
+ *            [x] Display an Interactive Map
+ *            [ ] Apple Maps / Google Maps clickable link
  *
+ *    [x] Filter Schedules
  *    [x] Delete a Schedule
  *    [ ] Edit the Schedule
  *
- *
  * [x] Read user input from client (title, location, dates, etc.) and store into Firebase
  * [x] Read data from Firebase and display UI
+ *
+ *
+ * Up Next.
+ *
+ * [ ] Refactor Modal to display desired design in Figma
+ *
+ * [x] Move Schedule form/input into a new component (AddScheduleModal)
+ * [ ] Create two different Modals, one for adding and one for viewing.
+ *
+ *
  * [ ] Stress test, bug hunt; refactor and fix.
  */
