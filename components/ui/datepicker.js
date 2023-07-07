@@ -47,6 +47,7 @@ export function DatePickerWithRange({ setSelectedDates }) {
               "w-[300px] justify-start gap-2 text-left font-normal",
               !date && "text-muted-foreground"
             )}
+            style={{ paddingTop: "1.5rem", paddingBottom: "1.5rem" }}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
             {date?.from ? (

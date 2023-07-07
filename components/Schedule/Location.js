@@ -32,14 +32,19 @@ export const Location = ({ selectedLocation, setSelectedLocation }) => {
   return (
     <>
       <PlacesAutocomplete setSelectedLocation={setSelectedLocation} />
-      <GoogleMap
-        center={center}
-        zoom={14}
-        mapContainerStyle={{ width: "100%", height: 250 }}
-        mapId="10c669e44c484b19"
-      >
-        {selectedLocation && <Marker position={selectedLocation} />}
-      </GoogleMap>
+      {selectedLocation && (
+        <>
+          <div className="mt-4" />
+          <GoogleMap
+            center={center}
+            zoom={14}
+            mapContainerStyle={{ width: "100%", height: 250 }}
+            mapId="10c669e44c484b19"
+          >
+            {selectedLocation && <Marker position={selectedLocation} />}
+          </GoogleMap>
+        </>
+      )}
     </>
   );
 };

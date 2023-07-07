@@ -6,13 +6,13 @@ import { AuthUserContext } from "@/lib/authContext";
 import { Modal } from "../Modal";
 import { Location } from "./Location";
 
-import { Input } from "../ui/input";
 import { DatePickerWithRange } from "../ui/datepicker";
-import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 
 import { cn } from "@/lib/utils";
 import { v4 as uuidv4 } from "uuid";
+
+import { StickyNote, Sunrise } from "lucide-react";
 
 export const AddScheduleModal = ({ onShow, onClose }) => {
   const { user } = useContext(AuthUserContext);
@@ -23,15 +23,15 @@ export const AddScheduleModal = ({ onShow, onClose }) => {
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedDates, setSelectedDates] = useState(null);
 
-  const addDateHandler = async (e) => {
-    e.preventDefault();
+  // const addDateHandler = async (e) => {
+  //   e.preventDefault();
 
-    try {
-      await addDate({ selectedDates });
-    } catch (e) {
-      console.log(e.message);
-    }
-  };
+  //   try {
+  //     await addDate({ selectedDates });
+  //   } catch (e) {
+  //     console.log(e.message);
+  //   }
+  // };
 
   const addScheduleHandler = async (e) => {
     e.preventDefault();
@@ -63,21 +63,39 @@ export const AddScheduleModal = ({ onShow, onClose }) => {
   return (
     <Modal onShow={onShow} onClose={onClose}>
       {/* Modal Toggle */}
-      <section className="mt-4">
-        <form onSubmit={addScheduleHandler}>
-          <label className="leading-2 text-xs">Title</label>
-          <div className="my-2 flex items-center gap-4">
-            <Input
-              type="text"
-              placeholder="What are you thinking of doing?..."
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
+      <section className="my-20">
+        <form
+          onSubmit={addScheduleHandler}
+          className="flex flex-col justify-center gap-10"
+        >
+          {/* Title */}
+          <div className="flex flex-col items-start justify-start">
+            <label className="text-sm font-medium ">
+              What are you doing?...
+            </label>
+
+            <div className="flex w-full items-center gap-4 rounded-lg border p-4 text-sm ">
+              <Sunrise className="h-4 w-4 flex-shrink-0" />
+              <input
+                type="text"
+                placeholder="eg. Gym, Tan, Laundry at..."
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full "
+                style={{
+                  textDecoration: "unset",
+                  border: "unset",
+                  outline: "none",
+                  width: "100%",
+                }}
+                maxLength="50"
+              />
+            </div>
           </div>
 
           {/* Maps & Places API */}
-          <div className="h-full w-full">
-            <label className="leading-2 text-xs">Location</label>
+          <div>
+            <label className="text-sm font-medium">Where to?...</label>
             <Location
               selectedLocation={selectedLocation}
               setSelectedLocation={setSelectedLocation}
@@ -85,25 +103,49 @@ export const AddScheduleModal = ({ onShow, onClose }) => {
           </div>
 
           {/* Search Results */}
-          <div className="mt-4">
-            <p className="leading-2 mb-2 text-xs">Dates</p>
+          <div>
+            <label className="text-sm font-medium">When?...</label>
             <DatePickerWithRange setSelectedDates={setSelectedDates} />
           </div>
 
           {/* Text Area */}
-          <div className="mt-4">
-            <p className="leading-2 mb-2 text-xs">Notes</p>
-            <Textarea
-              placeholder="Additional notes..."
-              maxLength="250"
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-            />
+          <div>
+            <label className="text-sm font-medium">
+              Any last things to note?...
+            </label>
+
+            <div className="flex w-full items-start gap-4 rounded-lg border p-4 text-sm ">
+              <StickyNote className="h-4 w-4 flex-shrink-0" />
+              <textarea
+                placeholder="eg. Don't forget to bring sunscreen..."
+                maxLength="250"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}
+                className="w-full "
+                style={{
+                  textDecoration: "unset",
+                  border: "unset",
+                  outline: "none",
+                  width: "100%",
+                }}
+              />
+            </div>
           </div>
 
-          <Button className={cn("mt-4 w-full")} type="submit">
-            Submit
-          </Button>
+          {/* Buttons */}
+          <div className="flex items-center justify-center gap-4">
+            <Button
+              variant="outline"
+              className={cn("w-1/4 font-normal text-gray-500")}
+              type="button"
+              onClick={() => onClose(false)}
+            >
+              Cancel
+            </Button>
+            <Button className={cn(" w-3/4")} type="submit">
+              Add to Schedule
+            </Button>
+          </div>
         </form>
       </section>
     </Modal>

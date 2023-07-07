@@ -36,6 +36,13 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
+      <button
+        type="button"
+        onClick={() => onClose(false)}
+        className="rounded-4xl bg-gray-400 p-2"
+      >
+        X
+      </button>
       <div className="flex items-center justify-between">
         <h2 className="text-xl font-bold">{expense.title}</h2>
         <button

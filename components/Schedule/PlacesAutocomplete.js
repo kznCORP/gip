@@ -3,7 +3,9 @@ import usePlacesAutocomplete, {
   getLatLng,
   getDetails,
 } from "use-places-autocomplete";
+
 import { Input } from "../ui/input";
+import { Navigation, MapPin } from "lucide-react";
 
 export const PlacesAutocomplete = ({ setSelectedLocation }) => {
   const {
@@ -54,24 +56,38 @@ export const PlacesAutocomplete = ({ setSelectedLocation }) => {
   };
 
   return (
-    <div className="my-2">
-      <Input
-        type="text"
-        placeholder="Search for a location..."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
+    <div>
+      <div className="flex w-full items-center gap-4 rounded-lg border p-4 text-sm ">
+        <MapPin className="h-4 w-4 flex-shrink-0" />
+        <input
+          type="text"
+          placeholder="eg. Hawaii, Paris, Japan..."
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          className="w-full "
+          style={{
+            textDecoration: "unset",
+            border: "unset",
+            outline: "none",
+            width: "100%",
+          }}
+          maxLength="50"
+        />
+      </div>
 
       {status === "OK" && (
         <ul className="items-left my-4 flex flex-col justify-center gap-2 rounded-lg border border-gray-200 p-4">
           {data.map(({ place_id, description }) => (
-            <li
+            <div
               key={place_id}
+              className="flex items-center justify-start gap-2 p-2 hover:cursor-pointer hover:bg-gray-100"
               onClick={() => handleSelect(description)}
-              className="border-b border-gray-200 p-2 hover:cursor-pointer hover:bg-gray-100"
             >
-              {description}
-            </li>
+              <Navigation className="h-4 w-3 flex-shrink-0" />
+              <li className="w-full border-b border-gray-200 p-2 text-xs ">
+                {description}
+              </li>
+            </div>
           ))}
         </ul>
       )}
