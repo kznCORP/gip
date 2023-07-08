@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { currencyFormatter } from "@/lib/utils";
 import { ViewExpenseModal } from "./ViewExpenseModal";
@@ -13,30 +15,28 @@ export const ExpenseCategoryItem = ({ expense }) => {
         expense={expense}
       />
 
-      <button onClick={() => setShowExpenseModal(true)}>
-        <div className="flex items-center justify-between border-b  px-4 py-6">
-          <div className="flex items-center gap-5">
-            <div
-              className="h-[25px] w-[25px] rounded-full"
-              style={{ backgroundColor: expense.color }}
-            />
-            <div className="flex flex-col items-start">
-              <p className="text-md font-medium">{expense.title}</p>
-              <p className="text-xs text-gray-400">
-                {expense?.items.length <= 1
-                  ? `${expense?.items.length} Transaction`
-                  : `${expense?.items.length} Transactions`}
-              </p>
-            </div>
+      <button
+        onClick={() => setShowExpenseModal(true)}
+        className="-mb-7 duration-300 ease-in hover:mb-2 last:hover:-mb-7"
+      >
+        <div
+          className="flex h-[125px] items-start justify-between rounded-2xl px-6 py-7"
+          style={{ backgroundColor: expense.color }}
+        >
+          <div className="flex w-1/2 flex-col items-start justify-center">
+            <p className="text-md font-medium text-white">{expense.title}</p>
+            <p className="text-xs text-white">
+              {expense?.items.length <= 1
+                ? `${expense?.items.length} Transaction`
+                : `${expense?.items.length} Transactions`}
+            </p>
           </div>
 
-          <div className="flex items-center gap-4">
-            <div className="flex flex-col items-start">
-              <p className="text-md font-semibold ">
-                {currencyFormatter(expense.total)}
-              </p>
-              <p className="text-xs  text-gray-400">View History</p>
-            </div>
+          <div className="flex w-1/2 flex-col items-end justify-center">
+            <p className="text-md font-semibold text-white">
+              {currencyFormatter(expense.total)}
+            </p>
+            <p className="text-xs  text-white">View History</p>
           </div>
         </div>
       </button>

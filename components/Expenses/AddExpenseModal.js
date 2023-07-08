@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { v4 as uuidv4 } from "uuid";
 
 import {
+  ArrowLeftCircle,
   BadgePlus,
   CircleDollarSign,
   ListPlus,
@@ -99,7 +100,13 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
-      <section className="my-20">
+      <div className="my-5">
+        <button type="button" onClick={() => onClose(false)}>
+          <ArrowLeftCircle className="h-8 w-8 flex-shrink-0" />
+        </button>
+      </div>
+
+      <section className="my-16">
         <form
           onSubmit={addExpenseHandler}
           className="flex flex-col justify-center gap-10"
@@ -172,7 +179,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
 
             {showCategories && (
               <div className="flex w-full items-center gap-2 rounded-lg border p-4 text-sm ">
-                <div className="flex items-center gap-2">
+                <div className="flex w-full items-center gap-2">
                   <div className="flex w-full items-center gap-4 rounded-lg border p-2 text-sm ">
                     <ListPlus className="h-4 w-4 flex-shrink-0" />
                     <input
@@ -199,8 +206,6 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
                         border: "none",
                         outline: "none",
                         background: "transparent",
-                        height: "45px",
-                        width: "75px",
                       }}
                     />
                   </div>

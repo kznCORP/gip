@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useContext } from "react";
 
 import { ScheduleContext } from "@/lib/scheduleContext";
@@ -12,7 +14,7 @@ import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 import { v4 as uuidv4 } from "uuid";
 
-import { StickyNote, Sunrise } from "lucide-react";
+import { ArrowLeftCircle, StickyNote, Sunrise } from "lucide-react";
 
 export const AddScheduleModal = ({ onShow, onClose }) => {
   const { user } = useContext(AuthUserContext);
@@ -62,6 +64,12 @@ export const AddScheduleModal = ({ onShow, onClose }) => {
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
+      <div className="my-5">
+        <button type="button" onClick={() => onClose(false)}>
+          <ArrowLeftCircle className="h-8 w-8 flex-shrink-0" />
+        </button>
+      </div>
+
       {/* Modal Toggle */}
       <section className="my-20">
         <form

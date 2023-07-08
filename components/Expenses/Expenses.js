@@ -3,18 +3,29 @@
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Chart, Doughnut, Line } from "react-chartjs-2";
 import { PlusCircle, TrendingUp, XCircle, Lightbulb } from "lucide-react";
 
 import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
-import { currencyFormatter } from "@/lib/utils";
+import { CHART_OPTIONS, currencyFormatter } from "@/lib/utils";
 import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
 
 import { FinanceContext } from "@/lib/financeContext";
 import { AuthUserContext } from "@/lib/authContext";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title);
 
 export const Expenses = () => {
   const router = useRouter();
@@ -35,6 +46,36 @@ export const Expenses = () => {
 
     setBalance(newBalance);
   }, [expenses, router, user, loading]);
+
+  const lineChartData = {
+    labels: expenses.reduce((labels, expense) => {
+      expense.items.forEach((item) => {
+        const cumulativeBalance =
+          labels.length > 0
+            ? labels[labels.length - 1] + item.amount
+            : item.amount;
+        labels.push(cumulativeBalance);
+      });
+      return labels;
+    }, []),
+    datasets: [
+      {
+        data: expenses.reduce((labels, expense) => {
+          expense.items.forEach((item) => {
+            const cumulativeBalance =
+              labels.length > 0
+                ? labels[labels.length - 1] + item.amount
+                : item.amount;
+            labels.push(cumulativeBalance);
+          });
+          return labels;
+        }, []),
+        fill: false,
+        borderColor: "rgba(74,222,128,1)",
+        tension: 0.1,
+      },
+    ],
+  };
 
   return (
     <>
@@ -81,8 +122,15 @@ export const Expenses = () => {
               <p className="text-xl font-medium text-white">
                 {currencyFormatter(balance)}
               </p>
-              <TrendingUp className=" h-8 w-8 text-white" />
+              <TrendingUp className=" h-8 w-8 text-green-400" />
             </div>
+
+            <Line
+              data={lineChartData}
+              options={CHART_OPTIONS}
+              className="mt-5"
+              height={100}
+            />
           </div>
         </section>
 
@@ -92,7 +140,7 @@ export const Expenses = () => {
             <h4 className="text-md font-medium  text-gray-800">Categories •</h4>
           </div>
           {/* Expense Container */}
-          <div className="flex flex-col border-t">
+          <div className="flex flex-col">
             {expenses.map((expense, index) => (
               <ExpenseCategoryItem key={index} expense={expense} />
             ))}
@@ -100,10 +148,8 @@ export const Expenses = () => {
         </section>
 
         {/* Charts */}
-        <section className="my-10">
-          <h4 className="text-md font-medium  text-gray-800">Charts •</h4>
-
-          <div className="mt-8">
+        <section className="mt-24">
+          <div>
             <Doughnut
               data={{
                 labels: expenses.map((expense) => expense.title),
@@ -125,6 +171,7 @@ export const Expenses = () => {
                   },
                 },
               }}
+              height={200}
             />
           </div>
         </section>
