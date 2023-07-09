@@ -5,7 +5,6 @@ import { Button } from "../ui/button";
 import { v4 as uuidv4 } from "uuid";
 
 import {
-  ArrowLeftCircle,
   BadgePlus,
   CircleDollarSign,
   ListPlus,
@@ -100,13 +99,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
-      <div className="my-5">
-        <button type="button" onClick={() => onClose(false)}>
-          <ArrowLeftCircle className="h-8 w-8 flex-shrink-0" />
-        </button>
-      </div>
-
-      <section className="my-16">
+      <section className="mt-5">
         <form
           onSubmit={addExpenseHandler}
           className="flex flex-col justify-center gap-10"

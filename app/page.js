@@ -8,10 +8,10 @@ import { ScheduleContext } from "@/lib/scheduleContext";
 import { Navigation } from "@/components/navigation.js";
 import { Expenses } from "@/components/Expenses/Expenses";
 import { PackingList } from "@/components/Packing/PackingList";
-import { ViewSchedules } from "@/components/Schedule/ViewSchedules";
+import { ScheduleItem } from "@/components/Schedule/ScheduleItem";
 
 import { AddScheduleModal } from "@/components/Schedule/AddScheduleModal";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, XCircle } from "lucide-react";
 
 // import { Input } from "@/components/ui/input";
 // import { DatePickerWithRange } from "@/components/ui/datepicker";
@@ -69,8 +69,18 @@ export default function Home() {
           </div>
         </section>
 
+        <section>
+          <div className="my-5 flex items-center justify-between rounded-lg bg-amber-100 p-5">
+            <p className="text-xs leading-snug">
+              * Displays all the potential events and activites that you can
+              take + relative photos and dynamic links that navigate you.
+            </p>
+            <XCircle className="h-5 w-5 flex-shrink-0" />
+          </div>
+        </section>
+
         {/* Date Filters */}
-        <section className="mt-4 flex items-center gap-2" type="button">
+        <section className="mt-8 flex items-center gap-2" type="button">
           <button onClick={() => setIsFilterApplied(false)}>
             <div className="flex h-[75px] items-center justify-center rounded-xl border px-6">
               <p className="text-md font-medium text-black">All</p>
@@ -106,7 +116,7 @@ export default function Home() {
 
         {/* List of Schedules */}
         <section>
-          <div className="mb-8 mt-10 flex justify-between ">
+          <div className="mb-10 mt-10 flex justify-between ">
             <h4 className="text-md font-medium  text-gray-800">
               All activities •
             </h4>
@@ -114,10 +124,10 @@ export default function Home() {
 
           {isFilterApplied
             ? filteredSchedules.map((item, index) => (
-                <ViewSchedules key={index} schedule={item} />
+                <ScheduleItem key={index} schedule={item} />
               ))
             : schedules.map((item, index) => (
-                <ViewSchedules key={index} schedule={item} />
+                <ScheduleItem key={index} schedule={item} />
               ))}
         </section>
       </section>

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useContext } from "react";
 import { Modal } from "../Modal";
-import { ArrowLeftCircle, Delete } from "lucide-react";
+import { Delete } from "lucide-react";
 import { currencyFormatter, dateFormatter } from "@/lib/utils";
 import { FinanceContext } from "@/lib/financeContext";
 
@@ -38,20 +38,14 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
-      <div className="my-5">
-        <button type="button" onClick={() => onClose(false)}>
-          <ArrowLeftCircle className="h-8 w-8 flex-shrink-0" />
-        </button>
-      </div>
-
-      <section className="mt-16">
+      <section className="mt-5">
         {/* Cover */}
         <div
-          className="flex h-[150px] items-center justify-between rounded-t-2xl px-6"
+          className="flex h-[125px] items-center justify-between rounded-t-2xl px-6"
           style={{ backgroundColor: expense.color }}
         >
           <div className="flex w-1/2 flex-col items-start justify-center">
-            <h2 className="text-xl font-medium text-white">{expense.title}</h2>
+            <h2 className="text-lg font-medium text-white">{expense.title}</h2>
             <p className="text-xs text-white">History of all expenses</p>
           </div>
 
@@ -78,7 +72,16 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
                   className="flex items-center justify-between gap-4 border-b p-6 last:border-b-0"
                 >
                   <div className="flex w-1/2 flex-col items-start justify-center">
-                    <h3 className="text-lg font-semibold">{item.name}</h3>
+                    <h3
+                      className="text-md font-semibold"
+                      style={{
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                      }}
+                    >
+                      {item.name}
+                    </h3>
                     <p className="mt-0.5 text-xs text-gray-400">
                       {dateFormatter(item.date)}
                     </p>
@@ -86,7 +89,7 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
 
                   <div className="flex w-1/2 flex-col items-end justify-center">
                     <p
-                      className="text-md font-semibold"
+                      className="text-sm font-semibold"
                       style={{ color: expense.color }}
                     >
                       + {currencyFormatter(item.amount)}
