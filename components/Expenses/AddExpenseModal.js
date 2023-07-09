@@ -99,7 +99,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
-      <section className="mt-5">
+      <section className="mt-5 px-6">
         <form
           onSubmit={addExpenseHandler}
           className="flex flex-col justify-center gap-10"

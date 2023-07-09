@@ -41,7 +41,7 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
       <section className="mt-5">
         {/* Cover */}
         <div
-          className="flex h-[125px] items-center justify-between rounded-t-2xl px-6"
+          className="flex h-[150px] items-center justify-between rounded-t-3xl px-6"
           style={{ backgroundColor: expense.color }}
         >
           <div className="flex w-1/2 flex-col items-start justify-center">
