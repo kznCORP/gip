@@ -21,6 +21,15 @@ export const PackingList = () => {
     }
   }, [router, user, loading]);
 
+  /**
+   * PACKING LIST TIME
+   *
+   * [ ] Add isBought feature
+   * [ ] Revamp Add Modal UI
+   * [ ]
+   *
+   */
+
   return (
     <>
       <AddPackItemModal
@@ -37,7 +46,7 @@ export const PackingList = () => {
               <button
                 data-modal-target="authentication-modal"
                 className="flex  items-center   gap-2   rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
-                onClick={() => setShowAddExpenseModal(true)}
+                onClick={() => setShowAddPackListModal(true)}
               >
                 <PlusCircle className="h-5 w-5" /> Add Item
               </button>

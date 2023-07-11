@@ -86,17 +86,6 @@ export const Expenses = () => {
 
       <section className="relative px-4">
         {/* Tips / Helpful Insight */}
-        <section>
-          <div className="my-5 flex items-center justify-between rounded-lg bg-amber-100 p-5">
-            <p className="text-xs leading-snug">
-              * Displays all expenses paid - organized in labels, allocating
-              each expense history within the categories. For example: Food →
-              Walmart: $57.12, Chipotle: $16.52, Bubble Tea: $7.84, etc...
-            </p>
-            <XCircle className="h-5 w-5 flex-shrink-0" />
-          </div>
-        </section>
-
         {/* Add Expense */}
         <section className="sticky top-0 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
@@ -111,6 +100,17 @@ export const Expenses = () => {
                 <PlusCircle className="h-5 w-5" /> Add Expense
               </button>
             </div>
+          </div>
+        </section>
+
+        <section>
+          <div className="my-5 flex items-center justify-between rounded-lg bg-amber-100 p-5">
+            <p className="text-xs leading-snug">
+              * Displays all expenses paid - organized in labels, allocating
+              each expense history within the categories. For example: Food →
+              Walmart: $57.12, Chipotle: $16.52, Bubble Tea: $7.84, etc...
+            </p>
+            <XCircle className="h-5 w-5 flex-shrink-0" />
           </div>
         </section>
 

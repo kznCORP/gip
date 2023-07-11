@@ -1,40 +1,34 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
-import { ScheduleContext } from "@/lib/scheduleContext";
-import {
-  Trash2,
-  Navigation,
-  CalendarClock,
-  StickyNote,
-  Star,
-} from "lucide-react";
+import React, { useState } from "react";
+import { ViewScheduleModal } from "./ViewScheduleModal";
 
-export const ViewSchedules = ({ schedule }) => {
-  const { deleteSchedule } = useContext(ScheduleContext);
+import { Navigation, Star } from "lucide-react";
 
-  // Delete Expense from Items Array in Firebase
-  const deleteActivityHandler = async (activityId) => {
-    try {
-      const updatedItems = schedule.activities.filter(
-        (activity) => activity.id !== activityId
-      );
-      const updatedActivities = { activities: updatedItems };
-
-      await deleteSchedule(schedule.id, activityId);
-    } catch (e) {
-      console.log("Error in deleting Expense Item", e);
-    }
-  };
-
-  // useEffect() => {  schedule dependency.  }
+export const ScheduleItem = ({ schedule }) => {
+  const [showScheduleModal, setShowScheduleModal] = useState(false);
+  const [selectedActivity, setSelectedActivity] = useState(null);
 
   return (
     <>
+      <ViewScheduleModal
+        onShow={showScheduleModal}
+        onClose={() => setShowScheduleModal(false)}
+        schedule={schedule}
+        activity={selectedActivity}
+      />
+
       {schedule.activities &&
         schedule.activities.map((activity, index) => (
-          <article key={index}>
-            <div className="my-10 flex flex-col border-b">
+          <button
+            key={index}
+            onClick={() => {
+              setShowScheduleModal(true);
+              setSelectedActivity(activity);
+            }}
+            className="w-full mb-4"
+          >
+            <div className="flex flex-col border-b py-2">
               {/* Image Wrapper */}
               <div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -50,19 +44,20 @@ export const ViewSchedules = ({ schedule }) => {
               </div>
 
               {/* Schedule Details */}
-              <div className="flex flex-col gap-4 px-2">
+              <div className="flex flex-col gap-2 px-2">
                 {/* Title */}
                 <div className="mt-4 flex w-full items-center justify-between">
                   <div className="flex items-center gap-4">
                     <h2 className="text-xl font-semibold">{activity.title}</h2>
                   </div>
-
-                  <button
-                    type="button"
-                    onClick={() => deleteActivityHandler(activity.id)}
-                  >
-                    <Trash2 className="h-4 w-4 " />
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <p className="text-xs font-medium text-yellow-500">
+                      {activity?.selectedLocation.rating}
+                    </p>
+                    {activity.selectedLocation.rating && (
+                      <Star className="h-4 w-4 text-yellow-500" />
+                    )}
+                  </div>
                 </div>
 
                 {/* Location / Address */}
@@ -83,7 +78,7 @@ export const ViewSchedules = ({ schedule }) => {
                 <div></div>
               </div>
             </div>
-          </article>
+          </button>
         ))}
     </>
   );
