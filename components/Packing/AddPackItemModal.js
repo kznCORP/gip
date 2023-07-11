@@ -5,6 +5,11 @@ import { Modal } from "../Modal";
 import { PackingContext } from "@/lib/packingContext";
 import { v4 as uuidv4 } from "uuid";
 
+import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
+
+import { BadgePlus, Briefcase, ListPlus, Plus, X } from "lucide-react";
+
 export const AddPackItemModal = ({ onShow, onClose }) => {
   const { packingItems, addPackingCategory, addPackingItem } =
     useContext(PackingContext);
@@ -61,94 +66,126 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
-      <h1>Packing List</h1>
-      <form onSubmit={addPackingItemHandler} className="mt-6 ">
-        <div className="mb-6 flex flex-col gap-1">
-          <label>Item</label>
-          <input
-            type="text"
-            name="name"
-            value={itemTitle}
-            onChange={(e) => setItemTitle(e.target.value)}
-            placeholder="Enter the name of the expense"
-            id="name"
-            required
-            className="w-full"
-          />
-          <button
-            className="text-md bg-blue-600 p-3"
-            onClick={addPackingItemHandler}
-          >
-            Add Item
-          </button>
-        </div>
-
-        <div className="">
-          <div className="flex items-center justify-between ">
-            <h4>Categories</h4>
-            <button
-              type="button"
-              className="text-lime-400"
-              onClick={() => setShowCategories(true)}
-            >
-              + New Category
-            </button>
-          </div>
-
-          {showCategories && (
-            <div className="mb-3 mt-3 flex items-center justify-between gap-4">
+      <section className="mt-6 px-6">
+        <form
+          onSubmit={addPackingItemHandler}
+          className="flex flex-col justify-center gap-10"
+        >
+          <div className="flex flex-col">
+            <label htmlFor="title" className="text-sm font-medium">
+              What are you bringing?...
+            </label>
+            <div className="flex w-full items-center gap-4 rounded-lg border p-4 text-sm ">
+              <Briefcase className="h-4 w-4 flex-shrink-0" />
               <input
                 type="text"
                 name="name"
-                value={packingCategory}
-                onChange={(e) => setPackingCategory(e.target.value)}
-                placeholder="Enter the name of the expense"
+                value={itemTitle}
+                onChange={(e) => setItemTitle(e.target.value)}
+                placeholder="Taco, cat, goat, cheese, pizza..."
                 id="name"
                 required
                 className="w-full"
               />
-              <button
-                type="button"
-                className="rounded-3xl bg-blue-600 p-1 text-xs text-white"
-                onClick={addPackingCategoryHandler}
-              >
-                Create
-              </button>
-              <button
-                type="button"
-                className="rounded-3xl bg-red-600 p-1 text-xs text-white"
-                onClick={() => setShowCategories(false)}
-              >
-                Cancel
-              </button>
             </div>
-          )}
-        </div>
+          </div>
 
-        <div className="mt-3 flex flex-col gap-4">
-          {packingItems.map((category) => (
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center justify-between ">
+              <label className="text-sm font-medium">For which category?</label>
+            </div>
+
             <button
               type="button"
-              key={category.id}
-              onClick={() => setSelectedCategory(category.id)}
+              className="flex w-full items-center gap-4 rounded-lg border p-4 text-sm"
+              onClick={() => setShowCategories(true)}
             >
-              <div
-                className="flex items-center justify-between rounded-2xl bg-slate-500 px-3 py-3"
-                style={{
-                  border:
-                    category.id === selectedCategory
-                      ? "1px solid white"
-                      : "none",
-                }}
-              >
-                <div>
-                  <h4 className="capitalize">{category.packingCategory}</h4>
+              <BadgePlus className="h-4 w-4 flex-shrink-0" />
+              <p className="text-gray-400">Create a new category...</p>
+            </button>
+
+            {showCategories && (
+              <div className="flex w-full items-center gap-2 rounded-lg border p-4 text-sm ">
+                <div className="flex w-full items-center gap-2">
+                  <div className="flex w-full items-center gap-4 rounded-lg border p-2 text-sm ">
+                    <ListPlus className="h-4 w-4 flex-shrink-0" />
+                    <input
+                      type="text"
+                      name="name"
+                      value={packingCategory}
+                      onChange={(e) => setPackingCategory(e.target.value)}
+                      placeholder="Enter the name of the expense"
+                      id="name"
+                      required
+                      className="w-full"
+                      style={{
+                        textDecoration: "unset",
+                        border: "unset",
+                        outline: "none",
+                        width: "100%",
+                      }}
+                      maxLength="50"
+                    />
+                  </div>
+
+                  <Button onClick={addPackingCategoryHandler}>
+                    <Plus className="h-5 w-5 flex-shrink-0" />
+                  </Button>
+                  <Button onClick={() => setShowCategories(false)}>
+                    <X className="h-5 w-5 flex-shrink-0" />
+                  </Button>
                 </div>
               </div>
-            </button>
-          ))}
-        </div>
-      </form>
+            )}
+
+            <div className="mt-3 flex flex-col gap-4">
+              {packingItems.map((category) => (
+                <button
+                  type="button"
+                  key={category.id}
+                  className="flex w-full items-center justify-between gap-4 rounded-lg border p-4 text-sm "
+                  style={{
+                    border:
+                      category.id === selectedCategory
+                        ? `1px solid ${category.color}`
+                        : "1px solid #E2E8F0",
+                  }}
+                  onClick={() => {
+                    setSelectedCategory(category.id);
+                  }}
+                >
+                  <div className="flex items-center gap-4">
+                    <div
+                      className="h-[15px] w-[15px] rounded-full"
+                      style={{ backgroundColor: "black" }} // category.color
+                    ></div>
+                    <div>
+                      <h4 className="font-medium capitalize">
+                        {category.packingCategory}
+                      </h4>
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Buttons */}
+          <div className="flex items-center justify-center gap-4">
+            <Button
+              variant="outline"
+              className={cn("w-1/4 font-normal text-gray-500")}
+              type="button"
+              onClick={() => onClose(false)}
+            >
+              Cancel
+            </Button>
+            <Button className={cn(" w-3/4")} type="submit">
+              Submit Item
+            </Button>
+          </div>
+        </form>
+      </section>
     </Modal>
   );
 };
