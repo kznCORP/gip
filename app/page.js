@@ -159,7 +159,7 @@ export default function Home() {
  *        [x] Location form
  *        [x] Search addresses based on location input
  *            [x] Display an Interactive Map
- *            [ ] Apple Maps / Google Maps clickable link
+ *            [x] Apple Maps / Google Maps clickable link
  *
  *    [x] Filter Schedules
  *    [x] Delete a Schedule
@@ -168,14 +168,19 @@ export default function Home() {
  * [x] Read user input from client (title, location, dates, etc.) and store into Firebase
  * [x] Read data from Firebase and display UI
  *
+ * [x] Refactor Modal to display desired design in Figma
+ * [x] Move Schedule form/input into a new component (AddScheduleModal)
+ * [x] Create two different Modals, one for adding and one for viewing.
+ *
  *
  * Up Next.
  *
- * [ ] Refactor Modal to display desired design in Figma
+ * [ ] Create the Packing List Feature
+ *    [ ] Improve UI
+ *    [ ] Input for who's bringing what.
  *
- * [x] Move Schedule form/input into a new component (AddScheduleModal)
- * [ ] Create two different Modals, one for adding and one for viewing.
  *
  *
  * [ ] Stress test, bug hunt; refactor and fix.
+ * [ ] Optimize Read and Writes for Application
  */

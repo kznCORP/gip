@@ -9,6 +9,7 @@ import {
   Star,
   MapPin,
   StarIcon,
+  Compass,
 } from "lucide-react";
 import { dateFormatter } from "@/lib/utils";
 
@@ -63,7 +64,7 @@ export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
 
           <div>
             {activity?.selectedLocation.rating && (
-              <div className="mt-6 mb-4 flex items-center gap-1">
+              <div className="mb-4 mt-6 flex items-center gap-1">
                 <p className="text-sm font-medium text-yellow-500">
                   {activity?.selectedLocation.rating}
                 </p>
@@ -111,6 +112,21 @@ export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
               </div>
             </div>
           )}
+
+          <div className="w-full">
+            <a
+              href={activity?.selectedLocation.url}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <div className="mt-10 flex items-center justify-center gap-2 rounded-xl border border-gray-800 p-4">
+                <Compass className="h-5 w-5 flex-shrink-0" />
+                <p className="text-blue-gray text-sm font-medium">
+                  Open in Maps
+                </p>
+              </div>
+            </a>
+          </div>
         </section>
       </article>
     </Modal>
