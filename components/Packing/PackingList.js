@@ -6,7 +6,7 @@ import { PackingContext } from "@/lib/packingContext";
 import { AddPackItemModal } from "@/components/Packing/AddPackItemModal";
 import { ViewPackingItemsModal } from "@/components/Packing/ViewPackingItemsModal";
 
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, XCircle } from "lucide-react";
 
 export const PackingList = () => {
   const router = useRouter();
@@ -39,7 +39,7 @@ export const PackingList = () => {
       <section className="my-12 px-4">
         {/* Add Packing Item */}
         <section className="sticky top-0 pt-4 backdrop-blur-sm">
-          <div className="mb-5 flex items-center justify-between border-b border-gray-300 pb-3 ">
+          <div className="mb-5 flex items-center justify-between pb-3 ">
             <h2 className="text-xl font-medium">Packing List</h2>
             <div className="flex gap-4">
               {/* Modal Toggle */}
@@ -51,6 +51,16 @@ export const PackingList = () => {
                 <PlusCircle className="h-5 w-5" /> Add Item
               </button>
             </div>
+          </div>
+        </section>
+
+        <section>
+          <div className="my-5 flex items-center justify-between rounded-lg bg-amber-100 p-5">
+            <p className="text-xs leading-snug">
+              Displays items needed to be brought throughout the course of the
+              event/activity planned.
+            </p>
+            <XCircle className="h-5 w-5 flex-shrink-0" />
           </div>
         </section>
 

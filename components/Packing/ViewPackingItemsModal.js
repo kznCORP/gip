@@ -1,12 +1,10 @@
 import React, { useContext, useState } from "react";
 import { PackingContext } from "@/lib/packingContext";
-import { AuthUserContext } from "@/lib/authContext";
 import { Trash2 } from "lucide-react";
+import PackingItem from "./PackingItem";
 
 export const ViewPackingItemsModal = ({ packingItem }) => {
-  const { deletePackingItem, deletePackingCategory, updateCheckbox } =
-    useContext(PackingContext);
-  const { user } = useContext(AuthUserContext);
+  const { deletePackingCategory } = useContext(PackingContext);
 
   const deletePackingCategoryHandler = async () => {
     try {
@@ -16,74 +14,33 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
     }
   };
 
-  const deletePackingItemHandler = async (item) => {
-    try {
-      const updatedItems = packingItem.items.filter((i) => i.id !== item.id);
-
-      const updatedPackingItems = {
-        items: [...updatedItems],
-      };
-
-      await deletePackingItem(packingItem.id, updatedPackingItems);
-    } catch (e) {
-      console.log("Error in deleting Packing Item", e);
-    }
-  };
-
-  const checkBoxHandler = async (item) => {
-    try {
-      const updatedItem = {
-        ...item,
-        checked: !item.checked,
-      };
-      await updateCheckbox(packingItem.id, updatedItem);
-    } catch (e) {
-      console.log("Error in item checkbox", e);
-    }
-  };
-
   return (
     <>
-      <div className="flex items-center gap-4 border-b p-4">
-        <h2 className="text-xl font-bold ">{packingItem?.packingCategory}</h2>
-        <button
-          type="button"
-          onClick={() => deletePackingCategoryHandler(packingItem.id)}
-        >
-          <Trash2 />
-        </button>
-      </div>
+      <section className="flex flex-col justify-center gap-4 rounded-xl border p-6">
+        <div className="flex justify-between">
+          <h2 className="text-lg font-medium">
+            {packingItem?.packingCategory}
+          </h2>
+          <button
+            type="button"
+            onClick={() => deletePackingCategoryHandler(packingItem.id)}
+          >
+            <Trash2 className="h-4 w-4" />
+          </button>
+        </div>
 
-      <div>
-        {packingItem &&
-          packingItem.items &&
-          packingItem.items.map((item) => {
-            return (
-              <div
-                key={item.id}
-                className="mb-2 flex items-center justify-between gap-4"
-              >
-                <div className="flex items-center gap-4">
-                  <input
-                    type="checkbox"
-                    name="check"
-                    checked={item.checked}
-                    className="h-5 w-5 rounded border text-white checked:bg-blue-600 hover:appearance-none hover:ring-2 hover:ring-blue-600"
-                    onChange={() => checkBoxHandler(item)}
-                  />
-                  <h3>{item.name}</h3>
-                </div>
-                <h3>{user?.displayName}</h3>
-                <button
-                  type="button"
-                  onClick={() => deletePackingItemHandler(item)}
-                >
-                  <Trash2 />
-                </button>
-              </div>
-            );
-          })}
-      </div>
+        <div>
+          <p className="text-xs text-gray-400">Things to bring</p>
+        </div>
+
+        <div>
+          {packingItem &&
+            packingItem.items &&
+            packingItem.items.map((item, index) => (
+              <PackingItem item={item} key={index} />
+            ))}
+        </div>
+      </section>
     </>
   );
 };

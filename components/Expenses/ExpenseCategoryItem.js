@@ -20,11 +20,11 @@ export const ExpenseCategoryItem = ({ expense }) => {
         className="-mb-7 duration-300 ease-in hover:mb-2 last:hover:-mb-7"
       >
         <div
-          className="flex h-[125px] items-start justify-between rounded-2xl px-6 py-7"
+          className="flex h-[150px] items-start justify-between rounded-2xl px-6 py-7"
           style={{ backgroundColor: expense.color }}
         >
           <div className="flex w-1/2 flex-col items-start justify-center">
-            <p className="text-md font-medium text-white">{expense.title}</p>
+            <p className="text-lg font-medium text-white">{expense.title}</p>
             <p className="text-xs text-white">
               {expense?.items.length <= 1
                 ? `${expense?.items.length} Transaction`
@@ -33,7 +33,7 @@ export const ExpenseCategoryItem = ({ expense }) => {
           </div>
 
           <div className="flex w-1/2 flex-col items-end justify-center">
-            <p className="text-md font-semibold text-white">
+            <p className="text-lg font-semibold text-white">
               {currencyFormatter(expense.total)}
             </p>
             <p className="text-xs  text-white">View History</p>

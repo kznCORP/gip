@@ -31,8 +31,6 @@ export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
     }
   };
 
-  console.log(activity);
-
   return (
     <Modal onShow={onShow} onClose={onClose}>
       <article className="mt-5">
