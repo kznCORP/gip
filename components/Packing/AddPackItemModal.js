@@ -64,6 +64,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
     }
   };
 
+
   return (
     <Modal onShow={onShow} onClose={onClose}>
       <section className="mt-6 px-6">
@@ -147,7 +148,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
                   style={{
                     border:
                       category.id === selectedCategory
-                        ? `1px solid ${category.color}`
+                        ? `1px solid #000000`
                         : "1px solid #E2E8F0",
                   }}
                   onClick={() => {

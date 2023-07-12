@@ -11,9 +11,11 @@ import { PlusCircle, XCircle } from "lucide-react";
 export const PackingList = () => {
   const router = useRouter();
   const { user, loading } = useContext(AuthUserContext);
-  const { packingItems } = useContext(PackingContext);
+  const { packingItems, getTotalPackedPercentage } = useContext(PackingContext);
 
   const [showAddPackListModal, setShowAddPackListModal] = useState("");
+
+  const totalPercentage = getTotalPackedPercentage();
 
   useEffect(() => {
     if (!user && !loading) {
@@ -54,6 +56,7 @@ export const PackingList = () => {
           </div>
         </section>
 
+        {/* Tips / Helpful Insight */}
         <section>
           <div className="my-5 flex items-center justify-between rounded-lg bg-amber-100 p-5">
             <p className="text-xs leading-snug">
@@ -61,6 +64,31 @@ export const PackingList = () => {
               event/activity planned.
             </p>
             <XCircle className="h-5 w-5 flex-shrink-0" />
+          </div>
+        </section>
+
+        {/* Today's Progress */}
+        <section>
+          <div className="my-6 rounded-lg bg-gray-900 p-6">
+            <h4 className="text-sm text-white">Today&apos;s Progress •</h4>
+            <div className="mt-10 flex flex-col items-start justify-between gap-4">
+              <div className="flex items-end">
+                <h3 className="text-6xl font-bold text-white">{`${totalPercentage}%`}</h3>
+                <p className="mb-1 ml-2 text-xs text-gray-600">
+                  of all items packed.
+                </p>
+              </div>
+
+              <div className="h-10 w-full rounded bg-gray-100">
+                <div
+                  className="h-10 rounded bg-orange-400 "
+                  style={{
+                    width: `${totalPercentage}%`,
+                    maxWidth: "100%",
+                  }}
+                ></div>
+              </div>
+            </div>
           </div>
         </section>
 

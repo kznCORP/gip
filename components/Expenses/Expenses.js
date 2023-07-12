@@ -85,7 +85,6 @@ export const Expenses = () => {
       />
 
       <section className="relative px-4">
-        {/* Tips / Helpful Insight */}
         {/* Add Expense */}
         <section className="sticky top-0 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
@@ -103,6 +102,7 @@ export const Expenses = () => {
           </div>
         </section>
 
+        {/* Tips / Helpful Insight */}
         <section>
           <div className="my-5 flex items-center justify-between rounded-lg bg-amber-100 p-5">
             <p className="text-xs leading-snug">
