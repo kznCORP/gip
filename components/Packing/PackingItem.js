@@ -62,7 +62,7 @@ export const PackingItem = ({ category, item }) => {
             onClick={() => checkBoxHandler(item)}
             className={`${
               item.checked ? "text-blue-500" : "text-gray-900"
-            } h-auto w-auto p-1 text-xs text-white`}
+            } h-auto w-auto p-1 text-xs`}
           >
             {item.checked ? (
               <CheckCircle className="h-5 w-5" strokeWidth={2} />
@@ -76,7 +76,7 @@ export const PackingItem = ({ category, item }) => {
             onClick={() => needToBuyHandler(item)}
             className={`${
               item.bought ? "text-blue-500" : "text-gray-900"
-            } h-auto w-auto whitespace-nowrap p-1 text-xs text-white`}
+            } h-auto w-auto whitespace-nowrap p-1 text-xs`}
           >
             <ShoppingBag className="h-5 w-5" strokeWidth={2} />
           </button>
