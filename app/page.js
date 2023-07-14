@@ -13,15 +13,6 @@ import { ScheduleItem } from "@/components/Schedule/ScheduleItem";
 import { AddScheduleModal } from "@/components/Schedule/AddScheduleModal";
 import { PlusCircle, XCircle } from "lucide-react";
 
-// import { Input } from "@/components/ui/input";
-// import { DatePickerWithRange } from "@/components/ui/datepicker";
-// import { Location } from "@/components/Schedule/Location";
-// import { Textarea } from "@/components/ui/textarea";
-// import { Button } from "@/components/ui/button";
-
-// import { cn } from "@/lib/utils";
-// import { v4 as uuidv4 } from "uuid";
-
 export default function Home() {
   const router = useRouter();
   const { user, loading } = useContext(AuthUserContext);
@@ -96,10 +87,8 @@ export default function Home() {
                   onClick={() => applyFilter(date)}
                 >
                   <div className="flex h-[75px] flex-col items-center justify-center rounded-xl border px-6">
-                    <p className="text-lg font-medium uppercase">{date.day}</p>
-                    <p className="text-xs font-medium uppercase">
-                      {date.month}
-                    </p>
+                    <p className="pb-2 text-xs font-medium">{date.month}</p>
+                    <p className="text-xl font-medium uppercase">{date.day}</p>
                   </div>
                 </button>
               );
@@ -107,6 +96,7 @@ export default function Home() {
 
           <button type="button">
             <div className="flex h-[75px] items-center justify-center rounded-xl border px-6">
+              {/* Set Dates Input */}
               <p className="text-sm font-medium uppercase ">
                 <PlusCircle className="h-5 w-5 stroke-2 text-gray-400" />
               </p>

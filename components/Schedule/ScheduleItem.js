@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { ViewScheduleModal } from "./ViewScheduleModal";
 
-import { Navigation, Star } from "lucide-react";
+import { MapPin, Star } from "lucide-react";
 
 export const ScheduleItem = ({ schedule }) => {
   const [showScheduleModal, setShowScheduleModal] = useState(false);
@@ -26,25 +26,25 @@ export const ScheduleItem = ({ schedule }) => {
               setShowScheduleModal(true);
               setSelectedActivity(activity);
             }}
-            className="w-full mb-4"
+            className="mb-2 w-full rounded-xl bg-gray-50 drop-shadow"
           >
-            <div className="flex flex-col border-b py-2">
+            <div className="flex flex-col gap-2">
               {/* Image Wrapper */}
               <div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={activity.selectedLocation?.photoUrl}
                   alt={`${activity.selectedLocation?.name} Google Review image.`}
-                  className="w-full rounded-md object-cover"
+                  className="w-full rounded-t-xl object-cover"
                   width={200}
                   height={150}
-                  style={{ height: "175px", width: "100%" }}
+                  style={{ height: "200px", width: "100%" }}
                   loading="lazy"
                 />
               </div>
 
               {/* Schedule Details */}
-              <div className="flex flex-col gap-2 px-2">
+              <div className="mb-4 flex flex-col gap-3 px-4">
                 {/* Title */}
                 <div className="mt-4 flex w-full items-center justify-between">
                   <div className="flex items-center gap-4">
@@ -55,7 +55,10 @@ export const ScheduleItem = ({ schedule }) => {
                       {activity?.selectedLocation.rating}
                     </p>
                     {activity.selectedLocation.rating && (
-                      <Star className="h-4 w-4 text-yellow-500" />
+                      <Star
+                        className="h-4 w-4 text-yellow-500"
+                        strokeWidth={3}
+                      />
                     )}
                   </div>
                 </div>
@@ -63,7 +66,10 @@ export const ScheduleItem = ({ schedule }) => {
                 {/* Location / Address */}
                 <div className="flex w-full items-center justify-between ">
                   <div className="flex items-start gap-2">
-                    <Navigation className="stroke-3 mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600 " />
+                    <MapPin
+                      className="stroke-3 mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600"
+                      strokeWidth={3}
+                    />
                     <p className="text-sm font-medium text-blue-600">
                       {activity.selectedLocation?.name}
                     </p>

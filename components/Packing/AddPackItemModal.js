@@ -39,6 +39,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
           id: uuidv4(),
           name: itemTitle,
           checked: false,
+          bought: false,
         },
       ],
     };
@@ -46,6 +47,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
     try {
       await addPackingItem(selectedCategory, newItem);
       setSelectedCategory(null);
+      onClose();
     } catch (e) {
       console.log("Error in adding a Packing Item Modal", e);
     }
@@ -63,7 +65,6 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
       console.log("Error in adding a Packing Category Modal", e);
     }
   };
-
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
@@ -115,7 +116,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
                       name="name"
                       value={packingCategory}
                       onChange={(e) => setPackingCategory(e.target.value)}
-                      placeholder="Enter the name of the expense"
+                      placeholder="Add..."
                       id="name"
                       required
                       className="w-full"

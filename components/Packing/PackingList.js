@@ -23,15 +23,6 @@ export const PackingList = () => {
     }
   }, [router, user, loading]);
 
-  /**
-   * PACKING LIST TIME
-   *
-   * [ ] Add isBought feature
-   * [ ] Revamp Add Modal UI
-   * [ ]
-   *
-   */
-
   return (
     <>
       <AddPackItemModal
@@ -73,15 +64,17 @@ export const PackingList = () => {
             <h4 className="text-sm text-white">Today&apos;s Progress •</h4>
             <div className="mt-10 flex flex-col items-start justify-between gap-4">
               <div className="flex items-end">
-                <h3 className="text-6xl font-bold text-white">{`${totalPercentage}%`}</h3>
-                <p className="mb-1 ml-2 text-xs text-gray-600">
+                <h3 className="text-3xl font-bold text-white">{`${totalPercentage.toFixed(
+                  0
+                )}%`}</h3>
+                <p className="mb-1 ml-2 text-xs text-gray-400">
                   of all items packed.
                 </p>
               </div>
 
-              <div className="h-10 w-full rounded bg-gray-100">
+              <div className="h-5 w-full rounded bg-gray-100">
                 <div
-                  className="h-10 rounded bg-orange-400 "
+                  className="h-5 rounded bg-green-400 "
                   style={{
                     width: `${totalPercentage}%`,
                     maxWidth: "100%",
@@ -94,6 +87,9 @@ export const PackingList = () => {
 
         {/* Packing List */}
         <section>
+          <div className="mb-8 mt-10 flex justify-between ">
+            <h4 className="text-md font-medium  text-gray-800">Labels •</h4>
+          </div>
           <div className="flex flex-col gap-4">
             {packingItems.map((item, index) => (
               <ViewPackingItemsModal key={index} packingItem={item} />

@@ -3,11 +3,13 @@ import { PackingContext } from "@/lib/packingContext";
 import { Trash2 } from "lucide-react";
 import PackingItem from "./PackingItem";
 
+import { percentage } from "@/lib/utils";
+
 export const ViewPackingItemsModal = ({ packingItem }) => {
-  const { deletePackingCategory, getPackedPercentageForCategory } =
+  const { deletePackingCategory, getPackedItemsForCategory } =
     useContext(PackingContext);
 
-  const categoryPercentage = getPackedPercentageForCategory(packingItem.id);
+  const categoryItems = getPackedItemsForCategory(packingItem.id);
 
   const deletePackingCategoryHandler = async () => {
     try {
@@ -19,9 +21,10 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
 
   return (
     <>
-      <section className="flex flex-col justify-center gap-4 rounded-xl border px-6 py-8">
+      <section className="flex flex-col justify-center gap-6 rounded-xl bg-gray-50 px-6 py-8 drop-shadow">
+        {/* Packing Category */}
         <div className="flex justify-between">
-          <h2 className="text-lg font-medium">
+          <h2 className="text-xl font-semibold">
             {packingItem?.packingCategory}
           </h2>
           <button
@@ -32,31 +35,31 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
           </button>
         </div>
 
-        <div>
-          <p className="text-xs text-gray-400">Things to bring</p>
+        {/* Progress Bar */}
+        <div className="flex flex-col items-start">
+          <div>
+            <p className="mb-4 text-xs text-gray-400">{`${categoryItems} items`}</p>
+          </div>
+          <div className="flex w-full items-center">
+            <div className="h-2 w-2/3 rounded bg-gray-100">
+              <div
+                className="h-2 rounded bg-blue-400 "
+                style={{
+                  width: `${percentage(categoryItems)}%`,
+                  maxWidth: "100%",
+                }}
+              ></div>
+            </div>
+          </div>
         </div>
 
+        {/* Packing Items */}
         <div>
           {packingItem &&
             packingItem.items &&
-            packingItem.items.map((item, index) => (
-              <PackingItem category={packingItem} item={item} key={index} />
+            packingItem.items.map((item) => (
+              <PackingItem category={packingItem} item={item} key={item.id} />
             ))}
-        </div>
-
-        <div className="flex items-center">
-          <div className="h-2 w-2/3 rounded bg-gray-100">
-            <div
-              className="h-2 rounded bg-orange-300 "
-              style={{
-                width: `${categoryPercentage}%`,
-                maxWidth: "100%",
-              }}
-            ></div>
-          </div>
-          <p className="ml-2 text-xs font-medium text-gray-400">{`${categoryPercentage.toFixed(
-            0
-          )}%`}</p>
         </div>
       </section>
     </>
