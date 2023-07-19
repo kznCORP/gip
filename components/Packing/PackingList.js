@@ -11,11 +11,13 @@ import { PlusCircle, XCircle } from "lucide-react";
 export const PackingList = () => {
   const router = useRouter();
   const { user, loading } = useContext(AuthUserContext);
-  const { packingItems, getTotalPackedPercentage } = useContext(PackingContext);
+  const { packingItems, getTotalPackedPercentage, getUnboughtItems } =
+    useContext(PackingContext);
 
   const [showAddPackListModal, setShowAddPackListModal] = useState("");
 
   const totalPercentage = getTotalPackedPercentage();
+  const unboughtItems = getUnboughtItems();
 
   useEffect(() => {
     if (!user && !loading) {
@@ -59,17 +61,14 @@ export const PackingList = () => {
         </section>
 
         {/* Today's Progress */}
-        <section>
-          <div className="my-6 rounded-lg bg-gray-900 p-6">
-            <h4 className="text-sm text-white">Today&apos;s Progress •</h4>
+        <section className="my-6 flex w-full items-start gap-4 ">
+          <div className="w-1/2 rounded-lg bg-gray-900 p-6">
+            <h4 className="text-sm text-white font-medium">Today&apos;s Progress •</h4>
             <div className="mt-10 flex flex-col items-start justify-between gap-4">
               <div className="flex items-end">
                 <h3 className="text-3xl font-bold text-white">{`${totalPercentage.toFixed(
                   0
                 )}%`}</h3>
-                <p className="mb-1 ml-2 text-xs text-gray-400">
-                  of all items packed.
-                </p>
               </div>
 
               <div className="h-5 w-full rounded bg-gray-100">
@@ -81,6 +80,17 @@ export const PackingList = () => {
                   }}
                 ></div>
               </div>
+            </div>
+          </div>
+
+          <div className="w-1/2 rounded-lg border p-6">
+            <h4 className="text-sm font-medium">Reminder to Buy •</h4>
+            <div className="mt-6 flex flex-col items-start justify-between gap-4">
+              {unboughtItems.map((item) => (
+                <div key={item.id} className="rounded-full bg-purple-100 py-2 px-4">
+                  <p className="text-xs font-medium">{item.name}</p>
+                </div>
+              ))}
             </div>
           </div>
         </section>

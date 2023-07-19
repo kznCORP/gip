@@ -165,10 +165,12 @@ export default function Home() {
  *
  * Up Next.
  *
- * [ ] Create the Packing List Feature
- *    [ ] Improve UI
- *    [ ] Input for who's bringing what.
- *
+ * [x] Create the Packing List Feature
+ *    [x] Improve UI
+ *    [x] Input for who's bringing what.
+ *    [ ] Colored Categories
+ *    [ ] Reminder to Buy
+ *    [ ]
  *
  *
  * [ ] Stress test, bug hunt; refactor and fix.

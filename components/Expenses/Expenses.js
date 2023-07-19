@@ -117,7 +117,9 @@ export const Expenses = () => {
         {/* Total Spendings */}
         <section>
           <div className="my-6 rounded-lg bg-gray-900 p-6">
-            <h3 className="text-sm  text-white ">Total Spendings •</h3>
+            <h3 className="text-sm font-medium text-white">
+              Total Spendings •
+            </h3>
             <div className="mt-2 flex items-center justify-between">
               <p className="text-xl font-medium text-white">
                 {currencyFormatter(balance)}
