@@ -168,9 +168,9 @@ export default function Home() {
  * [x] Create the Packing List Feature
  *    [x] Improve UI
  *    [x] Input for who's bringing what.
- *    [ ] Colored Categories
- *    [ ] Reminder to Buy
- *    [ ]
+ *    [x] Colored Categories
+ *    [x] Reminder to Buy
+ *    [ ] Refactor Styling to be more simple and clean.
  *
  *
  * [ ] Stress test, bug hunt; refactor and fix.

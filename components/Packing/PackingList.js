@@ -33,7 +33,7 @@ export const PackingList = () => {
       />
       <section className="my-12 px-4">
         {/* Add Packing Item */}
-        <section className="sticky top-0 pt-4 backdrop-blur-sm">
+        <section className="sticky top-0 z-10 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
             <h2 className="text-xl font-medium">Packing List</h2>
             <div className="flex gap-4">
@@ -63,7 +63,9 @@ export const PackingList = () => {
         {/* Today's Progress */}
         <section className="my-6 flex w-full items-start gap-4 ">
           <div className="w-1/2 rounded-lg bg-gray-900 p-6">
-            <h4 className="text-sm text-white font-medium">Today&apos;s Progress •</h4>
+            <h4 className="text-sm font-medium text-white">
+              Today&apos;s Progress •
+            </h4>
             <div className="mt-10 flex flex-col items-start justify-between gap-4">
               <div className="flex items-end">
                 <h3 className="text-3xl font-bold text-white">{`${totalPercentage.toFixed(
@@ -87,7 +89,10 @@ export const PackingList = () => {
             <h4 className="text-sm font-medium">Reminder to Buy •</h4>
             <div className="mt-6 flex flex-col items-start justify-between gap-4">
               {unboughtItems.map((item) => (
-                <div key={item.id} className="rounded-full bg-purple-100 py-2 px-4">
+                <div
+                  key={item.id}
+                  className="rounded-full bg-purple-100 px-4 py-2"
+                >
                   <p className="text-xs font-medium">{item.name}</p>
                 </div>
               ))}

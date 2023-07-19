@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Modal } from "../Modal";
 import { PackingContext } from "@/lib/packingContext";
 import { v4 as uuidv4 } from "uuid";
@@ -18,6 +18,8 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
   const [itemTitle, setItemTitle] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showCategories, setShowCategories] = useState(false);
+
+  const ctgColorRef = useRef("#0000FF");
 
   const addPackingItemHandler = async (e) => {
     e.preventDefault();
@@ -56,9 +58,11 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
   const addPackingCategoryHandler = async (e) => {
     e.preventDefault();
 
+    const color = ctgColorRef.current.value;
+
     try {
       if (packingCategory !== "") {
-        await addPackingCategory({ packingCategory });
+        await addPackingCategory({ packingCategory, color });
         setShowCategories(false);
       }
     } catch (e) {
@@ -130,6 +134,20 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
                     />
                   </div>
 
+                  <div>
+                    <input
+                      type="color"
+                      ref={ctgColorRef}
+                      className="hover:cursor-pointer "
+                      style={{
+                        appearance: "none",
+                        border: "none",
+                        outline: "none",
+                        background: "transparent",
+                      }}
+                    />
+                  </div>
+
                   <Button onClick={addPackingCategoryHandler}>
                     <Plus className="h-5 w-5 flex-shrink-0" />
                   </Button>
@@ -149,7 +167,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
                   style={{
                     border:
                       category.id === selectedCategory
-                        ? `1px solid #000000`
+                        ? `1px solid ${category.color}`
                         : "1px solid #E2E8F0",
                   }}
                   onClick={() => {
@@ -159,7 +177,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
                   <div className="flex items-center gap-4">
                     <div
                       className="h-[15px] w-[15px] rounded-full"
-                      style={{ backgroundColor: "black" }} // category.color
+                      style={{ backgroundColor: `${category.color}` }} // category.color
                     ></div>
                     <div>
                       <h4 className="font-medium capitalize">

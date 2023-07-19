@@ -43,10 +43,11 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
           <div className="flex w-full items-center">
             <div className="h-2 w-2/3 rounded bg-gray-100">
               <div
-                className="h-2 rounded bg-blue-400 "
+                className="h-2 rounded"
                 style={{
                   width: `${percentage(categoryItems)}%`,
                   maxWidth: "100%",
+                  backgroundColor: `${packingItem.color}`,
                 }}
               ></div>
             </div>
