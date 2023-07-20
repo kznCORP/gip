@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 
-import { AuthUserContext } from "@/lib/authContext";
 import { PackingContext } from "@/lib/packingContext";
 
 import { Circle, CheckCircle, Trash2, ShoppingBag } from "lucide-react";
@@ -9,7 +8,6 @@ import { initialsFormatter } from "@/lib/utils";
 export const PackingItem = ({ category, item }) => {
   const { deletePackingItem, updateCheckbox, updateBought } =
     useContext(PackingContext);
-  const { user } = useContext(AuthUserContext);
 
   const deletePackingItemHandler = async (item) => {
     try {
@@ -86,9 +84,15 @@ export const PackingItem = ({ category, item }) => {
           </h3>
         </div>
 
+        {/* 
+         
+         Randomize the background Color to have different avatar colors.
+
+         */}
+
         <div className="flex items-center gap-4">
           <p className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-500 text-xs text-white">
-            {initialsFormatter(user?.displayName)}
+            {initialsFormatter(item.user)}
           </p>
 
           <button type="button" onClick={() => deletePackingItemHandler(item)}>

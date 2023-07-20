@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from "uuid";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
-import { BadgePlus, Briefcase, ListPlus, Plus, X } from "lucide-react";
+import { BadgePlus, Briefcase, Users, ListPlus, Plus, X } from "lucide-react";
 
 export const AddPackItemModal = ({ onShow, onClose }) => {
   const { packingItems, addPackingCategory, addPackingItem } =
@@ -16,6 +16,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
 
   const [packingCategory, setPackingCategory] = useState("");
   const [itemTitle, setItemTitle] = useState("");
+  const [itemUser, setItemUser] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showCategories, setShowCategories] = useState(false);
 
@@ -40,6 +41,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
         {
           id: uuidv4(),
           name: itemTitle,
+          user: itemUser,
           checked: false,
           bought: false,
         },
@@ -85,10 +87,29 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
               <Briefcase className="h-4 w-4 flex-shrink-0" />
               <input
                 type="text"
-                name="name"
+                name="title"
                 value={itemTitle}
                 onChange={(e) => setItemTitle(e.target.value)}
                 placeholder="Taco, cat, goat, cheese, pizza..."
+                id="name"
+                required
+                className="w-full"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col">
+            <label htmlFor="name" className="text-sm font-medium">
+              Who&#x27;s bringing it?...
+            </label>
+            <div className="flex w-full items-center gap-4 rounded-lg border p-4 text-sm ">
+              <Users className="h-4 w-4 flex-shrink-0" />
+              <input
+                type="text"
+                name="name"
+                value={itemUser}
+                onChange={(e) => setItemUser(e.target.value)}
+                placeholder="Name..."
                 id="name"
                 required
                 className="w-full"
