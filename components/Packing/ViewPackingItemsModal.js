@@ -21,7 +21,7 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
 
   return (
     <>
-      <section className="flex flex-col justify-center gap-6 rounded-xl bg-gray-50 px-6 py-8 drop-shadow">
+      <section className="flex flex-col justify-center gap-6 rounded-xl border px-6 py-8 shadow">
         {/* Packing Category */}
         <div className="flex justify-between">
           <h2 className="text-xl font-semibold">

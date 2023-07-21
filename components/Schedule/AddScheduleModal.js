@@ -65,7 +65,7 @@ export const AddScheduleModal = ({ onShow, onClose }) => {
   return (
     <Modal onShow={onShow} onClose={onClose}>
       {/* Modal Toggle */}
-      <section className="mt-5 px-6">
+      <section className="mt-6 px-6">
         <form
           onSubmit={addScheduleHandler}
           className="flex flex-col justify-center gap-10"

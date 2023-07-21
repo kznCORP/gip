@@ -102,18 +102,6 @@ export const Expenses = () => {
           </div>
         </section>
 
-        {/* Tips / Helpful Insight */}
-        <section>
-          <div className="my-5 flex items-center justify-between rounded-lg bg-amber-100 p-5">
-            <p className="text-xs leading-snug">
-              * Displays all expenses paid - organized in labels, allocating
-              each expense history within the categories. For example: Food →
-              Walmart: $57.12, Chipotle: $16.52, Bubble Tea: $7.84, etc...
-            </p>
-            <XCircle className="h-5 w-5 flex-shrink-0" />
-          </div>
-        </section>
-
         {/* Total Spendings */}
         <section>
           <div className="my-6 rounded-lg bg-gray-900 p-6">

@@ -33,7 +33,7 @@ export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
-      <article className="mt-5">
+      <article className="mt-6 px-6">
         <div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -47,7 +47,7 @@ export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
           />
         </div>
 
-        <section className="px-6">
+        <section>
           <div className="mb-4 mt-8 flex w-full items-center justify-between">
             <div className="flex items-center gap-4">
               <h2 className="text-2xl font-medium">{activity?.title}</h2>

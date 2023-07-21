@@ -49,26 +49,15 @@ export const PackingList = () => {
           </div>
         </section>
 
-        {/* Tips / Helpful Insight */}
-        <section>
-          <div className="my-5 flex items-center justify-between rounded-lg bg-amber-100 p-5">
-            <p className="text-xs leading-snug">
-              Displays items needed to be brought throughout the course of the
-              event/activity planned.
-            </p>
-            <XCircle className="h-5 w-5 flex-shrink-0" />
-          </div>
-        </section>
-
         {/* Today's Progress */}
         <section className="my-6 flex w-full items-start gap-4 ">
           <div className="w-1/2 rounded-lg bg-gray-900 p-6">
             <h4 className="text-sm font-medium text-white">
               Today&apos;s Progress •
             </h4>
-            <div className="mt-10 flex flex-col items-start justify-between gap-4">
+            <div className="mt-10 flex flex-col items-start justify-between gap-2">
               <div className="flex items-end">
-                <h3 className="text-3xl font-bold text-white">{`${totalPercentage.toFixed(
+                <h3 className="text-2xl font-bold text-white">{`${totalPercentage.toFixed(
                   0
                 )}%`}</h3>
               </div>
@@ -85,7 +74,7 @@ export const PackingList = () => {
             </div>
           </div>
 
-          <div className="w-1/2 rounded-lg border p-6">
+          <div className="w-1/2 rounded-lg border p-6 shadow">
             <h4 className="text-sm font-medium">Reminder to Buy •</h4>
             <div className="mt-6 flex flex-col items-start justify-between gap-4">
               {unboughtItems.map((item) => (

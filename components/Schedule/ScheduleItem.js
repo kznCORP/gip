@@ -26,7 +26,7 @@ export const ScheduleItem = ({ schedule }) => {
               setShowScheduleModal(true);
               setSelectedActivity(activity);
             }}
-            className="mb-2 w-full rounded-xl bg-gray-50 drop-shadow"
+            className="mb-2 w-full rounded-xl border shadow"
           >
             <div className="flex flex-col gap-2">
               {/* Image Wrapper */}

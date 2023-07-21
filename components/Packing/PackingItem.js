@@ -9,10 +9,20 @@ export const PackingItem = ({ category, item }) => {
   const { deletePackingItem, updateCheckbox, updateBought } =
     useContext(PackingContext);
 
+  const [authorColor, setAuthorColor] = useState(() => {
+    const storedColor = localStorage.getItem(`author_color_${item.user}`);
+    if (storedColor) {
+      return storedColor;
+    }
+
+    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    localStorage.setItem(`author_color_${item.user}`, randomColor);
+    return randomColor;
+  });
+
   const deletePackingItemHandler = async (item) => {
     try {
       const updatedItems = category.items.filter((i) => i.id !== item.id);
-
       const updatedPackingItems = {
         items: [...updatedItems],
       };
@@ -51,7 +61,7 @@ export const PackingItem = ({ category, item }) => {
     <div className="mb-4 flex">
       <div
         className={`${
-          item.bought ? "bg-gray-100 " : ""
+          item.bought ? "bg-gray-50 " : ""
         } flex w-full justify-between rounded-xl border px-4 py-2.5`}
       >
         <div className="flex items-center justify-start gap-3">
@@ -84,14 +94,11 @@ export const PackingItem = ({ category, item }) => {
           </h3>
         </div>
 
-        {/* 
-         
-         Randomize the background Color to have different avatar colors.
-
-         */}
-
         <div className="flex items-center gap-4">
-          <p className="flex h-6 w-6 items-center justify-center rounded-full bg-purple-500 text-xs text-white">
+          <p
+            style={{ backgroundColor: authorColor }}
+            className="flex h-6 w-6 items-center justify-center rounded-full text-xs text-white"
+          >
             {initialsFormatter(item.user)}
           </p>
 

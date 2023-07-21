@@ -38,7 +38,7 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
-      <section className="mt-5">
+      <section className="mt-5 px-6">
         {/* Cover */}
         <div
           className="flex h-[150px] items-center justify-between rounded-t-3xl px-6"
@@ -62,7 +62,7 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
         </div>
 
         {/* All Expense Items */}
-        <div className="rounded-b-xl border">
+        <div className="rounded-b-xl border shadow">
           {expense &&
             expense.items &&
             expense.items.map((item) => {

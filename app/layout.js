@@ -29,14 +29,21 @@ export const metadata = {
   title: "GIP - Group Itinerary Planner",
   description:
     "Make planning a trip easy so all you have to do is just show up. Have everyone on the same page using features such as live collaboration, voting for suggestions, poll for answers from your group, packing lists, expense tracking and more!",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>
-        <AllProviders components={allComponents}>{children}</AllProviders>
-      </body>
-    </html>
+    <>
+      <html lang="en">
+        <body>
+          <AllProviders components={allComponents}>{children}</AllProviders>
+        </body>
+      </html>
+    </>
   );
 }

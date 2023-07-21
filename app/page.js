@@ -60,7 +60,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section>
+        {/* <section>
           <div className="my-5 flex items-center justify-between rounded-lg bg-amber-100 p-5">
             <p className="text-xs leading-snug">
               * Displays all the potential events and activites that you can
@@ -68,12 +68,12 @@ export default function Home() {
             </p>
             <XCircle className="h-5 w-5 flex-shrink-0" />
           </div>
-        </section>
+        </section> */}
 
         {/* Date Filters */}
         <section className="mt-8 flex items-center gap-2" type="button">
           <button onClick={() => setIsFilterApplied(false)}>
-            <div className="flex h-[75px] items-center justify-center rounded-xl border px-6">
+            <div className="flex h-[75px] items-center justify-center rounded-xl border px-6 shadow">
               <p className="text-md font-medium text-black">All</p>
             </div>
           </button>
@@ -86,7 +86,7 @@ export default function Home() {
                   type="button"
                   onClick={() => applyFilter(date)}
                 >
-                  <div className="flex h-[75px] flex-col items-center justify-center rounded-xl border px-6">
+                  <div className="flex h-[75px] flex-col items-center justify-center rounded-xl border px-6 shadow">
                     <p className="pb-2 text-xs font-medium">{date.month}</p>
                     <p className="text-xl font-medium uppercase">{date.day}</p>
                   </div>
@@ -95,10 +95,10 @@ export default function Home() {
             })}
 
           <button type="button">
-            <div className="flex h-[75px] items-center justify-center rounded-xl border px-6">
+            <div className="flex h-[75px] items-center justify-center rounded-xl border px-6 shadow">
               {/* Set Dates Input */}
               <p className="text-sm font-medium uppercase ">
-                <PlusCircle className="h-5 w-5 stroke-2 text-gray-400" />
+                <PlusCircle className="h-5 w-5 stroke-2 text-gray-600" />
               </p>
             </div>
           </button>
