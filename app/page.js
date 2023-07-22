@@ -46,7 +46,7 @@ export default function Home() {
         {/* Add Schedule */}
         <section className="sticky top-0 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
-            <h2 className="text-xl font-medium">Schedule</h2>
+            <h2 className="text-3xl font-medium">Schedule</h2>
             <div className="flex gap-4">
               {/* Modal Toggle */}
               <button
@@ -107,8 +107,8 @@ export default function Home() {
         {/* List of Schedules */}
         <section>
           <div className="mb-10 mt-10 flex justify-between ">
-            <h4 className="text-md font-medium  text-gray-800">
-              All activities •
+            <h4 className="text-lg font-medium  text-gray-800">
+              All activities
             </h4>
           </div>
 

@@ -35,7 +35,7 @@ export const PackingList = () => {
         {/* Add Packing Item */}
         <section className="sticky top-0 z-10 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
-            <h2 className="text-xl font-medium">Packing List</h2>
+            <h2 className="text-3xl font-medium">Packing List</h2>
             <div className="flex gap-4">
               {/* Modal Toggle */}
               <button
@@ -52,8 +52,8 @@ export const PackingList = () => {
         {/* Today's Progress */}
         <section className="my-6 flex w-full items-start gap-4 ">
           <div className="w-1/2 rounded-lg bg-gray-900 p-6">
-            <h4 className="text-sm font-medium text-white">
-              Today&apos;s Progress •
+            <h4 className="text-xs font-medium text-white">
+              Today&apos;s Progress
             </h4>
             <div className="mt-10 flex flex-col items-start justify-between gap-2">
               <div className="flex items-end">
@@ -75,7 +75,7 @@ export const PackingList = () => {
           </div>
 
           <div className="w-1/2 rounded-lg border p-6 shadow">
-            <h4 className="text-sm font-medium">Reminder to Buy •</h4>
+            <h4 className="text-xs font-medium">Reminder to Buy</h4>
             <div className="mt-6 flex flex-col items-start justify-between gap-4">
               {unboughtItems.map((item) => (
                 <div
@@ -92,7 +92,7 @@ export const PackingList = () => {
         {/* Packing List */}
         <section>
           <div className="mb-8 mt-10 flex justify-between ">
-            <h4 className="text-md font-medium  text-gray-800">Labels •</h4>
+            <h4 className="text-lg font-medium  text-gray-800">Labels</h4>
           </div>
           <div className="flex flex-col gap-4">
             {packingItems.map((item, index) => (

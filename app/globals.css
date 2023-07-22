@@ -88,4 +88,8 @@
   * 
   * This will create a rounded blue button with white text for each element that has className="btn"
   */
+
+  body {
+    letter-spacing: -0.02em;
+  }
 }

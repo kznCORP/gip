@@ -88,7 +88,7 @@ export const Expenses = () => {
         {/* Add Expense */}
         <section className="sticky top-0 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
-            <h2 className="text-xl font-medium">Expenses</h2>
+            <h2 className="text-3xl  font-medium">Expenses</h2>
             <div className="flex gap-4">
               {/* Modal Toggle */}
               <button
@@ -105,9 +105,7 @@ export const Expenses = () => {
         {/* Total Spendings */}
         <section>
           <div className="my-6 rounded-lg bg-gray-900 p-6">
-            <h3 className="text-sm font-medium text-white">
-              Total Spendings •
-            </h3>
+            <h3 className="text-sm font-medium text-white">Total Spendings</h3>
             <div className="mt-2 flex items-center justify-between">
               <p className="text-xl font-medium text-white">
                 {currencyFormatter(balance)}
@@ -127,7 +125,7 @@ export const Expenses = () => {
         {/* List of Expenses */}
         <section>
           <div className="mb-8 mt-10 flex justify-between ">
-            <h4 className="text-md font-medium  text-gray-800">Categories •</h4>
+            <h4 className="text-lg font-medium  text-gray-800">Categories</h4>
           </div>
           {/* Expense Container */}
           <div className="flex flex-col">

@@ -3,8 +3,6 @@
 import React, { useState } from "react";
 import { ViewScheduleModal } from "./ViewScheduleModal";
 
-import { MapPin, Star } from "lucide-react";
-
 export const ScheduleItem = ({ schedule }) => {
   const [showScheduleModal, setShowScheduleModal] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState(null);
@@ -26,7 +24,7 @@ export const ScheduleItem = ({ schedule }) => {
               setShowScheduleModal(true);
               setSelectedActivity(activity);
             }}
-            className="mb-2 w-full rounded-xl border shadow"
+            className="mb-2 w-full rounded-xl"
           >
             <div className="flex flex-col gap-2">
               {/* Image Wrapper */}
@@ -35,7 +33,7 @@ export const ScheduleItem = ({ schedule }) => {
                 <img
                   src={activity.selectedLocation?.photoUrl}
                   alt={`${activity.selectedLocation?.name} Google Review image.`}
-                  className="w-full rounded-t-xl object-cover"
+                  className="w-full rounded-lg object-cover shadow-md"
                   width={200}
                   height={150}
                   style={{ height: "200px", width: "100%" }}
@@ -44,44 +42,19 @@ export const ScheduleItem = ({ schedule }) => {
               </div>
 
               {/* Schedule Details */}
-              <div className="mb-4 flex flex-col gap-3 px-4">
-                {/* Title */}
-                <div className="mt-4 flex w-full items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <h2 className="text-xl font-semibold">{activity.title}</h2>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <p className="text-xs font-medium text-yellow-500">
-                      {activity?.selectedLocation.rating}
-                    </p>
-                    {activity.selectedLocation.rating && (
-                      <Star
-                        className="h-4 w-4 text-yellow-500"
-                        strokeWidth={3}
-                      />
-                    )}
-                  </div>
-                </div>
+              <div>
+                <div className="flex flex-col items-start gap-1">
+                  <h2 className="text-lg font-semibold">{activity.title}</h2>
 
-                {/* Location / Address */}
-                <div className="flex w-full items-center justify-between ">
-                  <div className="flex items-start gap-2">
-                    <MapPin
-                      className="stroke-3 mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600"
-                      strokeWidth={3}
-                    />
-                    <p className="text-sm font-medium text-blue-600">
-                      {activity.selectedLocation?.name}
-                    </p>
-                  </div>
-
-                  <p className="text-xs font-light text-gray-400">
-                    More information
+                  <p className="text-xs font-medium text-blue-600">
+                    {`${activity.selectedLocation?.address.substring(
+                      0,
+                      50
+                    )} ...`}
                   </p>
-                </div>
 
-                {/* View Map  Button */}
-                <div></div>
+                  <p className="text-xs text-gray-400">More information</p>
+                </div>
               </div>
             </div>
           </button>
