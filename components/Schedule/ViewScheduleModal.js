@@ -37,7 +37,7 @@ export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
         <div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={activity?.selectedLocation.photoUrl}
+            src={activity?.selectedLocation?.photoUrl}
             alt={`${activity?.selectedLocation?.name} Google Review image.`}
             className="w-full rounded-t-3xl object-cover"
             width={250}
@@ -61,10 +61,10 @@ export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
           </div>
 
           <div>
-            {activity?.selectedLocation.rating && (
+            {activity?.selectedLocation?.rating && (
               <div className="mb-4 mt-6 flex items-center gap-1">
                 <p className="text-sm font-medium text-yellow-500">
-                  {activity?.selectedLocation.rating}
+                  {activity?.selectedLocation?.rating}
                 </p>
                 <StarIcon className="h-4 w-4 flex-shrink-0 text-yellow-500" />
               </div>
@@ -77,7 +77,7 @@ export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
               <div className="flex w-full flex-col items-start justify-start gap-4 rounded-xl border p-4 ">
                 <MapPin className="h-5 w-5 flex-shrink-0 text-blue-600" />
                 <p className="text-xs font-medium text-blue-600">
-                  {activity?.selectedLocation.address}
+                  {activity?.selectedLocation?.address}
                 </p>
               </div>
             </div>
@@ -88,11 +88,11 @@ export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
                 <CalendarClock className="h-5 w-5 flex-shrink-0 text-gray-600" />
                 <div>
                   <p className="text-xs font-medium text-gray-600">
-                    {dateFormatter(schedule?.selectedDates.from)}
+                    {dateFormatter(schedule?.selectedDates?.from)}
                   </p>
                   {schedule?.selectedDates.to && (
                     <p className="text-xs font-medium text-gray-600">
-                      to {dateFormatter(schedule?.selectedDates.to)}
+                      to {dateFormatter(schedule?.selectedDates?.to)}
                     </p>
                   )}
                 </div>
@@ -113,7 +113,7 @@ export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
 
           <div className="w-full">
             <a
-              href={activity?.selectedLocation.url}
+              href={activity?.selectedLocation?.url}
               target="_blank"
               rel="noreferrer"
             >

@@ -32,6 +32,18 @@ export function DatePickerWithRange({ setSelectedDates }) {
     }
   };
 
+  const handleTimeChange = (event) => {
+    const time = event.target.value;
+    const [hours, minutes] = time.split(":").map(Number);
+
+    const fromDateTime = new Date(date.from);
+    fromDateTime.setHours(hours);
+    fromDateTime.setMinutes(minutes);
+
+    setDate({ ...date, from: fromDateTime });
+    setSelectedDates({ ...date, from: fromDateTime });
+  };
+
   useEffect(() => {
     setSelectedDates(date);
   }, [date, setSelectedDates]);
@@ -64,7 +76,10 @@ export function DatePickerWithRange({ setSelectedDates }) {
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent
+          className="flex w-auto flex-col items-center p-0"
+          align="start"
+        >
           <Calendar
             initialFocus
             mode="range"
@@ -72,6 +87,13 @@ export function DatePickerWithRange({ setSelectedDates }) {
             selected={date}
             onSelect={(date) => handleSelect(date)}
             numberOfMonths={1}
+          />
+          <input
+            type="time"
+            value={date.from ? format(date.from, "HH:mm") : ""}
+            className="mb-4 mt-2 rounded-xl border border-gray-500 p-2 text-sm font-medium"
+            onChange={handleTimeChange}
+            required
           />
         </PopoverContent>
       </Popover>

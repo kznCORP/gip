@@ -33,6 +33,8 @@ export default function Home() {
     }
   }, [router, user, loading]);
 
+  console.log(filteredDates);
+
   return (
     <>
       <Navigation />
