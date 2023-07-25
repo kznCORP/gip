@@ -17,13 +17,14 @@ export const ScheduleItem = ({ schedule }) => {
       />
 
       {schedule.activities &&
-        schedule.activities.map((activity, index) => (
-          <section key={index}>
+        schedule.activities.map((activity) => (
+          <section key={activity.id} className="flex items-center gap-5 border">
             {/*
              *
              * This is for connecting each ScheduleItem together by dates..
              *
              */}
+
             <div>
               <div className="mb-2 h-3 w-3 rounded-xl bg-blue-500"></div>
             </div>

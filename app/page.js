@@ -33,8 +33,6 @@ export default function Home() {
     }
   }, [router, user, loading]);
 
-  console.log(filteredDates);
-
   return (
     <>
       <Navigation />
@@ -73,7 +71,10 @@ export default function Home() {
         </section> */}
 
         {/* Date Filters */}
-        <section className="mt-8 flex items-center gap-2" type="button">
+        <section
+          className="mt-8 flex items-center gap-2 overflow-x-auto "
+          type="button"
+        >
           <button onClick={() => setIsFilterApplied(false)}>
             <div className="flex h-[75px] items-center justify-center rounded-xl border px-6 shadow">
               <p className="text-md font-medium text-black">All</p>
@@ -152,6 +153,7 @@ export default function Home() {
  *        [x] Search addresses based on location input
  *            [x] Display an Interactive Map
  *            [x] Apple Maps / Google Maps clickable link
+ *        [x] Date & Time Picker
  *
  *    [x] Filter Schedules
  *    [x] Delete a Schedule
@@ -163,6 +165,8 @@ export default function Home() {
  * [x] Refactor Modal to display desired design in Figma
  * [x] Move Schedule form/input into a new component (AddScheduleModal)
  * [x] Create two different Modals, one for adding and one for viewing.
+ *
+ *
  *
  *
  * Up Next.
