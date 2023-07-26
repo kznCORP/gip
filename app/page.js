@@ -72,12 +72,12 @@ export default function Home() {
 
         {/* Date Filters */}
         <section
-          className="mt-8 flex items-center gap-2 overflow-x-auto "
+          className="mt-8 flex items-center gap-3 overflow-x-auto p-0.5"
           type="button"
         >
           <button onClick={() => setIsFilterApplied(false)}>
-            <div className="flex h-[75px] items-center justify-center rounded-xl border px-6 shadow">
-              <p className="text-md font-medium text-black">All</p>
+            <div className="flex h-[75px]  items-center justify-center rounded-xl border border-gray-100 px-5 shadow">
+              <p className="text-sm font-medium ">All</p>
             </div>
           </button>
 
@@ -87,21 +87,22 @@ export default function Home() {
                 <button
                   key={index}
                   type="button"
+                  className=""
                   onClick={() => applyFilter(date)}
                 >
-                  <div className="flex h-[75px] flex-col items-center justify-center rounded-xl border px-6 shadow">
-                    <p className="pb-2 text-xs font-medium">{date.month}</p>
-                    <p className="text-xl font-medium uppercase">{date.day}</p>
+                  <div className="flex h-[75px] flex-col items-center justify-between rounded-xl border border-gray-100 px-5 py-3 shadow">
+                    <p className="text-xs font-medium">{date.month}</p>
+                    <p className="text-sm font-medium uppercase ">{date.day}</p>
                   </div>
                 </button>
               );
             })}
 
           <button type="button">
-            <div className="flex h-[75px] items-center justify-center rounded-xl border px-6 shadow">
+            <div className="flex h-[75px] items-center justify-center rounded-xl border border-dashed border-gray-200 px-5">
               {/* Set Dates Input */}
               <p className="text-sm font-medium uppercase ">
-                <PlusCircle className="h-5 w-5 stroke-2 text-gray-600" />
+                <PlusCircle className="h-4 w-4 text-gray-400" strokeWidth={2} />
               </p>
             </div>
           </button>
@@ -117,10 +118,10 @@ export default function Home() {
 
           {isFilterApplied
             ? filteredSchedules.map((item, index) => (
-                <ScheduleItem key={index} schedule={item} />
+                <ScheduleItem key={index} schedule={item} position={index} />
               ))
             : schedules.map((item, index) => (
-                <ScheduleItem key={index} schedule={item} />
+                <ScheduleItem key={index} schedule={item} position={index} />
               ))}
         </section>
       </section>

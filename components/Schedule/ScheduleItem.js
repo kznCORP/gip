@@ -3,9 +3,13 @@
 import React, { useState } from "react";
 import { ViewScheduleModal } from "./ViewScheduleModal";
 
-export const ScheduleItem = ({ schedule }) => {
+export const ScheduleItem = ({ schedule, position }) => {
   const [showScheduleModal, setShowScheduleModal] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState(null);
+
+  const firstItem = position === 0;
+  const secondItem = position === 1;
+  const otherItems = position > 1;
 
   return (
     <>
@@ -18,15 +22,43 @@ export const ScheduleItem = ({ schedule }) => {
 
       {schedule.activities &&
         schedule.activities.map((activity) => (
-          <section key={activity.id} className="flex items-center gap-5 border">
-            {/*
-             *
-             * This is for connecting each ScheduleItem together by dates..
-             *
-             */}
-
-            <div>
-              <div className="mb-2 h-3 w-3 rounded-xl bg-blue-500"></div>
+          <section key={activity.id} className="flex gap-5">
+            {/* Connector */}
+            <div
+              className={`flex flex-col ${
+                firstItem
+                  ? "justify-end"
+                  : secondItem
+                  ? "justify-start"
+                  : "justify-center"
+              }`}
+            >
+              {/* Other Items - Top Border Gray */}
+              {otherItems && (
+                <div className="h-1/2 w-1/2 border-r border-dashed border-gray-400"></div>
+              )}
+              {/* Second Item - Bottom Border Blue */}
+              {secondItem && !otherItems && (
+                <div className="h-1/2 w-1/2 border-r border-dashed border-blue-400"></div>
+              )}
+              {/* Dot */}
+              <div
+                className={`my-4 h-2 w-2 flex-shrink-0 rounded-xl ${
+                  firstItem ? "bg-blue-600" : "bg-gray-400"
+                }`}
+              />
+              {/* First Item - Bottom Border Blue */}
+              {firstItem && !otherItems && (
+                <div className="h-1/2 w-1/2 border-r border-dashed border-blue-400"></div>
+              )}
+              {/* Second Item - Top Border Blue */}
+              {secondItem && !otherItems && (
+                <div className="h-1/2 w-1/2 border-r border-dashed border-gray-400"></div>
+              )}
+              {/* Other Items Item - Bottom Border Gray */}
+              {otherItems && (
+                <div className="h-1/2 w-1/2 border-r border-dashed border-gray-400"></div>
+              )}
             </div>
 
             <button
