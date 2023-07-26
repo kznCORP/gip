@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { ViewScheduleModal } from "./ViewScheduleModal";
+import { timeFormatter } from "@/lib/utils";
 
 export const ScheduleItem = ({ schedule, position }) => {
   const [showScheduleModal, setShowScheduleModal] = useState(false);
@@ -95,7 +96,11 @@ export const ScheduleItem = ({ schedule, position }) => {
                       )} ...`}
                     </p>
 
-                    <p className="text-xs text-gray-400">More information</p>
+                    <p className="text-xs font-medium text-black">
+                      {timeFormatter(schedule.selectedDates.from)}
+                    </p>
+
+                    <p className="text-xs text-gray-400">More</p>
                   </div>
                 </div>
               </div>
