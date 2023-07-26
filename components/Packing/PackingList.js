@@ -100,6 +100,17 @@ export const PackingList = () => {
             ))}
           </div>
         </section>
+
+        {packingItems.length == 0 && (
+          <button
+            type="button"
+            onClick={() => setShowAddPackListModal(true)}
+            className="flex w-full items-center justify-center gap-4 rounded-xl border border-dashed border-gray-200 p-10"
+          >
+            <PlusCircle className="h-4 w-4 text-gray-400" strokeWidth={2} />
+            <p className="text-sm text-gray-400">Add New Packing Item</p>
+          </button>
+        )}
       </section>
     </>
   );

@@ -84,7 +84,7 @@ export const Expenses = () => {
         onClose={() => setShowAddExpenseModal(false)}
       />
 
-      <section className="relative px-4">
+      <section className="relative mb-24 px-4">
         {/* Add Expense */}
         <section className="sticky top-0 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
@@ -113,12 +113,14 @@ export const Expenses = () => {
               <TrendingUp className=" h-8 w-8 text-green-400" />
             </div>
 
-            <Line
-              data={lineChartData}
-              options={CHART_OPTIONS}
-              className="mt-5"
-              height={100}
-            />
+            {expenses.length > 0 && (
+              <Line
+                data={lineChartData}
+                options={CHART_OPTIONS}
+                className="mt-5"
+                height={100}
+              />
+            )}
           </div>
         </section>
 
@@ -129,6 +131,17 @@ export const Expenses = () => {
           </div>
           {/* Expense Container */}
           <div className="flex flex-col">
+            {expenses.length == 0 && (
+              <button
+                type="button"
+                onClick={() => setShowAddExpenseModal(true)}
+                className="flex items-center justify-center gap-4 rounded-xl border border-dashed border-gray-200 p-10"
+              >
+                <PlusCircle className="h-4 w-4 text-gray-400" strokeWidth={2} />
+                <p className="text-sm text-gray-400">Add New Expense</p>
+              </button>
+            )}
+
             {expenses.map((expense, index) => (
               <ExpenseCategoryItem key={index} expense={expense} />
             ))}
@@ -136,33 +149,35 @@ export const Expenses = () => {
         </section>
 
         {/* Charts */}
-        <section className="mt-24">
-          <div>
-            <Doughnut
-              data={{
-                labels: expenses.map((expense) => expense.title),
-                datasets: [
-                  {
-                    label: "expenses",
-                    data: expenses.map((expense) => expense.total),
-                    backgroundColor: expenses.map((expense) => expense.color),
-                    hoverOffset: 4,
+        {expenses.length > 0 && (
+          <section className="mt-24">
+            <div>
+              <Doughnut
+                data={{
+                  labels: expenses.map((expense) => expense.title),
+                  datasets: [
+                    {
+                      label: "expenses",
+                      data: expenses.map((expense) => expense.total),
+                      backgroundColor: expenses.map((expense) => expense.color),
+                      hoverOffset: 4,
+                    },
+                  ],
+                }}
+                options={{
+                  responsive: true,
+                  elements: {
+                    arc: {
+                      borderWidth: 5, // Customize the border width of the arcs
+                      borderColor: "#ffffff", // Customize the border color of the arcs
+                    },
                   },
-                ],
-              }}
-              options={{
-                responsive: true,
-                elements: {
-                  arc: {
-                    borderWidth: 5, // Customize the border width of the arcs
-                    borderColor: "#ffffff", // Customize the border color of the arcs
-                  },
-                },
-              }}
-              height={200}
-            />
-          </div>
-        </section>
+                }}
+                height={200}
+              />
+            </div>
+          </section>
+        )}
       </section>
     </>
   );
