@@ -29,7 +29,7 @@ export const Header = () => {
         className="rounded-3xl bg-red-600 px-4 py-2 text-sm"
         onClick={logout}
       >
-        Sign Out
+        Log Out
       </button>
     </header>
   );
