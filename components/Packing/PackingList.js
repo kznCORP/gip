@@ -31,7 +31,7 @@ export const PackingList = () => {
         onShow={showAddPackListModal}
         onClose={() => setShowAddPackListModal(false)}
       />
-      <section className="my-12 px-4">
+      <section className="mb-48 px-4">
         {/* Add Packing Item */}
         <section className="sticky top-0 z-10 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">

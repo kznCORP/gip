@@ -36,29 +36,29 @@ export const ScheduleItem = ({ schedule, position }) => {
             >
               {/* Other Items - Top Border Gray */}
               {otherItems && (
-                <div className="h-1/2 w-1/2 border-r border-dashed border-gray-400"></div>
+                <div className="h-1/2 w-1/2 border-r border-dashed border-gray-200"></div>
               )}
               {/* Second Item - Bottom Border Blue */}
               {secondItem && !otherItems && (
-                <div className="h-1/2 w-1/2 border-r border-dashed border-blue-400"></div>
+                <div className="h-1/2 w-1/2 border-r border-dashed border-blue-200"></div>
               )}
               {/* Dot */}
               <div
                 className={`my-4 h-2 w-2 flex-shrink-0 rounded-xl ${
-                  firstItem ? "bg-blue-600" : "bg-gray-400"
+                  firstItem ? "bg-blue-300" : "bg-gray-200"
                 }`}
               />
               {/* First Item - Bottom Border Blue */}
               {firstItem && !otherItems && (
-                <div className="h-1/2 w-1/2 border-r border-dashed border-blue-400"></div>
+                <div className="h-1/2 w-1/2 border-r border-dashed border-blue-200"></div>
               )}
               {/* Second Item - Top Border Blue */}
               {secondItem && !otherItems && (
-                <div className="h-1/2 w-1/2 border-r border-dashed border-gray-400"></div>
+                <div className="h-1/2 w-1/2 border-r border-dashed border-gray-200"></div>
               )}
               {/* Other Items Item - Bottom Border Gray */}
               {otherItems && (
-                <div className="h-1/2 w-1/2 border-r border-dashed border-gray-400"></div>
+                <div className="h-1/2 w-1/2 border-r border-dashed border-gray-200"></div>
               )}
             </div>
 
