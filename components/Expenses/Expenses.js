@@ -84,7 +84,7 @@ export const Expenses = () => {
         onClose={() => setShowAddExpenseModal(false)}
       />
 
-      <section className="relative mb-24 px-4">
+      <section className="relative mb-24 px-4" id="expenses">
         {/* Add Expense */}
         <section className="sticky top-0 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
