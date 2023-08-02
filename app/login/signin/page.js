@@ -30,6 +30,24 @@ export default function SignIn() {
     }
   }, [user, router]);
 
+
+
+  
+
+  /**
+   *
+   *  To-Do:
+   *
+   *  [x] Create New Pull Request
+   *  [ ] Change Login / Logout UI
+   *  [ ] Create list of color presets
+   *      [ ] Add + button that displays color input for customization
+   */
+
+
+
+
+
   return (
     <main>
       <section className="z-10 h-screen w-screen overflow-hidden bg-white">

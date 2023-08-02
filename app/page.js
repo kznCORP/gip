@@ -169,17 +169,22 @@ export default function Home() {
  * [x] Move Schedule form/input into a new component (AddScheduleModal)
  * [x] Create two different Modals, one for adding and one for viewing.
  *
+ * [x] Create the Packing List Feature
+ * [x] Improve UI
+ * [x] Input for who's bringing what.
+ * [x] Colored Categories
+ * [x] Reminder to Buy
+ * [x] Refactor Styling to be more simple and clean.
  *
  *
  *
  * Up Next.
  *
- * [x] Create the Packing List Feature
- *    [x] Improve UI
- *    [x] Input for who's bringing what.
- *    [x] Colored Categories
- *    [x] Reminder to Buy
- *    [ ] Refactor Styling to be more simple and clean.
+ * [ ] Change Login / Logout UI
+ * [ ] Create list of color presets
+ *      [ ] Add + button that displays color input for customization
+ * 
+ * 
  *
  *
  * [ ] Stress test, bug hunt; refactor and fix.

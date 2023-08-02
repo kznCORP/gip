@@ -5,17 +5,6 @@ import Link from "next/link";
 import { CalendarClock, CircleDollarSign, ClipboardList } from "lucide-react";
 
 export const Navigation = () => {
-  /**
-   *
-   *  Fixed bottom Menu with 3 different logos for each section
-   *  - Schedule
-   *  - Expenses
-   *  - PackingList
-   *
-   *  Name clicked for Profile Settings & Sign Out
-   *
-   */
-
   return (
     <nav className="fixed bottom-0 left-1/2 z-50 w-1/2 -translate-x-1/2 transform py-4">
       <ul className="flex items-center justify-between rounded-full bg-neutral-800 p-2 opacity-80 backdrop-blur">
