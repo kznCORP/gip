@@ -5,6 +5,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthUserContext } from "@/lib/authContext";
 import { FcGoogle } from "react-icons/fc";
 import { useRouter } from "next/navigation";
+import { KeyRound, Mail } from "lucide-react";
+import Link from "next/link";
 
 export default function SignIn() {
   const router = useRouter();
@@ -30,72 +32,101 @@ export default function SignIn() {
     }
   }, [user, router]);
 
-
-
-  
-
   /**
    *
    *  To-Do:
    *
-   *  [x] Create New Pull Request
-   *  [ ] Change Login / Logout UI
+   *  [x] Change Login UI
+   *  [ ] Change Logout UI
    *  [ ] Create list of color presets
    *      [ ] Add + button that displays color input for customization
    */
 
-
-
-
-
   return (
-    <main>
-      <section className="z-10 h-screen w-screen overflow-hidden bg-white">
-        <div className="flex h-1/3 w-full items-center justify-center bg-blue-200">
-          <h2>Image + Logo</h2>
+    <section>
+      <div className="flex h-screen flex-col items-center justify-center gap-8">
+        <div className="mb-6 w-2/3 text-center">
+          <h2 className="text-2xl font-medium">Welcome Back</h2>
+          <p className="mt-2 text-xs font-light text-gray-400">
+            Enter your details or continue with our sign-in providers
+          </p>
         </div>
 
-        {/* Login + SignUp */}
-        <div className="flex h-1/2 flex-col items-center justify-center gap-5">
-          <form className="w-1/2" onSubmit={signInWithEmail}>
-            <div className="flex flex-col gap-1">
-              <label>Email</label>
-              <input
-                name="email"
-                type="email"
-                placeholder="Email Address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="border border-black"
-              />
-            </div>
+        <form className="flex w-2/3 flex-col gap-4" onSubmit={signInWithEmail}>
+          {/* Login */}
+          <div className="flex w-full items-center gap-4 rounded-lg border p-2 text-sm ">
+            <Mail className="ml-2 h-4 w-4 flex-shrink-0" />
+            <input
+              name="email"
+              type="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="py-2 text-xs"
+              style={{
+                textDecoration: "unset",
+                border: "unset",
+                outline: "none",
+                width: "100%",
+              }}
+              maxLength="50"
+            />
+          </div>
 
-            <div className="flex flex-col gap-1">
-              <label>Password</label>
-              <input
-                name="password"
-                type="password"
-                placeholder="Password..."
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="border border-black"
-              />
-            </div>
+          {/* Sign Up */}
+          <div className=" flex w-full items-center gap-4 rounded-lg border p-2 text-sm ">
+            <KeyRound className="ml-2 h-4 w-4 flex-shrink-0" />
+            <input
+              name="password"
+              type="password"
+              placeholder="Password..."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="py-2 text-xs"
+              style={{
+                textDecoration: "unset",
+                border: "unset",
+                outline: "none",
+                width: "100%",
+              }}
+              maxLength="12"
+            />
+          </div>
 
-            <button className="mt-3 w-full rounded-3xl bg-blue-600 p-3 font-medium text-white">
-              Sign In
-            </button>
-          </form>
-
-          <button
-            className="flex w-1/2 items-center justify-center gap-4 rounded-3xl border border-black p-3 font-medium text-black"
-            onClick={googleLoginHandler}
-          >
-            <FcGoogle className="text-xl" />
-            Continue With Google
+          <button className=" w-full rounded-lg bg-blue-600 p-3 text-sm font-medium text-white">
+            Login with Email
           </button>
+        </form>
+
+        <div className=" flex w-2/3 items-center justify-between gap-6">
+          <div className="h-[1px] w-full bg-gray-200"></div>
+          <p className="flex-shrink-0 whitespace-nowrap text-xs font-light text-gray-400">
+            OR
+          </p>
+          <div className="h-[1px] w-full bg-gray-200"></div>
         </div>
-      </section>
-    </main>
+
+        <button
+          className="flex w-2/3 items-center justify-center gap-4 rounded-full border border-gray-500 p-3 text-sm font-medium"
+          onClick={googleLoginHandler}
+        >
+          <FcGoogle className="h-4 w-4 flex-shrink-0" />
+          Continue With Google
+        </button>
+
+        <div className=" w-1/2 text-center text-xs font-light">
+          <p>By clicking continue, you agree to our</p>
+          <div>
+            <Link href="#" className="border-b border-gray-500">
+              Terms of Service
+            </Link>{" "}
+            and{" "}
+            <Link href="#" className="border-b border-gray-500">
+              Privacy Policy
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
