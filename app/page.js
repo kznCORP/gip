@@ -180,11 +180,12 @@ export default function Home() {
  *
  * Up Next.
  *
- * [ ] Change Login / Logout UI
+ * [x] Change Login / Logout UI
+ * [ ] Store Images into Firebase Storage/Bucket
  * [ ] Create list of color presets
  *      [ ] Add + button that displays color input for customization
- * 
- * 
+ *
+ *
  *
  *
  * [ ] Stress test, bug hunt; refactor and fix.

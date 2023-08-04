@@ -1,36 +1,84 @@
 "use client";
 
+import React, { useState } from "react";
+import Logo from "@/components/Logo";
 import Link from "next/link";
 
-const Login = () => {
+export default function Login() {
+  const [activeItem, setActiveItem] = useState(1);
+  const totalItems = 3; // Total number of carousel items
+
+  const handleScroll = (e) => {
+    const scrollPosition = e.target.scrollLeft;
+    const containerWidth = e.target.clientWidth;
+    const itemWidth = containerWidth / totalItems;
+    const activeIndex = Math.floor(scrollPosition / itemWidth) + 1;
+    setActiveItem(activeIndex);
+  };
+
   return (
     <>
-      <main>
-        <section className="z-10 h-screen w-screen overflow-hidden bg-white">
-          <div className="flex h-1/2 w-full items-center justify-center bg-blue-200">
-            <h2>Image + Logo</h2>
+      <Logo />
+
+      <section>
+        <div className="flex h-screen flex-col items-center justify-between gap-8 px-6">
+          <div className="mt-48 w-full">
+            <h1 className="text-3xl font-medium">
+              Make sense out of planning.
+            </h1>
+            <h2 className="text-xl text-neutral-400">
+              Have everyone on the same page, literally.
+            </h2>
           </div>
 
-          {/* Login + SignUp */}
-          <div className="flex h-1/2 flex-col items-center justify-center gap-5">
+          <div
+            className="no-scrollbar w-full overflow-x-auto whitespace-nowrap"
+            onScroll={handleScroll}
+          >
+            <div className="mr-4 inline-block w-5/6">
+              <div className="h-60 rounded-lg bg-red-400">
+                {/* Carousel Item 1 */}
+              </div>
+            </div>
+            <div className="mr-4 inline-block w-5/6">
+              <div className="h-60 rounded-lg bg-blue-400">
+                {/* Carousel Item 2 */}
+              </div>
+            </div>
+            <div className="inline-block w-5/6">
+              <div className="h-60 rounded-lg bg-purple-400">
+                {/* Carousel Item 3 */}
+              </div>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            {Array.from({ length: totalItems }, (_, i) => (
+              <div
+                key={i}
+                className={`h-2 w-2 rounded-full ${
+                  activeItem === i + 1 ? "bg-black" : "bg-gray-300"
+                }`}
+              />
+            ))}
+          </div>
+
+          <div className="mb-12 flex w-full flex-col items-center justify-center gap-2 ">
             <Link
               href="/login/signin"
-              className="mt-3 w-1/2 rounded-3xl bg-blue-600 p-3 text-center font-medium text-white"
+              className="w-full rounded-lg bg-black p-4 text-center text-sm font-medium text-white"
             >
-              <button>Log In</button>
+              <button>Create an account</button>
             </Link>
 
             <Link
               href="/login/signup"
-              className="flex w-1/2 items-center justify-center gap-4 rounded-3xl border border-blue-600 p-3 font-medium text-blue-600"
+              className="w-full rounded-lg border-2 border-black p-4 text-center text-sm font-medium"
             >
-              <button>Create Account</button>
+              <button>I already have an account</button>
             </Link>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
     </>
   );
-};
-
-export default Login;
+}
