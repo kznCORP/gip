@@ -70,10 +70,10 @@ export const AddScheduleModal = ({ onShow, onClose }) => {
   return (
     <Modal onShow={onShow} onClose={onClose}>
       {/* Modal Toggle */}
-      <section className="mt-6 px-6">
+      <section className="mt-24 max-h-[calc(100vh-12rem)] px-6">
         <form
           onSubmit={addScheduleHandler}
-          className="flex flex-col justify-center gap-10"
+          className="flex flex-col justify-center gap-10 overflow-y-auto"
         >
           {/* Title */}
           <div className="flex flex-col items-start justify-start">
@@ -140,7 +140,7 @@ export const AddScheduleModal = ({ onShow, onClose }) => {
           </div>
 
           {/* Buttons */}
-          <div className="flex items-center justify-center gap-4">
+          <div className="mb-10 flex items-center justify-center gap-4">
             <Button
               variant="outline"
               className={cn("w-1/4 font-normal text-gray-500")}

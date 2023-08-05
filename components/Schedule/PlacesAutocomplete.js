@@ -14,6 +14,9 @@ export const PlacesAutocomplete = ({ setSelectedLocation }) => {
     clearSuggestions,
   } = usePlacesAutocomplete();
 
+  const DEFAULT_PHOTO_URL =
+    "https://images.pexels.com/photos/2425232/pexels-photo-2425232.jpeg?auto=compress&cs=tinysrgb&w=600";
+
   const handleSelect = async (address) => {
     setValue(address, false);
     clearSuggestions();
@@ -32,7 +35,9 @@ export const PlacesAutocomplete = ({ setSelectedLocation }) => {
         lng: lng || "",
         address: address || "",
         name: name || "",
-        photoUrl: photos?.[0]?.getUrl({ maxWidth: 400, maxHeight: 400 }) || [],
+        photoUrl:
+          photos?.[0]?.getUrl({ maxWidth: 600, maxHeight: 600 }) ||
+          DEFAULT_PHOTO_URL,
         rating: rating || "",
         url: url || "",
       };

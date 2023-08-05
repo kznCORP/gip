@@ -93,12 +93,23 @@ export const Expenses = () => {
               {/* Modal Toggle */}
               <button
                 data-modal-target="authentication-modal"
-                className="flex  items-center   gap-2   rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
+                className="flex  items-center   gap-2   rounded-full bg-blue-600 text-sm font-medium text-white"
                 onClick={() => setShowAddExpenseModal(true)}
               >
-                <PlusCircle className="h-5 w-5" /> Add Expense
+                <PlusCircle className="h-6 w-6" />
               </button>
             </div>
+          </div>
+        </section>
+
+        <section>
+          <div className="my-5 flex items-center justify-between rounded-lg bg-violet-50 p-5">
+            <p className="text-xs leading-snug">
+              Displays all expenses paid - organized in labels, allocating each
+              expense history within the categories. For example: Food &rarr;
+              Walmart: $57.12, Chipotle: $16.52, Bubble Tea: $7.84
+            </p>
+            <XCircle className="h-5 w-5 flex-shrink-0" />
           </div>
         </section>
 

@@ -38,9 +38,12 @@ export default function Home() {
    *
    *  To-Do:
    *
-   *  [ ] Store photos into Firebase Storage / Buckets
    *  [ ] Create list of color presets
    *      [ ] Add + button that displays color input for customization
+   *
+   *  [ ] Fix Onboard Height on Mobile
+   * 
+   * 
    */
 
   return (
@@ -62,24 +65,24 @@ export default function Home() {
               {/* Modal Toggle */}
               <button
                 data-modal-target="authentication-modal"
-                className="flex  items-center   gap-2   rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
+                className="flex  items-center   gap-2   rounded-full bg-blue-600  text-sm font-medium text-white"
                 onClick={() => setShowAddScheduleModal(true)}
               >
-                <PlusCircle className="h-5 w-5" /> Add Event
+                <PlusCircle className="h-6 w-6" />
               </button>
             </div>
           </div>
         </section>
 
-        {/* <section>
-          <div className="my-5 flex items-center justify-between rounded-lg bg-amber-100 p-5">
+        <section>
+          <div className="my-5 flex items-center justify-between rounded-lg bg-violet-50 p-5">
             <p className="text-xs leading-snug">
               * Displays all the potential events and activites that you can
               take + relative photos and dynamic links that navigate you.
             </p>
             <XCircle className="h-5 w-5 flex-shrink-0" />
           </div>
-        </section> */}
+        </section>
 
         {/* Date Filters */}
         <section
@@ -103,13 +106,15 @@ export default function Home() {
                 >
                   <div className="flex h-[75px] flex-col items-center justify-between rounded-xl border border-gray-100 px-5 py-3 shadow">
                     <p className="text-xs font-medium">{date.month}</p>
-                    <p className="text-sm font-medium uppercase ">{date.day}</p>
+                    <p className="text-sm font-semibold uppercase ">
+                      {date.day}
+                    </p>
                   </div>
                 </button>
               );
             })}
 
-          <button type="button">
+          <button type="button" onClick={() => setShowAddScheduleModal(true)}>
             <div className="flex h-[75px] items-center justify-center rounded-xl border border-dashed border-gray-200 px-5">
               {/* Set Dates Input */}
               <p className="text-sm font-medium uppercase ">

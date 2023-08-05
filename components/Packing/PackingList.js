@@ -40,12 +40,22 @@ export const PackingList = () => {
               {/* Modal Toggle */}
               <button
                 data-modal-target="authentication-modal"
-                className="flex  items-center   gap-2   rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white"
+                className="flex  items-center   gap-2   rounded-full bg-blue-600 text-sm font-medium text-white"
                 onClick={() => setShowAddPackListModal(true)}
               >
-                <PlusCircle className="h-5 w-5" /> Add Item
+                <PlusCircle className="h-6 w-6" />
               </button>
             </div>
+          </div>
+        </section>
+
+        <section>
+          <div className="my-5 flex items-center justify-between rounded-lg bg-violet-50 p-5">
+            <p className="text-xs leading-snug">
+              Displays items needed to be brought and bought throughout the
+              course of the events and activities planned.
+            </p>
+            <XCircle className="h-5 w-5 flex-shrink-0" />
           </div>
         </section>
 

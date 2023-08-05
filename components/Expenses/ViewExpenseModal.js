@@ -38,7 +38,7 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
-      <section className="mt-5 px-6">
+      <section className="mt-24 mb-10 px-6">
         {/* Cover */}
         <div
           className="flex h-[150px] items-center justify-between rounded-t-3xl px-6"
