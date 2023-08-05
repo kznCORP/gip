@@ -34,6 +34,15 @@ export default function Home() {
     }
   }, [router, user, loading]);
 
+  /**
+   *
+   *  To-Do:
+   *
+   *  [ ] Store photos into Firebase Storage / Buckets
+   *  [ ] Create list of color presets
+   *      [ ] Add + button that displays color input for customization
+   */
+
   return (
     <>
       <Header />

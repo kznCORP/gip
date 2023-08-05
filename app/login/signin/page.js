@@ -33,16 +33,6 @@ export default function SignIn() {
     }
   }, [user, router]);
 
-  /**
-   *
-   *  To-Do:
-   *
-   *  [x] Change Login UI
-   *  [x] Change Logout UI
-   *  [ ] Create list of color presets
-   *      [ ] Add + button that displays color input for customization
-   */
-
   return (
     <>
       <Logo />

@@ -64,14 +64,14 @@ export default function Login() {
 
           <div className="mb-12 flex w-full flex-col items-center justify-center gap-2 ">
             <Link
-              href="/login/signin"
+              href="/login/signup"
               className="w-full rounded-lg bg-black p-4 text-center text-sm font-medium text-white"
             >
               <button>Create an account</button>
             </Link>
 
             <Link
-              href="/login/signup"
+              href="/login/signin"
               className="w-full rounded-lg border-2 border-black p-4 text-center text-sm font-medium"
             >
               <button>I already have an account</button>

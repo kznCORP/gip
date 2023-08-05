@@ -16,6 +16,9 @@ import { v4 as uuidv4 } from "uuid";
 
 import { StickyNote, Sunrise } from "lucide-react";
 
+// Bucket URL from Storage in Firebase Console
+const BUCKET_URL = "gs://whatarewedoing-7e3f5.appspot.com";
+
 export const AddScheduleModal = ({ onShow, onClose }) => {
   const { user } = useContext(AuthUserContext);
   const { addDate, addSchedule } = useContext(ScheduleContext);
@@ -51,7 +54,9 @@ export const AddScheduleModal = ({ onShow, onClose }) => {
     };
 
     try {
+      // Write to Firebase
       await addSchedule(selectedDates, newActivity, user.uid);
+
       // Reset the form fields
       setTitle("");
       setNotes("");

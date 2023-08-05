@@ -4,7 +4,6 @@ import usePlacesAutocomplete, {
   getDetails,
 } from "use-places-autocomplete";
 
-import { Input } from "../ui/input";
 import { Navigation, MapPin } from "lucide-react";
 
 export const PlacesAutocomplete = ({ setSelectedLocation }) => {
@@ -33,7 +32,7 @@ export const PlacesAutocomplete = ({ setSelectedLocation }) => {
         lng: lng || "",
         address: address || "",
         name: name || "",
-        photoUrl: photos[0].getUrl() || [],
+        photoUrl: photos?.[0]?.getUrl({ maxWidth: 400, maxHeight: 400 }) || [],
         rating: rating || "",
         url: url || "",
       };
