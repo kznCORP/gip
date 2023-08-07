@@ -41,9 +41,7 @@ export default function Home() {
    *  [ ] Create list of color presets
    *      [ ] Add + button that displays color input for customization
    *
-   *  [ ] Fix Onboard Height on Mobile
-   * 
-   * 
+   *
    */
 
   return (
