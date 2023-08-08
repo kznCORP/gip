@@ -40,6 +40,8 @@ export default function Home() {
    *
    *  [ ] Create list of color presets
    *      [ ] Add + button that displays color input for customization
+   * 
+   *  [ ] Add media breakpoints for transitioning to Tablet View.
    *
    *
    */
@@ -193,7 +195,6 @@ export default function Home() {
  * Up Next.
  *
  * [x] Change Login / Logout UI
- * [ ] Store Images into Firebase Storage/Bucket
  * [ ] Create list of color presets
  *      [ ] Add + button that displays color input for customization
  *
