@@ -7,14 +7,25 @@ import { v4 as uuidv4 } from "uuid";
 import {
   BadgePlus,
   CircleDollarSign,
-  ListPlus,
+  Tags,
   Plus,
   ShoppingBag,
   X,
+  PlusCircle,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+const colorOptions = [
+  { value: "#f87171" },
+  { value: "#60a5fa" },
+  { value: "#c084fc" },
+  { value: "#4ade80" },
+];
+
 export const AddExpenseModal = ({ onShow, onClose }) => {
+  const { expenses, addExpenseItem, addExpenseCategory } =
+    useContext(FinanceContext);
+
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showCategories, setShowCategories] = useState(false);
   const [isSubmitClicked, setIsSubmitClicked] = useState(false);
@@ -25,8 +36,13 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
   const ctgNameRef = useRef();
   const ctgColorRef = useRef("#0000FF");
 
-  const { expenses, addExpenseItem, addExpenseCategory } =
-    useContext(FinanceContext);
+  if (!ctgColorRef.current || !ctgColorRef.current.value) {
+    ctgColorRef.current = { value: "#0000FF" }; // Default color value
+  }
+
+  const setColorValue = (color) => {
+    ctgColorRef.current.value = color;
+  };
 
   const addExpenseHandler = async (e) => {
     e.preventDefault();
@@ -171,10 +187,10 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
             </button>
 
             {showCategories && (
-              <div className="flex w-full items-center gap-2 rounded-lg border p-4 text-sm ">
+              <div className="flex w-full flex-col items-start gap-2 rounded-lg border p-4 text-sm ">
                 <div className="flex w-full items-center gap-2">
                   <div className="flex w-full items-center gap-4 rounded-lg border p-2 text-sm ">
-                    <ListPlus className="h-4 w-4 flex-shrink-0" />
+                    <Tags className="h-4 w-4 flex-shrink-0" />
                     <input
                       type="text"
                       placeholder="Add..."
@@ -189,26 +205,40 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
                     />
                   </div>
 
-                  <div>
-                    <input
-                      type="color"
-                      ref={ctgColorRef}
-                      className="hover:cursor-pointer "
-                      style={{
-                        appearance: "none",
-                        border: "none",
-                        outline: "none",
-                        background: "transparent",
-                      }}
-                    />
-                  </div>
-
                   <Button onClick={addCategoryHandler}>
                     <Plus className="h-5 w-5 flex-shrink-0" />
                   </Button>
                   <Button onClick={() => setShowCategories(false)}>
                     <X className="h-5 w-5 flex-shrink-0" />
                   </Button>
+                </div>
+
+                <div className="flex gap-1">
+                  {colorOptions.map((color) => (
+                    <button
+                      key={color.value}
+                      type="button"
+                      onClick={() => setColorValue(color.value)}
+                    >
+                      <div
+                        className="h-5 w-5 rounded-full"
+                        style={{ backgroundColor: color.value }}
+                      ></div>
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => ctgColorRef.current.click()}
+                  >
+                    <PlusCircle className="h-5 w-5 hover:cursor-pointer" />
+                  </button>
+                  <div className="relative">
+                    <input
+                      type="color"
+                      ref={ctgColorRef}
+                      className="absolute left-0 top-0 h-5 w-5 opacity-0"
+                    />
+                  </div>
                 </div>
               </div>
             )}

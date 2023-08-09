@@ -38,10 +38,10 @@ export default function Home() {
    *
    *  To-Do:
    *
-   *  [ ] Create list of color presets
-   *      [ ] Add + button that displays color input for customization
-   * 
    *  [ ] Add media breakpoints for transitioning to Tablet View.
+   *    [ ] Packing List
+   *    [ ] Expenses
+   *    [ ] Schedule
    *
    *
    */
@@ -190,17 +190,20 @@ export default function Home() {
  * [x] Reminder to Buy
  * [x] Refactor Styling to be more simple and clean.
  *
+ * [x] Change Login / Logout UI
+ * [x] Create list of color presets
+ *      [x] Add + button that displays color input for customization
+ *
  *
  *
  * Up Next.
  *
- * [x] Change Login / Logout UI
- * [ ] Create list of color presets
- *      [ ] Add + button that displays color input for customization
+ *  [ ] Add media breakpoints for transitioning to Tablet View.
+ *    [ ] Packing List
+ *    [ ] Expenses
+ *    [ ] Schedule
  *
  *
- *
- *
- * [ ] Stress test, bug hunt; refactor and fix.
- * [ ] Optimize Read and Writes for Application
+ * [.] Stress test, bug hunt; refactor and fix.
+ * [.] Optimize Read and Writes for Application
  */

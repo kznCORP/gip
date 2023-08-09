@@ -8,7 +8,22 @@ import { v4 as uuidv4 } from "uuid";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
-import { BadgePlus, Briefcase, Users, ListPlus, Plus, X } from "lucide-react";
+import {
+  BadgePlus,
+  Briefcase,
+  Users,
+  PlusCircle,
+  Plus,
+  Tags,
+  X,
+} from "lucide-react";
+
+const colorOptions = [
+  { value: "#f87171" },
+  { value: "#60a5fa" },
+  { value: "#c084fc" },
+  { value: "#4ade80" },
+];
 
 export const AddPackItemModal = ({ onShow, onClose }) => {
   const { packingItems, addPackingCategory, addPackingItem } =
@@ -17,10 +32,19 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
   const [packingCategory, setPackingCategory] = useState("");
   const [itemTitle, setItemTitle] = useState("");
   const [itemUser, setItemUser] = useState("");
+
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [showCategories, setShowCategories] = useState(false);
 
   const ctgColorRef = useRef("#0000FF");
+
+  if (!ctgColorRef.current || !ctgColorRef.current.value) {
+    ctgColorRef.current = { value: "#0000FF" }; // Default color value
+  }
+
+  const setColorValue = (color) => {
+    ctgColorRef.current.value = color;
+  };
 
   const addPackingItemHandler = async (e) => {
     e.preventDefault();
@@ -132,10 +156,10 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
             </button>
 
             {showCategories && (
-              <div className="flex w-full items-center gap-2 rounded-lg border p-4 text-sm ">
+              <div className="flex w-full flex-col items-start gap-2 rounded-lg border p-4 text-sm ">
                 <div className="flex w-full items-center gap-2">
                   <div className="flex w-full items-center gap-4 rounded-lg border p-2 text-sm ">
-                    <ListPlus className="h-4 w-4 flex-shrink-0" />
+                    <Tags className="h-4 w-4 flex-shrink-0" />
                     <input
                       type="text"
                       name="name"
@@ -155,26 +179,40 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
                     />
                   </div>
 
-                  <div>
-                    <input
-                      type="color"
-                      ref={ctgColorRef}
-                      className="hover:cursor-pointer "
-                      style={{
-                        appearance: "none",
-                        border: "none",
-                        outline: "none",
-                        background: "transparent",
-                      }}
-                    />
-                  </div>
-
                   <Button onClick={addPackingCategoryHandler}>
                     <Plus className="h-5 w-5 flex-shrink-0" />
                   </Button>
                   <Button onClick={() => setShowCategories(false)}>
                     <X className="h-5 w-5 flex-shrink-0" />
                   </Button>
+                </div>
+
+                <div className="flex gap-1">
+                  {colorOptions.map((color) => (
+                    <button
+                      key={color.value}
+                      type="button"
+                      onClick={() => setColorValue(color.value)}
+                    >
+                      <div
+                        className="h-5 w-5 rounded-full"
+                        style={{ backgroundColor: color.value }}
+                      ></div>
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => ctgColorRef.current.click()}
+                  >
+                    <PlusCircle className="h-5 w-5 hover:cursor-pointer" />
+                  </button>
+                  <div className="relative">
+                    <input
+                      type="color"
+                      ref={ctgColorRef}
+                      className="absolute left-0 top-0 h-5 w-5 opacity-0"
+                    />
+                  </div>
                 </div>
               </div>
             )}
