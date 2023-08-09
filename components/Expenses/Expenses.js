@@ -84,7 +84,10 @@ export const Expenses = () => {
         onClose={() => setShowAddExpenseModal(false)}
       />
 
-      <section className="relative mb-24 px-4" id="expenses">
+      <section
+        className="relative mb-24 px-4 sm:border-2 sm:border-red-500"
+        id="expenses"
+      >
         {/* Add Expense */}
         <section className="sticky top-0 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
@@ -137,7 +140,7 @@ export const Expenses = () => {
 
         {/* List of Expenses */}
         <section>
-          <div className="mb-8 mt-10 flex justify-between ">
+          <div className="mb-8 mt-10">
             <h4 className="text-lg font-medium  text-gray-800">Categories</h4>
           </div>
           {/* Expense Container */}
@@ -162,7 +165,10 @@ export const Expenses = () => {
         {/* Charts */}
         {expenses.length > 0 && (
           <section className="mt-24">
-            <div>
+            <div className="mb-8 mt-10">
+              <h4 className="text-lg font-medium  text-gray-800">Chart</h4>
+            </div>
+            <div className="flex h-[275px] items-center justify-center">
               <Doughnut
                 data={{
                   labels: expenses.map((expense) => expense.title),

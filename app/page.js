@@ -56,7 +56,7 @@ export default function Home() {
         onClose={() => setShowAddScheduleModal(false)}
       />
 
-      <section className="mb-24 mt-4 px-4" id="schedules">
+      <section className="mb-24 mt-4 px-4 " id="schedules">
         {/* Add Schedule */}
         <section className="sticky top-0 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
