@@ -37,8 +37,8 @@ export default function SignIn() {
     <>
       <Logo />
 
-      <section>
-        <div className="flex h-screen flex-col items-center justify-center gap-8 border">
+      <section className="flex items-center justify-center">
+        <div className="flex h-screen w-full flex-col items-center justify-center gap-8 sm:w-3/4">
           <div className="mb-6 mt-12 w-2/3 text-center">
             <h2 className="text-2xl font-medium">Welcome Back</h2>
             <p className="mt-2 text-xs font-light text-gray-400">

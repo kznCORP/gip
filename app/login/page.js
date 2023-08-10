@@ -23,10 +23,10 @@ export default function Login() {
       <section>
         <div className="flex h-screen flex-col items-center justify-between gap-8 px-6">
           <div className="mt-48 w-full">
-            <h1 className="text-3xl font-medium">
+            <h1 className="text-center text-3xl font-medium">
               Make sense out of planning.
             </h1>
-            <h2 className="text-xl text-neutral-400">
+            <h2 className="text-center text-xl text-neutral-400">
               Have everyone on the same page, literally.
             </h2>
           </div>

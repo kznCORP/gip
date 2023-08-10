@@ -38,8 +38,8 @@ export default function SignUp() {
     <>
       <Logo />
 
-      <section>
-        <div className="flex h-screen flex-col items-center justify-center gap-8">
+      <section className="flex items-center justify-center">
+        <div className="flex h-screen w-full flex-col items-center justify-center gap-8">
           <div className="mb-6 mt-12 w-2/3 text-center">
             <h2 className="text-2xl font-medium">Create an Account</h2>
             <p className="mt-2 text-xs font-light text-gray-400">
