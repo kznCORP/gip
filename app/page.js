@@ -38,6 +38,20 @@ export default function Home() {
    *
    *  To-Do:
    *
+   *  Read from Firebase DB
+   *  Filter 15 icons (.svg) in Storage
+   *  Get icon’s URL for each category in Storage
+   *  Display as <img src={ icon.url } />
+   *
+   *
+   *  Add to Firebase DB
+   *  1. User chose icon (plane) - update state
+   *  2. Close dropdown menu option
+   *  3. Display chosen icon on input form
+   *  4. Get icon URL from Storage
+   *  5. Submit chosen icon to db; ExpenseItem schema
+   *
+   *
    *  [ ] Add media breakpoints for transitioning to Tablet View.
    *    [ ] Packing List
    *    [ ] Expenses

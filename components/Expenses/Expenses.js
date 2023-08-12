@@ -84,10 +84,7 @@ export const Expenses = () => {
         onClose={() => setShowAddExpenseModal(false)}
       />
 
-      <section
-        className="relative mb-24 px-4 sm:border-2 sm:border-red-500"
-        id="expenses"
-      >
+      <section className="relative mb-24 px-4 " id="expenses">
         {/* Add Expense */}
         <section className="sticky top-0 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
@@ -118,8 +115,8 @@ export const Expenses = () => {
 
         {/* Total Spendings */}
         <section>
-          <div className="my-6 rounded-lg bg-gray-900 p-6">
-            <h3 className="text-sm font-medium text-white">Total Spendings</h3>
+          <div className="my-6 rounded-lg border bg-stone-800 p-6">
+            <h3 className="text-md font-medium text-white">Total Spendings</h3>
             <div className="mt-2 flex items-center justify-between">
               <p className="text-xl font-medium text-white">
                 {currencyFormatter(balance)}

@@ -21,29 +21,26 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
 
   return (
     <>
-      <section className="flex flex-col justify-center gap-6 rounded-xl border px-6 py-8 shadow">
+      <section className="flex flex-col justify-center gap-2">
         {/* Packing Category */}
         <div className="flex justify-between">
-          <h2 className="text-xl font-semibold">
+          <h2 className="text-sm font-semibold">
             {packingItem?.packingCategory}
           </h2>
           <button
             type="button"
             onClick={() => deletePackingCategoryHandler(packingItem.id)}
           >
-            <Trash2 className="h-4 w-4" />
+            <Trash2 className="h-4 w-4" strokeWidth={1} />
           </button>
         </div>
 
         {/* Progress Bar */}
-        <div className="flex flex-col items-start">
-          <div>
-            <p className="mb-4 text-xs text-gray-400">{`${categoryItems} items`}</p>
-          </div>
+        <div className=" flex flex-col items-start">
           <div className="flex w-full items-center">
-            <div className="h-2 w-2/3 rounded bg-gray-100">
+            <div className="h-[50px] w-full rounded-full bg-gray-100">
               <div
-                className="h-2 rounded"
+                className="flex h-[50px] w-full rounded-full"
                 style={{
                   width: `${percentage(categoryItems)}%`,
                   maxWidth: "100%",
@@ -55,14 +52,20 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
         </div>
 
         {/* Packing Items */}
-        <div>
+        {/* <div>
           {packingItem &&
             packingItem.items &&
             packingItem.items.map((item) => (
               <PackingItem category={packingItem} item={item} key={item.id} />
             ))}
-        </div>
+        </div> */}
       </section>
     </>
   );
 };
+
+{
+  /* <div>
+  <p className="text-xs text-gray-400">{`${categoryItems}`}</p>
+</div> */
+}

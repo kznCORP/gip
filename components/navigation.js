@@ -2,25 +2,42 @@
 
 import React from "react";
 import Link from "next/link";
-import { CalendarClock, CircleDollarSign, ClipboardList } from "lucide-react";
+import {
+  CalendarClock,
+  CircleDollarSign,
+  ClipboardList,
+  Home,
+} from "lucide-react";
 
 export const Navigation = () => {
   return (
     <nav className="fixed bottom-0 left-1/2 z-50 w-1/2 -translate-x-1/2 transform py-4">
-      <ul className="flex items-center justify-between rounded-full bg-neutral-800 p-2 opacity-80 backdrop-blur">
-        <li className="mx-4  rounded-lg bg-neutral-900 p-2">
+      <ul className="flex items-center justify-evenly rounded-full bg-neutral-900  opacity-90 backdrop-blur">
+        <li className="mx-2 rounded-lg p-2">
+          <Link href="#">
+            <Home className="h-6 w-6 text-white" strokeWidth={1.5} />
+          </Link>
+        </li>
+        <div
+          className="opacity-20"
+          style={{ border: "0.5px solid white", height: "56px" }}
+        ></div>
+        <li className="mx-2  rounded-lg p-2">
           <Link href="#shedules">
-            <CalendarClock className="h-6 w-6 text-white" strokeWidth={2} />
+            <CalendarClock className="h-6 w-6 text-white" strokeWidth={1.5} />
           </Link>
         </li>
-        <li className="rounded-lg  bg-neutral-900 p-2">
+        <li className="rounded-lg  p-2">
           <Link href="#expenses">
-            <CircleDollarSign className="h-6 w-6 text-white" strokeWidth={2} />
+            <CircleDollarSign
+              className="h-6 w-6 text-white"
+              strokeWidth={1.5}
+            />
           </Link>
         </li>
-        <li className="mx-4  rounded-lg bg-neutral-900 p-2">
+        <li className="mx-2  rounded-lg p-2">
           <Link href="#packing-list">
-            <ClipboardList className="h-6 w-6 text-white" strokeWidth={2} />
+            <ClipboardList className="h-6 w-6 text-white" strokeWidth={1.5} />
           </Link>
         </li>
       </ul>

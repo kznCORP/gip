@@ -24,8 +24,8 @@ export const ExpenseCategoryItem = ({ expense }) => {
           style={{ backgroundColor: expense.color }}
         >
           <div className="flex w-1/2 flex-col items-start justify-center">
-            <p className="text-lg font-medium text-white">{expense.title}</p>
-            <p className="text-xs text-white">
+            <p className="text-lg font-medium text-white ">{expense.title}</p>
+            <p className="text-xs text-white ">
               {expense?.items.length <= 1
                 ? `${expense?.items.length} Transaction`
                 : `${expense?.items.length} Transactions`}
@@ -33,10 +33,10 @@ export const ExpenseCategoryItem = ({ expense }) => {
           </div>
 
           <div className="flex w-1/2 flex-col items-end justify-center">
-            <p className="text-lg font-semibold text-white">
+            <p className="text-lg font-medium text-white">
               {currencyFormatter(expense.total)}
             </p>
-            <p className="text-xs  text-white">View History</p>
+            <p className="text-xs text-white">View History</p>
           </div>
         </div>
       </button>

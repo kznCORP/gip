@@ -60,49 +60,44 @@ export const PackingList = () => {
         </section>
 
         {/* Today's Progress */}
-        <section className="my-6 flex w-full items-start gap-4 ">
-          <div className="w-1/2 rounded-lg bg-gray-900 p-6">
-            <h4 className="text-xs font-medium text-white">
-              Today&apos;s Progress
-            </h4>
-            <div className="mt-10 flex flex-col items-start justify-between gap-2">
-              <div className="flex items-end">
-                <h3 className="text-2xl font-bold text-white">{`${totalPercentage.toFixed(
-                  0
-                )}%`}</h3>
-              </div>
-
-              <div className="h-5 w-full rounded bg-gray-100">
-                <div
-                  className="h-5 rounded bg-green-400 "
-                  style={{
-                    width: `${totalPercentage}%`,
-                    maxWidth: "100%",
-                  }}
-                ></div>
-              </div>
-            </div>
+        <section className="mb-24 mt-6 flex flex-col justify-start gap-4 ">
+          <h4 className="text-md border-b  font-medium text-gray-800">
+            Total Progress
+          </h4>
+          <div>
+            <h3
+              className="flex items-start justify-start text-7xl font-bold"
+              style={{ letterSpacing: "-0.05em" }}
+            >
+              {`${totalPercentage.toFixed(0)}`}
+              <span className="text-3xl">%</span>
+            </h3>
           </div>
+        </section>
 
-          <div className="w-1/2 rounded-lg border p-6 shadow">
-            <h4 className="text-xs font-medium">Reminder to Buy</h4>
-            <div className="mt-6 flex flex-col items-start justify-between gap-4">
-              {unboughtItems.map((item) => (
-                <div
-                  key={item.id}
-                  className="rounded-full bg-purple-100 px-4 py-2"
-                >
-                  <p className="text-xs font-medium">{item.name}</p>
-                </div>
-              ))}
-            </div>
+        <section>
+          <h4 className="text-md border-b  font-medium text-gray-800">
+            Reminder to Buy
+          </h4>
+
+          <div className="mt-6 flex flex-col items-start justify-between gap-4">
+            {unboughtItems.map((item) => (
+              <div
+                key={item.id}
+                className="rounded-full bg-indigo-100 px-4 py-2"
+              >
+                <p className="text-xs font-medium">{item.name}</p>
+              </div>
+            ))}
           </div>
         </section>
 
         {/* Packing List */}
         <section>
-          <div className="mb-8 mt-10 flex justify-between ">
-            <h4 className="text-lg font-medium  text-gray-800">Labels</h4>
+          <div className="mb-8 mt-16 ">
+            <h4 className="text-md border-b  font-medium text-gray-800">
+              Labels
+            </h4>
           </div>
           <div className="flex flex-col gap-4">
             {packingItems.map((item, index) => (
