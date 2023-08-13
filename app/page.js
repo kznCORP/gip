@@ -38,11 +38,6 @@ export default function Home() {
    *
    *  To-Do:
    *
-   *  Read from Firebase DB
-   *  Filter 15 icons (.svg) in Storage
-   *  Get icon’s URL for each category in Storage
-   *  Display as <img src={ icon.url } />
-   *
    *
    *  Add to Firebase DB
    *  1. User chose icon (plane) - update state

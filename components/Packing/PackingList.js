@@ -1,3 +1,7 @@
+"use client";
+
+import { ICON_DATA } from "@/lib/icons";
+
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AuthUserContext } from "@/lib/authContext";
