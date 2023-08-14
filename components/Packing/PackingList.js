@@ -79,28 +79,11 @@ export const PackingList = () => {
           </div>
         </section>
 
-        <section>
-          <h4 className="text-md border-b  font-medium text-gray-800">
-            Reminder to Buy
-          </h4>
-
-          <div className="mt-6 flex flex-col items-start justify-between gap-4">
-            {unboughtItems.map((item) => (
-              <div
-                key={item.id}
-                className="rounded-full bg-indigo-100 px-4 py-2"
-              >
-                <p className="text-xs font-medium">{item.name}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* Packing List */}
         <section>
           <div className="mb-8 mt-16 ">
             <h4 className="text-md border-b  font-medium text-gray-800">
-              Labels
+              All Categories
             </h4>
           </div>
           <div className="flex flex-col gap-4">
@@ -120,6 +103,25 @@ export const PackingList = () => {
             <p className="text-sm text-gray-400">Add New Packing Item</p>
           </button>
         )}
+
+        <section>
+          <div className="mb-8 mt-24 ">
+            <h4 className="text-md border-b  font-medium text-gray-800">
+              Items to Buy
+            </h4>
+          </div>
+
+          <div className="mt-6 flex flex-col items-start justify-between gap-4">
+            {unboughtItems.map((item) => (
+              <div
+                key={item.id}
+                className="rounded-full bg-indigo-100 px-4 py-2"
+              >
+                <p className="text-xs font-medium">{item.name}</p>
+              </div>
+            ))}
+          </div>
+        </section>
       </section>
     </>
   );

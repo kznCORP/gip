@@ -27,8 +27,14 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
   const [itemTitle, setItemTitle] = useState("");
   const [itemUser, setItemUser] = useState("");
 
-  const [selectedCategory, setSelectedCategory] = useState(null);
   const [showCategories, setShowCategories] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedIcon, setSelectedIcon] = useState({
+    id: 26,
+    imageUrl:
+      "https://firebasestorage.googleapis.com/v0/b/whatarewedoing-7e3f5.appspot.com/o/icons%2Fsticky-note.svg?alt=media&token=996ca78d-25e1-44ee-9cd9-07ce6fbe2a66",
+    name: "sticky-note",
+  });
 
   const ctgColorRef = useRef("#0000FF");
 
@@ -79,10 +85,11 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
     e.preventDefault();
 
     const color = ctgColorRef.current.value;
+    const icon = selectedIcon.imageUrl;
 
     try {
       if (packingCategory !== "") {
-        await addPackingCategory({ packingCategory, color });
+        await addPackingCategory({ packingCategory, icon, color });
         setShowCategories(false);
       }
     } catch (e) {
@@ -210,7 +217,10 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
                   <div className="mt-2 flex w-full flex-wrap gap-6">
                     {ICON_DATA &&
                       ICON_DATA.map((icon, index) => (
-                        <button key={index}>
+                        <button
+                          key={index}
+                          onClick={() => setSelectedIcon(icon)}
+                        >
                           <div>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
@@ -227,13 +237,13 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
 
                 <div className="flex w-full gap-1">
                   <button
-                    onClick={addPackingCategoryHandler}
+                    onClick={() => setShowCategories(false)}
                     className="w-1/6 rounded-md border p-2 text-xs text-gray-500"
                   >
                     Cancel
                   </button>
                   <button
-                    onClick={() => setShowCategories(false)}
+                    onClick={addPackingCategoryHandler}
                     className="w-2/6 rounded-md bg-black p-2 text-xs  text-white"
                   >
                     Add Category

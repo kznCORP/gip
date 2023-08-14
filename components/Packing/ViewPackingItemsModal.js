@@ -40,13 +40,20 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
           <div className="flex w-full items-center">
             <div className="h-[50px] w-full rounded-full bg-gray-100">
               <div
-                className="flex h-[50px] w-full rounded-full"
+                className="flex h-[50px] w-full items-center rounded-full"
                 style={{
                   width: `${percentage(categoryItems)}%`,
                   maxWidth: "100%",
                   backgroundColor: `${packingItem.color}`,
                 }}
-              ></div>
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={packingItem.icon}
+                  alt={`${packingItem} icon`}
+                  className="mx-5 h-5 w-5 text-white"
+                />
+              </div>
             </div>
           </div>
         </div>
