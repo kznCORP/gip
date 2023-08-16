@@ -4,6 +4,7 @@ import { Trash2 } from "lucide-react";
 import PackingItem from "./PackingItem";
 
 import { percentage } from "@/lib/utils";
+import { Icons } from "../Icons";
 
 export const ViewPackingItemsModal = ({ packingItem }) => {
   const { deletePackingCategory, getPackedItemsForCategory } =
@@ -32,12 +33,7 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
             style={{ backgroundColor: `${packingItem.color}` }}
           >
             <div className="h-[25px] w-[25px]">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={packingItem.icon}
-                alt={`${packingItem} icon`}
-                className="h-full w-full"
-              />
+              <Icons iconName={packingItem.icon} />
             </div>
           </div>
 

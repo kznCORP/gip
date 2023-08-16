@@ -85,7 +85,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
     e.preventDefault();
 
     const color = ctgColorRef.current.value;
-    const icon = selectedIcon.imageUrl;
+    const icon = selectedIcon.name;
 
     try {
       if (packingCategory !== "") {
