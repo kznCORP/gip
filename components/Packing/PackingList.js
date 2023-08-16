@@ -64,13 +64,12 @@ export const PackingList = () => {
         </section>
 
         {/* Today's Progress */}
-        <section className="mb-24 mt-6 flex flex-col justify-start gap-4 ">
-          <h4 className="text-md border-b  font-medium text-gray-800">
-            Total Progress
-          </h4>
+        <section className="mb-24 mt-6 flex flex-col justify-start rounded-lg bg-white p-6 shadow">
+          <h4 className="text-md font-medium text-gray-800">Total Progress</h4>
+          <h4 className="text-md font-medium text-gray-300">All Items</h4>
           <div>
             <h3
-              className="flex items-start justify-start text-7xl font-bold"
+              className="mt-12 flex items-start justify-start text-7xl font-bold"
               style={{ letterSpacing: "-0.05em" }}
             >
               {`${totalPercentage.toFixed(0)}`}
@@ -82,7 +81,7 @@ export const PackingList = () => {
         {/* Packing List */}
         <section>
           <div className="mb-8 mt-16 ">
-            <h4 className="text-md border-b  font-medium text-gray-800">
+            <h4 className="text-md font-medium text-gray-800">
               All Categories
             </h4>
           </div>
@@ -106,9 +105,7 @@ export const PackingList = () => {
 
         <section>
           <div className="mb-8 mt-24 ">
-            <h4 className="text-md border-b  font-medium text-gray-800">
-              Items to Buy
-            </h4>
+            <h4 className="text-md font-medium text-gray-800">Items to Buy</h4>
           </div>
 
           <div className="mt-6 flex flex-col items-start justify-between gap-4">

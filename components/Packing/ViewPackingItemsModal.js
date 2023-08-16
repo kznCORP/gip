@@ -11,6 +11,8 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
 
   const categoryItems = getPackedItemsForCategory(packingItem.id);
 
+  console.log(categoryItems);
+
   const deletePackingCategoryHandler = async () => {
     try {
       await deletePackingCategory(packingItem.id);
@@ -21,46 +23,46 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
 
   return (
     <>
-      <section className="flex flex-col justify-center gap-2">
+      <section>
         {/* Packing Category */}
-        <div className="flex justify-between">
-          <h2 className="text-sm font-semibold">
-            {packingItem?.packingCategory}
-          </h2>
-          <button
-            type="button"
-            onClick={() => deletePackingCategoryHandler(packingItem.id)}
+        <div className="flex justify-between gap-6 rounded-lg bg-white p-5 shadow">
+          {/* Icon */}
+          <div
+            className="flex items-center justify-center rounded-lg p-4"
+            style={{ backgroundColor: `${packingItem.color}` }}
           >
-            <Trash2 className="h-4 w-4" strokeWidth={1} />
-          </button>
-        </div>
-
-        {/* Progress Bar */}
-        <div className=" flex flex-col items-start">
-          <div className="flex w-full items-center">
-            <div className="h-[50px] w-full rounded-full bg-gray-100">
-              <div
-                className="flex h-[50px] w-full items-center rounded-full"
-                style={{
-                  width: `${percentage(categoryItems)}%`,
-                  maxWidth: "100%",
-                  backgroundColor: `${packingItem.color}`,
-                }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={packingItem.icon}
-                  alt={`${packingItem} icon`}
-                  className="mx-5 h-5 w-5 text-white"
-                />
-              </div>
+            <div className="h-[25px] w-[25px]">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={packingItem.icon}
+                alt={`${packingItem} icon`}
+                className="h-full w-full"
+              />
             </div>
+          </div>
+
+          {/* Title */}
+          <div className="flex w-full flex-col items-start justify-center">
+            <h2 className="font-medium">{packingItem?.packingCategory}</h2>
+            <h2 className="text-xs text-gray-400">View All</h2>
+          </div>
+
+          {/* Items */}
+          <div className="flex items-center justify-center gap-4 p-5">
+            <p className="text-xs font-medium">{categoryItems}</p>
+
+            <button
+              type="button"
+              onClick={() => deletePackingCategoryHandler(packingItem.id)}
+            >
+              <Trash2 className="h-4 w-4" strokeWidth={1} />
+            </button>
           </div>
         </div>
 
         {/* Packing Items */}
         {/* <div>
-          {packingItem &&
+          {packingItem && 
             packingItem.items &&
             packingItem.items.map((item) => (
               <PackingItem category={packingItem} item={item} key={item.id} />
@@ -70,9 +72,3 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
     </>
   );
 };
-
-{
-  /* <div>
-  <p className="text-xs text-gray-400">{`${categoryItems}`}</p>
-</div> */
-}
