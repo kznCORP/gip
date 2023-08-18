@@ -83,16 +83,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section>
-          <div className="my-5 flex items-center justify-between rounded-lg bg-violet-50 p-5">
-            <p className="text-xs leading-snug">
-              * Displays all the potential events and activites that you can
-              take + relative photos and dynamic links that navigate you.
-            </p>
-            <XCircle className="h-5 w-5 flex-shrink-0" />
-          </div>
-        </section>
-
         {/* Date Filters */}
         <section
           className="mt-8 flex items-center gap-3 overflow-x-auto p-0.5"

@@ -1,7 +1,5 @@
 "use client";
 
-import { ICON_DATA } from "@/lib/icons";
-
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AuthUserContext } from "@/lib/authContext";
@@ -53,37 +51,34 @@ export const PackingList = () => {
           </div>
         </section>
 
-        <section>
-          <div className="my-5 flex items-center justify-between rounded-lg bg-violet-50 p-5">
-            <p className="text-xs leading-snug">
-              Displays items needed to be brought and bought throughout the
-              course of the events and activities planned.
-            </p>
-            <XCircle className="h-5 w-5 flex-shrink-0" />
-          </div>
-        </section>
-
         {/* Today's Progress */}
-        <section className="mb-24 mt-6 flex flex-col justify-start rounded-lg bg-white p-6 shadow">
-          <h4 className="text-md font-medium text-gray-800">Total Progress</h4>
-          <h4 className="text-md font-medium text-gray-300">All Items</h4>
-          <div>
-            <h3
-              className="mt-12 flex items-start justify-start text-7xl font-bold"
-              style={{ letterSpacing: "-0.05em" }}
-            >
-              {`${totalPercentage.toFixed(0)}`}
-              <span className="text-3xl">%</span>
-            </h3>
+        <section className="mb-8 mt-6 flex flex-col justify-start rounded-lg bg-white p-6 shadow">
+          <h4 className="text-sm font-medium text-gray-800">Total Progress</h4>
+          <h4 className="text-sm font-medium text-gray-300">All Items</h4>
+
+          <div className="mb-4 mt-8 grid grid-cols-4  gap-1">
+            <div className="col-span-1 h-16 bg-gray-100"></div>
+            <div className="col-span-1 h-16 bg-gray-100"></div>
+            <div className="col-span-1 h-16 bg-gray-100"></div>
+            <div className="col-span-1 h-16 bg-gray-100"></div>
+            <div className="col-span-1 h-16 bg-gray-100"></div>
+            <div className="col-span-1 h-16 bg-gray-100"></div>
+            <div className="col-span-1 h-16 bg-gray-100"></div>
+            <div className="col-span-1 h-16 bg-gray-100"></div>
           </div>
         </section>
 
         {/* Packing List */}
         <section>
-          <div className="mb-8 mt-16 ">
-            <h4 className="text-md font-medium text-gray-800">
-              All Categories
-            </h4>
+          <div className="mb-8 mt-16">
+            <div className="flex items-center justify-between">
+              <h4 className="text-sm font-medium text-gray-700">
+                All Categories
+              </h4>
+              <h4 className="text-sm font-medium text-gray-300">
+                Packing List
+              </h4>
+            </div>
           </div>
           <div className="flex flex-col gap-4">
             {packingItems.map((item, index) => (
@@ -104,8 +99,8 @@ export const PackingList = () => {
         )}
 
         <section>
-          <div className="mb-8 mt-24 ">
-            <h4 className="text-md font-medium text-gray-800">Items to Buy</h4>
+          <div className="mb-8 mt-16 ">
+            <h4 className="text-sm font-medium text-gray-700">Items to Buy</h4>
           </div>
 
           <div className="mt-6 flex flex-col items-start justify-between gap-4">
