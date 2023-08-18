@@ -35,70 +35,70 @@ import {
   Zap,
 } from "lucide-react";
 
-export const Icons = ({ iconName }) => {
+export const Icons = ({ iconName, iconColor }) => {
   switch (iconName) {
     case "beef":
-      return <Beef color="white" />;
+      return <Beef color={iconColor} />;
     case "bike":
-      return <Bike color="white" />;
+      return <Bike color={iconColor} />;
     case "bus":
-      return <Bus color="white" />;
+      return <Bus color={iconColor} />;
     case "camera":
-      return <Camera color="white" />;
+      return <Camera color={iconColor} />;
     case "car":
-      return <Car color="white" />;
+      return <Car color={iconColor} />;
     case "circle-dollar-sign":
-      return <CircleDollarSign color="white" />;
+      return <CircleDollarSign color={iconColor} />;
     case "egg-fried":
-      return <EggFried color="white" />;
+      return <EggFried color={iconColor} />;
     case "heart-pulse":
-      return <HeartPulse color="white" />;
+      return <HeartPulse color={iconColor} />;
     case "home":
-      return <Home color="white" />;
+      return <Home color={iconColor} />;
     case "landmark":
-      return <Landmark color="white" />;
+      return <Landmark color={iconColor} />;
     case "moon":
-      return <Moon color="white" />;
+      return <Moon color={iconColor} />;
     case "mountain":
-      return <Mountain color="white" />;
+      return <Mountain color={iconColor} />;
     case "heart":
-      return <Heart color="white" />;
+      return <Heart color={iconColor} />;
     case "palmtree":
-      return <Palmtree color="white" />;
+      return <Palmtree color={iconColor} />;
     case "pill":
-      return <Pill color="white" />;
+      return <Pill color={iconColor} />;
     case "pizza":
-      return <Pizza color="white" />;
+      return <Pizza color={iconColor} />;
     case "plane":
-      return <Plane color="white" />;
+      return <Plane color={iconColor} />;
     case "sailboat":
-      return <Sailboat color="white" />;
+      return <Sailboat color={iconColor} />;
     case "shirt":
-      return <Shirt color="white" />;
+      return <Shirt color={iconColor} />;
     case "shopping-bag":
-      return <ShoppingBag color="white" />;
+      return <ShoppingBag color={iconColor} />;
     case "snowflake":
-      return <Snowflake color="white" />;
+      return <Snowflake color={iconColor} />;
     case "soup":
-      return <Soup color="white" />;
+      return <Soup color={iconColor} />;
     case "sparkles":
-      return <Sparkles color="white" />;
+      return <Sparkles color={iconColor} />;
     case "sticky-note":
-      return <StickyNote color="white" />;
+      return <StickyNote color={iconColor} />;
     case "sun":
-      return <Sun color="white" />;
+      return <Sun color={iconColor} />;
     case "tag":
-      return <Tag color="white" />;
+      return <Tag color={iconColor} />;
     case "train":
-      return <Train color="white" />;
+      return <Train color={iconColor} />;
     case "utensils":
-      return <Utensils color="white" />;
+      return <Utensils color={iconColor} />;
     case "volume-2":
-      return <Volume2 color="white" />;
+      return <Volume2 color={iconColor} />;
     case "wallet":
-      return <Wallet color="white" />;
+      return <Wallet color={iconColor} />;
     case "zap":
-      return <Zap color="white" />;
+      return <Zap color={iconColor} />;
     default:
       return null;
   }

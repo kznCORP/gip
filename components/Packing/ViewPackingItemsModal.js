@@ -1,18 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { PackingContext } from "@/lib/packingContext";
 import { Trash2 } from "lucide-react";
 import PackingItem from "./PackingItem";
 
-import { percentage } from "@/lib/utils";
 import { Icons } from "../Icons";
 
 export const ViewPackingItemsModal = ({ packingItem }) => {
-  const { deletePackingCategory, getPackedItemsForCategory } =
-    useContext(PackingContext);
-
-  const categoryItems = getPackedItemsForCategory(packingItem.id);
-
-  console.log(categoryItems);
+  const { deletePackingCategory } = useContext(PackingContext);
 
   const deletePackingCategoryHandler = async () => {
     try {
@@ -33,7 +27,7 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
             style={{ backgroundColor: `${packingItem.color}` }}
           >
             <div className="h-[25px] w-[25px]">
-              <Icons iconName={packingItem.icon} />
+              <Icons iconName={packingItem.icon} iconColor="white" />
             </div>
           </div>
 
@@ -45,8 +39,6 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
 
           {/* Items */}
           <div className="flex items-center justify-center gap-4 p-5">
-            <p className="text-xs font-medium">{categoryItems}</p>
-
             <button
               type="button"
               onClick={() => deletePackingCategoryHandler(packingItem.id)}

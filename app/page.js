@@ -38,13 +38,12 @@ export default function Home() {
    *
    *  To-Do:
    *
+   *  [ ] Finish Packing List Rework
+   *    [ ] Progress Bar for each Icon
+   *    [ ] Fix Icons disappearing for every data entry.
    *
-   *  Add to Firebase DB
-   *  1. User chose icon (plane) - update state
-   *  2. Close dropdown menu option
-   *  3. Display chosen icon on input form
-   *  4. Get icon URL from Storage
-   *  5. Submit chosen icon to db; ExpenseItem schema
+   *  [ ] Finish Expenses Rework
+   *    [ ] Remove Chart.js, display makeshift Bar graph.
    *
    *
    *  [ ] Add media breakpoints for transitioning to Tablet View.

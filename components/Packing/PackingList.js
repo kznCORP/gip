@@ -9,6 +9,7 @@ import { AddPackItemModal } from "@/components/Packing/AddPackItemModal";
 import { ViewPackingItemsModal } from "@/components/Packing/ViewPackingItemsModal";
 
 import { PlusCircle, XCircle } from "lucide-react";
+import ProgressIcons from "./ProgressIcons";
 
 export const PackingList = () => {
   const router = useRouter();
@@ -51,20 +52,25 @@ export const PackingList = () => {
           </div>
         </section>
 
+        <section>
+          <div className="my-5 flex items-center justify-between rounded-lg bg-violet-50 p-5">
+            <p className="text-xs leading-snug">
+              Displays items needed to be brought and bought throughout the
+              course of the events and activities planned.
+            </p>
+            <XCircle className="h-5 w-5 flex-shrink-0" />
+          </div>
+        </section>
+
         {/* Today's Progress */}
         <section className="mb-8 mt-6 flex flex-col justify-start rounded-lg bg-white p-6 shadow">
           <h4 className="text-sm font-medium text-gray-800">Total Progress</h4>
           <h4 className="text-sm font-medium text-gray-300">All Items</h4>
 
-          <div className="mb-4 mt-8 grid grid-cols-4  gap-1">
-            <div className="col-span-1 h-16 bg-gray-100"></div>
-            <div className="col-span-1 h-16 bg-gray-100"></div>
-            <div className="col-span-1 h-16 bg-gray-100"></div>
-            <div className="col-span-1 h-16 bg-gray-100"></div>
-            <div className="col-span-1 h-16 bg-gray-100"></div>
-            <div className="col-span-1 h-16 bg-gray-100"></div>
-            <div className="col-span-1 h-16 bg-gray-100"></div>
-            <div className="col-span-1 h-16 bg-gray-100"></div>
+          <div className="mb-4 mt-8 grid grid-cols-4">
+            {packingItems.map((item, index) => (
+              <ProgressIcons item={item} index={index} key={index} />
+            ))}
           </div>
         </section>
 
@@ -72,9 +78,7 @@ export const PackingList = () => {
         <section>
           <div className="mb-8 mt-16">
             <div className="flex items-center justify-between">
-              <h4 className="text-sm font-medium text-gray-700">
-                All Categories
-              </h4>
+              <h4 className="text-sm font-medium text-gray-700">Categories</h4>
               <h4 className="text-sm font-medium text-gray-300">
                 Packing List
               </h4>
