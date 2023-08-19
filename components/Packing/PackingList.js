@@ -38,7 +38,7 @@ export const PackingList = () => {
         {/* Add Packing Item */}
         <section className="sticky top-0 z-10 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
-            <h2 className="text-3xl font-medium">Packing List</h2>
+            <h2 className="text-xl font-medium">Packing List</h2>
             <div className="flex gap-4">
               {/* Modal Toggle */}
               <button
@@ -52,7 +52,7 @@ export const PackingList = () => {
           </div>
         </section>
 
-        <section>
+        {/* <section>
           <div className="my-5 flex items-center justify-between rounded-lg bg-violet-50 p-5">
             <p className="text-xs leading-snug">
               Displays items needed to be brought and bought throughout the
@@ -60,16 +60,21 @@ export const PackingList = () => {
             </p>
             <XCircle className="h-5 w-5 flex-shrink-0" />
           </div>
-        </section>
+        </section> */}
 
         {/* Today's Progress */}
-        <section className="mb-8 mt-6 flex flex-col justify-start rounded-lg bg-white p-6 shadow">
+        <section className="mb-8 mt-6 flex flex-col justify-start rounded-lg bg-white px-6 py-8 ">
           <h4 className="text-sm font-medium text-gray-800">Total Progress</h4>
           <h4 className="text-sm font-medium text-gray-300">All Items</h4>
 
           <div className="mb-4 mt-8 grid grid-cols-4">
             {packingItems.map((item, index) => (
-              <ProgressIcons item={item} index={index} key={index} />
+              <ProgressIcons
+                item={item}
+                index={index}
+                key={index}
+                categoriesLength={packingItems.length}
+              />
             ))}
           </div>
         </section>
@@ -95,10 +100,10 @@ export const PackingList = () => {
           <button
             type="button"
             onClick={() => setShowAddPackListModal(true)}
-            className="flex w-full items-center justify-center gap-4 rounded-xl border border-dashed border-gray-200 p-10"
+            className="flex flex-col items-center justify-center gap-2  rounded-lg bg-white py-8"
           >
-            <PlusCircle className="h-4 w-4 text-gray-400" strokeWidth={2} />
-            <p className="text-sm text-gray-400">Add New Packing Item</p>
+            <PlusCircle className="h-5 w-5" strokeWidth={2} />
+            <p className="text-sm font-medium">Add Item</p>
           </button>
         )}
 

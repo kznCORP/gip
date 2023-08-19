@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { PackingContext } from "@/lib/packingContext";
-import { Trash2 } from "lucide-react";
+import { ChevronDown, Trash2 } from "lucide-react";
 import PackingItem from "./PackingItem";
 
 import { Icons } from "../Icons";
@@ -20,10 +20,10 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
     <>
       <section>
         {/* Packing Category */}
-        <div className="flex justify-between gap-6 rounded-lg bg-white p-5 shadow">
+        <div className="flex items-center justify-between gap-6 rounded-lg bg-white p-5">
           {/* Icon */}
           <div
-            className="flex items-center justify-center rounded-lg p-4"
+            className="flex h-1/2 items-center justify-center rounded-lg p-4"
             style={{ backgroundColor: `${packingItem.color}` }}
           >
             <div className="h-[25px] w-[25px]">
@@ -39,6 +39,9 @@ export const ViewPackingItemsModal = ({ packingItem }) => {
 
           {/* Items */}
           <div className="flex items-center justify-center gap-4 p-5">
+            <button type="button">
+              <ChevronDown className="h-5 w-5" strokeWidth={2} />
+            </button>
             <button
               type="button"
               onClick={() => deletePackingCategoryHandler(packingItem.id)}

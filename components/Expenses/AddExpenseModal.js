@@ -1,8 +1,14 @@
+"use client";
+
 import { useRef, useContext, useState } from "react";
 import { Modal } from "../Modal";
 import { FinanceContext } from "@/lib/financeContext";
-import { Button } from "../ui/button";
 import { v4 as uuidv4 } from "uuid";
+
+import { Button } from "../ui/button";
+import { cn } from "@/lib/utils";
+
+import { ICON_DATA } from "@/lib/icons";
 
 import {
   BadgePlus,
@@ -13,7 +19,6 @@ import {
   X,
   PlusCircle,
 } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 const colorOptions = [
   { value: "#f87171" },
@@ -26,9 +31,10 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
   const { expenses, addExpenseItem, addExpenseCategory } =
     useContext(FinanceContext);
 
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [showCategories, setShowCategories] = useState(false);
   const [isSubmitClicked, setIsSubmitClicked] = useState(false);
+  const [showCategories, setShowCategories] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedIcon, setSelectedIcon] = useState({ name: "sticky-note" });
 
   const [expenseAmount, setExpenseAmount] = useState("");
   const [expenseName, setExpenseName] = useState("");
@@ -93,6 +99,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
 
     const title = ctgNameRef.current.value;
     const color = ctgColorRef.current.value;
+    const icon = selectedIcon.name;
 
     try {
       // Check if the category already exists
@@ -106,7 +113,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
 
       if (showCategories) {
         setShowCategories(false);
-        await addExpenseCategory({ title, color, total: 0 });
+        await addExpenseCategory({ title, color, icon, total: 0 });
       }
     } catch (e) {
       console.log("Error in Adding Category in Modal", e);
@@ -187,14 +194,18 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
             </button>
 
             {showCategories && (
-              <div className="flex w-full flex-col items-start gap-2 rounded-lg border p-4 text-sm ">
-                <div className="flex w-full items-center gap-2">
-                  <div className="flex w-full items-center gap-4 rounded-lg border p-2 text-sm ">
-                    <Tags className="h-4 w-4 flex-shrink-0" />
+              <div className="flex w-full flex-col items-start gap-6 rounded-lg border p-4 text-sm ">
+                <div className="flex w-full flex-col">
+                  <label className="text-xs font-medium">Name</label>
+                  <div className="mt-2 w-full rounded-lg border p-2 text-sm ">
                     <input
                       type="text"
-                      placeholder="Add..."
+                      name="name"
                       ref={ctgNameRef}
+                      placeholder="e.g Clothes, Technology, Utilities..."
+                      id="name"
+                      required
+                      className="w-full text-xs"
                       style={{
                         textDecoration: "unset",
                         border: "unset",
@@ -204,41 +215,75 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
                       maxLength="50"
                     />
                   </div>
-
-                  <Button onClick={addCategoryHandler}>
-                    <Plus className="h-5 w-5 flex-shrink-0" />
-                  </Button>
-                  <Button onClick={() => setShowCategories(false)}>
-                    <X className="h-5 w-5 flex-shrink-0" />
-                  </Button>
                 </div>
 
-                <div className="flex gap-1">
-                  {colorOptions.map((color) => (
+                <div>
+                  <label className="text-xs font-medium">Color</label>
+                  <div className="mt-2 flex gap-2 ">
+                    {colorOptions.map((color) => (
+                      <button
+                        key={color.value}
+                        type="button"
+                        onClick={() => setColorValue(color.value)}
+                      >
+                        <div
+                          className="h-5 w-5 rounded-full"
+                          style={{ backgroundColor: color.value }}
+                        ></div>
+                      </button>
+                    ))}
                     <button
-                      key={color.value}
                       type="button"
-                      onClick={() => setColorValue(color.value)}
+                      onClick={() => ctgColorRef.current.click()}
                     >
-                      <div
-                        className="h-5 w-5 rounded-full"
-                        style={{ backgroundColor: color.value }}
-                      ></div>
+                      <PlusCircle className="h-5 w-5 hover:cursor-pointer" />
                     </button>
-                  ))}
-                  <button
-                    type="button"
-                    onClick={() => ctgColorRef.current.click()}
-                  >
-                    <PlusCircle className="h-5 w-5 hover:cursor-pointer" />
-                  </button>
-                  <div className="relative">
-                    <input
-                      type="color"
-                      ref={ctgColorRef}
-                      className="absolute left-0 top-0 h-5 w-5 opacity-0"
-                    />
+                    <div className="relative">
+                      <input
+                        type="color"
+                        ref={ctgColorRef}
+                        className="absolute left-0 top-0 h-5 w-5 opacity-0"
+                      />
+                    </div>
                   </div>
+                </div>
+
+                <div>
+                  <label className="text-xs font-medium">Icons</label>
+                  <div className="mt-2 flex w-full flex-wrap gap-6">
+                    {ICON_DATA &&
+                      ICON_DATA.map((icon, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setSelectedIcon(icon)}
+                        >
+                          <div>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={icon.imageUrl}
+                              alt={`${icon.name} image`}
+                              height={20}
+                              width={20}
+                            />
+                          </div>
+                        </button>
+                      ))}
+                  </div>
+                </div>
+
+                <div className="flex w-full gap-1">
+                  <button
+                    onClick={() => setShowCategories(false)}
+                    className="w-1/6 rounded-md border p-2 text-xs text-gray-500"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={addCategoryHandler}
+                    className="w-2/6 rounded-md bg-black p-2 text-xs  text-white"
+                  >
+                    Add Category
+                  </button>
                 </div>
               </div>
             )}

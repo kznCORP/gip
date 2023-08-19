@@ -29,12 +29,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
 
   const [showCategories, setShowCategories] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedIcon, setSelectedIcon] = useState({
-    id: 26,
-    imageUrl:
-      "https://firebasestorage.googleapis.com/v0/b/whatarewedoing-7e3f5.appspot.com/o/icons%2Fsticky-note.svg?alt=media&token=996ca78d-25e1-44ee-9cd9-07ce6fbe2a66",
-    name: "sticky-note",
-  });
+  const [selectedIcon, setSelectedIcon] = useState({ name: "sticky-note" });
 
   const ctgColorRef = useRef("#0000FF");
 
@@ -60,6 +55,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
 
     const newItem = {
       packingCategory: packingItem.packingCategory,
+      icon: packingItem.icon,
       items: [
         ...packingItem.items,
         {
