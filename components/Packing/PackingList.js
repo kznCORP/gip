@@ -83,8 +83,10 @@ export const PackingList = () => {
         <section>
           <div className="mb-8 mt-16">
             <div className="flex items-center justify-between">
-              <h4 className="text-sm font-medium text-gray-700">Categories</h4>
-              <h4 className="text-sm font-medium text-gray-300">
+              <h4 className="text-xs font-semibold uppercase text-gray-400">
+                Categories
+              </h4>
+              <h4 className="text-xs font-medium uppercase text-gray-300">
                 Packing List
               </h4>
             </div>
@@ -100,7 +102,7 @@ export const PackingList = () => {
           <button
             type="button"
             onClick={() => setShowAddPackListModal(true)}
-            className="flex flex-col items-center justify-center gap-2  rounded-lg bg-white py-8"
+            className="flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-white py-8"
           >
             <PlusCircle className="h-5 w-5" strokeWidth={2} />
             <p className="text-sm font-medium">Add Item</p>

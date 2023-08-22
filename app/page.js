@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { AuthUserContext } from "@/lib/authContext";
 import { ScheduleContext } from "@/lib/scheduleContext";
 
+import Header from "@/components/Header";
 import { Navigation } from "@/components/navigation.js";
 import { Expenses } from "@/components/Expenses/Expenses";
 import { PackingList } from "@/components/Packing/PackingList";
@@ -12,7 +13,8 @@ import { ScheduleItem } from "@/components/Schedule/ScheduleItem";
 
 import { AddScheduleModal } from "@/components/Schedule/AddScheduleModal";
 import { PlusCircle, XCircle } from "lucide-react";
-import Header from "@/components/Header";
+
+import { format } from "date-fns";
 
 export default function Home() {
   const router = useRouter();
@@ -24,9 +26,13 @@ export default function Home() {
     isFilterApplied,
     applyFilter,
     setIsFilterApplied,
+    selectedDate,
   } = useContext(ScheduleContext);
 
   const [showAddScheduleModal, setShowAddScheduleModal] = useState(false);
+
+  const [today, setToday] = useState(new Date());
+  const formattedToday = format(today, "MMMM dd");
 
   useEffect(() => {
     if (!user && !loading) {
@@ -40,7 +46,7 @@ export default function Home() {
    *
    *  [ ] Finish Packing List Rework
    *    [ ] Progress Bar for each Icon
-   *    [ ] Fix Icons disappearing for every data entry.
+   *    [x] Fix Icons disappearing for every data entry.
    *
    *  [ ] Finish Expenses Rework
    *    [ ] Remove Chart.js, display makeshift Bar graph.
@@ -88,7 +94,7 @@ export default function Home() {
           type="button"
         >
           <button onClick={() => setIsFilterApplied(false)}>
-            <div className="flex h-[75px]  items-center justify-center rounded-xl border border-gray-100 px-5 shadow">
+            <div className="flex h-[75px] items-center justify-center rounded-xl bg-white px-5">
               <p className="text-sm font-medium ">All</p>
             </div>
           </button>
@@ -102,8 +108,10 @@ export default function Home() {
                   className=""
                   onClick={() => applyFilter(date)}
                 >
-                  <div className="flex h-[75px] flex-col items-center justify-between rounded-xl border border-gray-100 px-5 py-3 shadow">
-                    <p className="text-xs font-medium">{date.month}</p>
+                  <div className="flex h-[75px] flex-col items-center justify-between rounded-xl bg-white px-5 py-3">
+                    <p className="text-xs font-medium">
+                      {date.month.substring(0, 3)}
+                    </p>
                     <p className="text-sm font-semibold uppercase ">
                       {date.day}
                     </p>
@@ -122,13 +130,54 @@ export default function Home() {
           </button>
         </section>
 
+        {/* Calendar */}
+        <section>
+          <div className="mt-16">
+            {isFilterApplied ? (
+              <div>
+                <h2 className="text-4xl font-semibold text-stone-700">
+                  {selectedDate.dateName},
+                </h2>
+                <h2 className="text-4xl font-semibold text-blue-600">
+                  {selectedDate.month} {selectedDate.day}
+                </h2>
+              </div>
+            ) : (
+              <div>
+                <h2 className="text-4xl font-semibold text-stone-700">
+                  Today,
+                </h2>
+                <h2 className="text-4xl font-semibold text-blue-600">
+                  {formattedToday}
+                </h2>
+              </div>
+            )}
+          </div>
+        </section>
+
         {/* List of Schedules */}
         <section>
-          <div className="mb-10 mt-10 flex justify-between ">
-            <h4 className="text-lg font-medium  text-gray-800">
-              All activities
-            </h4>
+          <div className="mb-8 mt-16">
+            <div className="flex items-center justify-between">
+              <h4 className="text-xs font-semibold uppercase text-gray-400">
+                Activities
+              </h4>
+              <h4 className="text-xs font-medium uppercase text-gray-300">
+                Schedule
+              </h4>
+            </div>
           </div>
+
+          {schedules.length == 0 && filteredSchedules.length == 0 && (
+            <button
+              type="button"
+              onClick={() => setShowAddScheduleModal(true)}
+              className="flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-white py-8"
+            >
+              <PlusCircle className="h-5 w-5" strokeWidth={2} />
+              <p className="text-sm font-medium">Add Item</p>
+            </button>
+          )}
 
           {isFilterApplied
             ? filteredSchedules.map((item, index) => (

@@ -3,6 +3,17 @@
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+import { Bar } from "react-chartjs-2";
+
 import { PlusCircle, XCircle } from "lucide-react";
 
 import { ExpenseCategoryItem } from "@/components/Expenses/ExpenseCategoryItem";
@@ -10,6 +21,11 @@ import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
 
 import { FinanceContext } from "@/lib/financeContext";
 import { AuthUserContext } from "@/lib/authContext";
+
+ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
+
+const DATA_COUNT = 7;
+const NUMBER_CFG = { count: DATA_COUNT, min: -100, max: 100 };
 
 export const Expenses = () => {
   const router = useRouter();
@@ -78,8 +94,12 @@ export const Expenses = () => {
         <section>
           <div className="mb-8 mt-16">
             <div className="flex items-center justify-between">
-              <h4 className="text-sm font-medium text-gray-700">Categories</h4>
-              <h4 className="text-sm font-medium text-gray-300">Expenses</h4>
+              <h4 className="text-xs font-semibold uppercase text-gray-400">
+                Categories
+              </h4>
+              <h4 className="text-xs font-medium uppercase text-gray-300">
+                Expenses
+              </h4>
             </div>
           </div>
 
@@ -89,7 +109,7 @@ export const Expenses = () => {
               <button
                 type="button"
                 onClick={() => setShowAddExpenseModal(true)}
-                className="flex flex-col items-center justify-center gap-2  rounded-lg bg-white py-8"
+                className="flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-white py-8"
               >
                 <PlusCircle className="h-5 w-5" strokeWidth={2} />
                 <p className="text-sm font-medium ">Add Expense</p>

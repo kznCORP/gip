@@ -3,14 +3,11 @@
 import React, { useState } from "react";
 import { ViewScheduleModal } from "./ViewScheduleModal";
 import { timeFormatter } from "@/lib/utils";
+import { Clock, MoveRight } from "lucide-react";
 
 export const ScheduleItem = ({ schedule, position }) => {
   const [showScheduleModal, setShowScheduleModal] = useState(false);
   const [selectedActivity, setSelectedActivity] = useState(null);
-
-  const firstItem = position === 0;
-  const secondItem = position === 1;
-  const otherItems = position > 1;
 
   return (
     <>
@@ -23,85 +20,54 @@ export const ScheduleItem = ({ schedule, position }) => {
 
       {schedule.activities &&
         schedule.activities.map((activity) => (
-          <section key={activity.id} className="flex gap-5">
-            {/* Connector */}
-            <div
-              className={`flex flex-col ${
-                firstItem
-                  ? "justify-end"
-                  : secondItem
-                  ? "justify-start"
-                  : "justify-center"
-              }`}
-            >
-              {/* Other Items - Top Border Gray */}
-              {otherItems && (
-                <div className="h-1/2 w-1/2 border-r border-dashed border-gray-200"></div>
-              )}
-              {/* Second Item - Bottom Border Blue */}
-              {secondItem && !otherItems && (
-                <div className="h-1/2 w-1/2 border-r border-dashed border-blue-200"></div>
-              )}
-              {/* Dot */}
-              <div
-                className={`my-4 h-2 w-2 flex-shrink-0 rounded-xl ${
-                  firstItem ? "bg-blue-300" : "bg-gray-200"
-                }`}
-              />
-              {/* First Item - Bottom Border Blue */}
-              {firstItem && !otherItems && (
-                <div className="h-1/2 w-1/2 border-r border-dashed border-blue-200"></div>
-              )}
-              {/* Second Item - Top Border Blue */}
-              {secondItem && !otherItems && (
-                <div className="h-1/2 w-1/2 border-r border-dashed border-gray-200"></div>
-              )}
-              {/* Other Items Item - Bottom Border Gray */}
-              {otherItems && (
-                <div className="h-1/2 w-1/2 border-r border-dashed border-gray-200"></div>
-              )}
-            </div>
-
+          <section key={activity.id} className="flex gap-4">
             <button
               onClick={() => {
                 setShowScheduleModal(true);
                 setSelectedActivity(activity);
               }}
-              className="mb-10 w-full rounded-xl"
+              className="mb-4 w-full rounded-xl"
             >
-              <div className="flex flex-col gap-2">
+              <div className="flex rounded-lg bg-white p-5">
                 {/* Image Wrapper */}
-                <div>
+                <div className="h-[125px] w-[125px] flex-shrink-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={activity.selectedLocation?.photoUrl}
                     alt={`${activity.selectedLocation?.name} Google Review image.`}
-                    className="w-full rounded-lg object-cover shadow-md"
-                    width={200}
-                    height={150}
-                    style={{ height: "200px", width: "100%" }}
+                    className="h-full w-full rounded-xl object-cover"
+                    width={100}
+                    height={100}
                     loading="lazy"
                   />
                 </div>
 
                 {/* Schedule Details */}
-                <div>
-                  <div className="flex flex-col items-start gap-1">
-                    <h2 className="text-lg font-semibold">{activity.title}</h2>
-
-                    <p className="text-xs font-medium text-blue-600">
-                      {`${activity.selectedLocation?.address.substring(
-                        0,
-                        50
-                      )} ...`}
-                    </p>
-
-                    <p className="text-xs font-medium text-black">
+                <div className="my-2 ml-8 inline-flex w-full flex-col items-start justify-between">
+                  <div className="flex items-center gap-1">
+                    <Clock
+                      className="h-3 w-3 flex-shrink-0 text-blue-600"
+                      strokeWidth={2.75}
+                    />
+                    <p className="h-4 text-xs font-semibold tracking-tighter text-blue-600">
                       {timeFormatter(schedule.selectedDates.from)}
                     </p>
-
-                    <p className="text-xs text-gray-400">More</p>
                   </div>
+
+                  <div className="flex flex-col items-start justify-center">
+                    <h2 className="text-lg font-semibold">{activity.title}</h2>
+                    <p className="text-xs text-gray-400">
+                      {`${activity.selectedLocation?.address.substring(
+                        0,
+                        40
+                      )}...`}
+                    </p>
+                  </div>
+
+                  <MoveRight
+                    className="h-5 w-5 text-gray-400"
+                    strokeWidth={1.5}
+                  />
                 </div>
               </div>
             </button>
