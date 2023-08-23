@@ -69,6 +69,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
     const newExpense = {
       color: expense.color,
       title: expense.title,
+      icon: expense.icon,
       total: expense.total + +expenseAmount,
       items: [
         ...expense.items,

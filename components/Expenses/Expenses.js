@@ -21,11 +21,12 @@ import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
 
 import { FinanceContext } from "@/lib/financeContext";
 import { AuthUserContext } from "@/lib/authContext";
+import { CHART_OPTIONS, currencyFormatter } from "@/lib/utils";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
-
-const DATA_COUNT = 7;
-const NUMBER_CFG = { count: DATA_COUNT, min: -100, max: 100 };
+ChartJS.defaults.font.family = "Arial";
+ChartJS.defaults.font.weight = 700;
+ChartJS.defaults.font.size = 13;
 
 export const Expenses = () => {
   const router = useRouter();
@@ -34,6 +35,22 @@ export const Expenses = () => {
 
   const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [balance, setBalance] = useState(0);
+
+  const lineChartData = {
+    labels: expenses.map((expense) => expense.title),
+    datasets: [
+      {
+        label: "Total: ",
+        data: expenses.map((expense) => expense.total),
+        backgroundColor: expenses.map((expense) => expense.color),
+        base: 5,
+        borderRadius: 5,
+        barThickness: 75,
+        barPercentage: 1,
+        categoryPercentage: 1,
+      },
+    ],
+  };
 
   useEffect(() => {
     if (!user && !loading) {
@@ -84,10 +101,24 @@ export const Expenses = () => {
         </section> */}
 
         <section className="mb-8 mt-6 flex flex-col justify-start rounded-lg bg-white p-6">
-          <h4 className="text-sm font-medium text-gray-800">Total Spendings</h4>
-          <h4 className="text-sm font-medium text-gray-300">All Expenses</h4>
+          <div>
+            <h4 className="text-sm font-medium text-gray-800">
+              Total Spendings
+            </h4>
+            <h4 className="text-sm font-medium text-gray-300">All Expenses</h4>
+          </div>
+
+          <div className="mt-6">
+            <p className="text-sm font-medium text-gray-800">{currencyFormatter(balance)}</p>
+          </div>
 
           {/* CREATE A LINE BAR GRAPH */}
+          <Bar
+            data={lineChartData}
+            options={CHART_OPTIONS}
+            className="mt-12 border-b border-l"
+            height={125}
+          />
         </section>
 
         {/* List of Expenses */}
