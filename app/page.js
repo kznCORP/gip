@@ -48,10 +48,6 @@ export default function Home() {
    *    [ ] Progress Bar for each Icon
    *    [x] Fix Icons disappearing for every data entry.
    *
-   *  [ ] Finish Expenses Rework
-   *    [ ] Remove Chart.js, display makeshift Bar graph.
-   *
-   *
    *  [ ] Add media breakpoints for transitioning to Tablet View.
    *    [ ] Packing List
    *    [ ] Expenses

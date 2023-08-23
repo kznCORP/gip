@@ -109,10 +109,11 @@ export const Expenses = () => {
           </div>
 
           <div className="mt-6">
-            <p className="text-sm font-medium text-gray-800">{currencyFormatter(balance)}</p>
+            <p className="text-sm font-medium text-gray-800">
+              {currencyFormatter(balance)}
+            </p>
           </div>
 
-          {/* CREATE A LINE BAR GRAPH */}
           <Bar
             data={lineChartData}
             options={CHART_OPTIONS}

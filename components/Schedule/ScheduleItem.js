@@ -56,7 +56,7 @@ export const ScheduleItem = ({ schedule, position }) => {
 
                   <div className="flex flex-col items-start justify-center">
                     <h2 className="text-lg font-semibold">{activity.title}</h2>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-start text-xs text-gray-400">
                       {`${activity.selectedLocation?.address.substring(
                         0,
                         40

@@ -33,7 +33,7 @@ export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
-      <article className="max-h-[calc(100vh-8rem)]">
+      <article className="mt-8 border-2 border-red-500">
         <div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
