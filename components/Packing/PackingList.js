@@ -6,7 +6,7 @@ import { AuthUserContext } from "@/lib/authContext";
 
 import { PackingContext } from "@/lib/packingContext";
 import { AddPackItemModal } from "@/components/Packing/AddPackItemModal";
-import { ViewPackingItemsModal } from "@/components/Packing/ViewPackingItemsModal";
+import { PackingCategoryItem } from "@/components/Packing/PackingCategoryItem";
 
 import { PlusCircle, XCircle } from "lucide-react";
 import ProgressIcons from "./ProgressIcons";
@@ -17,7 +17,7 @@ export const PackingList = () => {
   const { packingItems, getTotalPackedPercentage, getUnboughtItems } =
     useContext(PackingContext);
 
-  const [showAddPackListModal, setShowAddPackListModal] = useState("");
+  const [showAddPackListModal, setShowAddPackListModal] = useState(false);
 
   const totalPercentage = getTotalPackedPercentage();
   const unboughtItems = getUnboughtItems();
@@ -93,7 +93,7 @@ export const PackingList = () => {
           </div>
           <div className="flex flex-col gap-4">
             {packingItems.map((item, index) => (
-              <ViewPackingItemsModal key={index} packingItem={item} />
+              <PackingCategoryItem key={index} packingItem={item} />
             ))}
           </div>
         </section>

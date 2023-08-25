@@ -58,54 +58,46 @@ export const PackingItem = ({ category, item }) => {
   };
 
   return (
-    <div className="mb-4 flex">
-      <div
-        className={`${
-          item.bought ? "bg-gray-50 " : ""
-        } flex w-full justify-between rounded-xl border px-4 py-2.5`}
-      >
-        <div className="flex items-center justify-start gap-3">
-          <button
-            type="button"
-            onClick={() => checkBoxHandler(item)}
-            className={`${
-              item.checked ? "text-blue-500" : "text-gray-900"
-            } h-auto w-auto p-1 text-xs`}
-          >
-            {item.checked ? (
-              <CheckCircle className="h-5 w-5" strokeWidth={2} />
-            ) : (
-              <Circle className="h-5 w-5" strokeWidth={2} />
-            )}
-          </button>
+    <div className="mt-2 flex w-full justify-between px-6 py-4">
+      <div className="flex items-center justify-start gap-3">
+        <button
+          type="button"
+          onClick={() => checkBoxHandler(item)}
+          className={`${
+            item.checked ? "text-blue-500" : "text-gray-900"
+          } h-auto w-auto p-1 text-xs`}
+        >
+          {item.checked ? (
+            <CheckCircle className="h-5 w-5" strokeWidth={2.75} />
+          ) : (
+            <Circle className="h-5 w-5" strokeWidth={2.75} />
+          )}
+        </button>
 
-          <button
-            type="button"
-            onClick={() => needToBuyHandler(item)}
-            className={`${
-              item.bought ? "text-blue-500" : "text-gray-900"
-            } h-auto w-auto whitespace-nowrap p-1 text-xs`}
-          >
-            <ShoppingBag className="h-5 w-5" strokeWidth={2} />
-          </button>
+        <button
+          type="button"
+          onClick={() => needToBuyHandler(item)}
+          className={`${
+            item.bought ? "text-blue-500" : "text-gray-900"
+          } h-auto w-auto whitespace-nowrap p-1 text-xs`}
+        >
+          <ShoppingBag className="h-5 w-5" strokeWidth={2.75} />
+        </button>
 
-          <h3 className="ml-4 text-sm font-medium text-gray-600">
-            {item.name}
-          </h3>
-        </div>
+        <h3 className="ml-4 text-sm font-medium text-gray-600">{item.name}</h3>
+      </div>
 
-        <div className="flex items-center gap-4">
-          <p
-            style={{ backgroundColor: authorColor }}
-            className="flex h-6 w-6 items-center justify-center rounded-full text-xs text-white"
-          >
-            {initialsFormatter(item.user)}
-          </p>
+      <div className="flex items-center gap-4">
+        <p
+          style={{ backgroundColor: authorColor }}
+          className="flex h-6 w-6 items-center justify-center rounded-full text-xs text-white"
+        >
+          {initialsFormatter(item.user)}
+        </p>
 
-          <button type="button" onClick={() => deletePackingItemHandler(item)}>
-            <Trash2 className="h-4 w-4" strokeWidth={0.75} />
-          </button>
-        </div>
+        <button type="button" onClick={() => deletePackingItemHandler(item)}>
+          <Trash2 className="h-4 w-4" strokeWidth={0.75} />
+        </button>
       </div>
     </div>
   );
