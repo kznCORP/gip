@@ -5,7 +5,10 @@ export const Modal = ({ onShow, onClose, children }) => {
   return (
     <>
       {onShow && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-white">
+        <div
+          className="fixed inset-0 z-50 overflow-y-auto"
+          style={{ backgroundColor: "#F6F6F6" }}
+        >
           <div className="mt-4 px-6 pt-4">
             <button
               type="button"
