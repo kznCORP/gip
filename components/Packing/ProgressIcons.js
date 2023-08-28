@@ -16,10 +16,10 @@ export const ProgressIcons = ({ item, index, categoriesLength }) => {
       className={`relative flex h-24 flex-col items-center justify-center gap-4`}
     >
       {shouldAddBottomBorder && ( // Add bottom border for the first 4 divs
-        <div className="absolute bottom-0 left-1/2 w-[97%] -translate-x-1/2 border-b border-dotted border-gray-300"></div>
+        <div className="absolute bottom-0 left-1/2 w-[99%] -translate-x-1/2 border-b border-dotted border-gray-300"></div>
       )}
       {shouldAddBorderRight && ( // Add border right for the divs that are not multiples of 4
-        <div className="absolute right-0 top-1/2 h-[97%] w-1 -translate-y-1/2 border-r border-dotted border-gray-300"></div>
+        <div className="absolute right-0 top-1/2 h-[50%] w-1 -translate-y-1/2 border-r border-dotted border-gray-300"></div>
       )}
 
       <Icons iconName={item.icon} />
