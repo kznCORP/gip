@@ -5,9 +5,6 @@ import { Modal } from "../Modal";
 import { PackingContext } from "@/lib/packingContext";
 import { v4 as uuidv4 } from "uuid";
 
-import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
-
 import { ICON_DATA } from "@/lib/icons";
 
 import { BadgePlus, Briefcase, User, PlusCircle } from "lucide-react";
@@ -104,7 +101,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
           {/* Item Name */}
           <div className="flex flex-col gap-4">
             <label htmlFor="title" className="font-medium">
-              What are you bringing?...
+              What are you bringing? <span className="text-red-500">*</span>
             </label>
 
             <div className="flex rounded-lg bg-white p-4">
@@ -113,6 +110,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
                   <Briefcase />
                 </div>
               </div>
+
               <input
                 type="text"
                 name="title"
@@ -129,7 +127,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
           {/* User */}
           <div className="flex flex-col gap-4">
             <label htmlFor="name" className="font-medium">
-              Who&#x27;s bringing it?...
+              Who&#x27;s bringing it? <span className="text-red-500">*</span>
             </label>
 
             <div className="flex items-center rounded-lg bg-white p-4">
@@ -155,7 +153,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
           {/* Category */}
           <div className="flex flex-col gap-4">
             <label htmlFor="category" className="font-medium">
-              For which category?
+              For which category? <span className="text-red-500">*</span>
             </label>
 
             <button
@@ -292,12 +290,10 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
                 >
                   {/* Icon */}
                   <div
-                    className="flex items-center justify-center rounded-lg p-3"
+                    className="flex items-center justify-center rounded-lg p-2"
                     style={{ backgroundColor: `${category.color}` }}
                   >
-                    <div className="">
-                      <Icons iconName={category.icon} iconColor="white" />
-                    </div>
+                    <Icons iconName={category.icon} iconColor="white" />
                   </div>
 
                   {/* Title */}

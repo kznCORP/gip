@@ -5,20 +5,16 @@ import { Modal } from "../Modal";
 import { FinanceContext } from "@/lib/financeContext";
 import { v4 as uuidv4 } from "uuid";
 
-import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
-
 import { ICON_DATA } from "@/lib/icons";
 
 import {
   BadgePlus,
   CircleDollarSign,
-  Tags,
-  Plus,
   ShoppingBag,
-  X,
   PlusCircle,
 } from "lucide-react";
+
+import { Icons } from "../Icons";
 
 const colorOptions = [
   { value: "#f87171" },
@@ -126,22 +122,30 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
       <section className="mb-10 mt-24 px-6">
         <form
           onSubmit={addExpenseHandler}
-          className="flex flex-col justify-center gap-10"
+          className="flex flex-col justify-center gap-12"
         >
-          <div className="flex flex-col">
-            <label htmlFor="title" className="text-sm font-medium">
-              Name of expense?...
+          {/* Expense Name */}
+          <div className="flex flex-col gap-4">
+            <label htmlFor="title" className="font-medium">
+              Name of expense? <span className="text-red-500">*</span>
             </label>
-            <div className="flex w-full items-center gap-4 rounded-lg border p-4 text-sm ">
-              <ShoppingBag className="h-4 w-4 flex-shrink-0" />
+
+            <div className="flex rounded-lg bg-white p-4">
+              <div className="flex items-center justify-center rounded-lg p-1">
+                <div className="h-[25px] w-[25px]">
+                  <ShoppingBag />
+                </div>
+              </div>
+
               <input
                 type="text"
                 name="title"
                 value={expenseName}
                 onChange={(e) => setExpenseName(e.target.value)}
                 placeholder="eg. Food, Gas, Tools..."
-                id="title"
+                id="name"
                 required
+                className="ml-4 w-full text-sm font-medium"
                 style={{
                   textDecoration: "unset",
                   border: "unset",
@@ -153,12 +157,19 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
             </div>
           </div>
 
-          <div className="flex flex-col ">
-            <label htmlFor="amount" className="text-sm font-medium">
-              How much?
+          {/* Amount */}
+          <div className="flex flex-col gap-4">
+            <label htmlFor="amount" className="font-medium">
+              How much? <span className="text-red-500">*</span>
             </label>
-            <div className="flex w-full items-center gap-4 rounded-lg border p-4 text-sm ">
-              <CircleDollarSign className="h-4 w-4 flex-shrink-0" />
+
+            <div className="flex rounded-lg bg-white p-4">
+              <div className="flex items-center justify-center rounded-lg p-1">
+                <div className="h-[25px] w-[25px]">
+                  <CircleDollarSign />
+                </div>
+              </div>
+
               <input
                 type="number"
                 name="amount"
@@ -169,6 +180,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
                 placeholder="eg. $10, $20, $250..."
                 id="amount"
                 required
+                className="ml-4 w-full text-sm font-medium"
                 style={{
                   textDecoration: "unset",
                   border: "unset",
@@ -179,26 +191,34 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
             </div>
           </div>
 
+          {/* Category */}
           <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between ">
-              <label className="text-sm font-medium">For which category?</label>
-            </div>
+            <label htmlFor="category" className="font-medium">
+              For which category? <span className="text-red-500">*</span>
+            </label>
 
-            {/* New Modal? Maybe... */}
             <button
               type="button"
-              className="flex w-full items-center gap-4 rounded-lg border p-4 text-sm"
+              className="flex items-center rounded-lg bg-white p-4"
               onClick={() => setShowCategories(true)}
             >
-              <BadgePlus className="h-4 w-4 flex-shrink-0" />
-              <p className="text-gray-400">Create a new category...</p>
+              <div className="flex items-center justify-center rounded-lg p-1">
+                <div className="h-[25px] w-[25px]">
+                  <BadgePlus />
+                </div>
+              </div>
+
+              {/* Title */}
+              <h2 className="ml-4 w-full text-start text-sm font-medium text-gray-400">
+                Create new category...
+              </h2>
             </button>
 
             {showCategories && (
-              <div className="flex w-full flex-col items-start gap-6 rounded-lg border p-4 text-sm ">
+              <div className="flex w-full flex-col items-start gap-8 rounded-lg bg-white p-5 text-sm ">
                 <div className="flex w-full flex-col">
                   <label className="text-xs font-medium">Name</label>
-                  <div className="mt-2 w-full rounded-lg border p-2 text-sm ">
+                  <div className="mt-2 w-full rounded-lg border bg-white p-3 text-sm ">
                     <input
                       type="text"
                       name="name"
@@ -275,13 +295,15 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
                 <div className="flex w-full gap-1">
                   <button
                     onClick={() => setShowCategories(false)}
-                    className="w-1/6 rounded-md border p-2 text-xs text-gray-500"
+                    className="w-1/6 rounded-md border bg-white p-2 text-xs text-gray-500"
+                    type="button"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={addCategoryHandler}
                     className="w-2/6 rounded-md bg-black p-2 text-xs  text-white"
+                    type="button"
                   >
                     Add Category
                   </button>
@@ -289,51 +311,56 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
               </div>
             )}
 
-            {expenses.map((category) => (
-              <button
-                type="button"
-                key={category.id}
-                className="flex w-full items-center justify-between gap-4 rounded-lg border p-4 text-sm "
-                style={{
-                  border:
-                    category.id === selectedCategory
-                      ? `1px solid ${category.color}`
-                      : "1px solid #E2E8F0",
-                }}
-                onClick={() => {
-                  setSelectedCategory(category.id);
-                }}
-              >
-                <div className="flex items-center gap-4">
+            <div className="flex flex-wrap gap-2">
+              {expenses.map((category) => (
+                <button
+                  key={category.id}
+                  className="flex  items-center justify-between rounded-lg bg-white p-2"
+                  type="button"
+                  style={{
+                    border:
+                      category.id === selectedCategory
+                        ? `1px solid ${category.color}`
+                        : "",
+                  }}
+                  onClick={() => {
+                    setSelectedCategory(category.id);
+                  }}
+                >
+                  {/* Icon */}
                   <div
-                    className="h-[15px] w-[15px] rounded-full"
-                    style={{ backgroundColor: category.color }}
-                  ></div>
-                  <div>
-                    <h4 className="font-medium capitalize">{category.title}</h4>
+                    className="flex items-center justify-center rounded-lg p-2"
+                    style={{ backgroundColor: `${category.color}` }}
+                  >
+                    <Icons iconName={category.icon} iconColor="white" />
                   </div>
-                </div>
-              </button>
-            ))}
+
+                  {/* Title */}
+                  <div className="flex w-full flex-col items-start justify-center p-4">
+                    <h2 className="font-medium">{category?.title}</h2>
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Buttons */}
           <div className="flex items-center justify-center gap-4">
-            <Button
-              variant="outline"
-              className={cn("w-1/4 font-normal text-gray-500")}
+            <button
+              className="w-1/4 rounded-md border bg-white p-3 text-gray-500"
               type="button"
               onClick={() => onClose(false)}
             >
               Cancel
-            </Button>
-            <Button
-              className={cn(" w-3/4")}
+            </button>
+
+            <button
+              className="w-3/4 rounded-md bg-black p-3 font-medium text-white"
               type="submit"
               onClick={() => setIsSubmitClicked(true)}
             >
-              Submit Expense
-            </Button>
+              Submit Item
+            </button>
           </div>
         </form>
       </section>
