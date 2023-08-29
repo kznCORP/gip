@@ -4,7 +4,7 @@ import usePlacesAutocomplete, {
   getDetails,
 } from "use-places-autocomplete";
 
-import { Navigation, MapPin } from "lucide-react";
+import { MapPin, Map } from "lucide-react";
 
 export const PlacesAutocomplete = ({ setSelectedLocation }) => {
   const {
@@ -61,14 +61,19 @@ export const PlacesAutocomplete = ({ setSelectedLocation }) => {
 
   return (
     <div>
-      <div className="flex w-full items-center gap-4 rounded-lg border p-4 text-sm ">
-        <MapPin className="h-4 w-4 flex-shrink-0" />
+      <div className="flex rounded-lg bg-white p-4">
+        <div className="flex items-center justify-center rounded-lg p-1">
+          <div className="h-[25px] w-[25px]">
+            <Map />
+          </div>
+        </div>
+
         <input
           type="text"
           placeholder="eg. Hawaii, Paris, Japan..."
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          className="w-full "
+          className="ml-4 w-full text-sm font-medium"
           style={{
             textDecoration: "unset",
             border: "unset",
@@ -80,15 +85,15 @@ export const PlacesAutocomplete = ({ setSelectedLocation }) => {
       </div>
 
       {status === "OK" && (
-        <ul className="items-left my-4 flex flex-col justify-center gap-2 rounded-lg border border-gray-200 p-4">
+        <ul className="items-left my-4 flex flex-col justify-center gap-2 rounded-lg bg-white p-4">
           {data.map(({ place_id, description }) => (
             <div
               key={place_id}
               className="flex items-center justify-start gap-2 p-2 hover:cursor-pointer hover:bg-gray-100"
               onClick={() => handleSelect(description)}
             >
-              <Navigation className="h-4 w-3 flex-shrink-0" />
-              <li className="w-full border-b border-gray-200 p-2 text-xs ">
+              <MapPin className="h-4 w-4 flex-shrink-0" />
+              <li className="ml-4 w-full border-b border-gray-200 py-2 text-xs ">
                 {description}
               </li>
             </div>

@@ -2,17 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import { addDays, format, startOfDay } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
-import { DateRange } from "react-day-picker";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { CalendarClock } from "lucide-react";
 
 export function DatePickerWithRange({ setSelectedDates }) {
   const today = startOfDay(new Date());
@@ -52,29 +50,30 @@ export function DatePickerWithRange({ setSelectedDates }) {
     <div className={cn("grid gap-2")}>
       <Popover className={cn("flex items-center justify-center")}>
         <PopoverTrigger asChild>
-          <Button
-            id="date"
-            variant={"outline"}
-            className={cn(
-              "w-[300px] justify-start gap-2 text-left font-normal",
-              !date && "text-muted-foreground"
-            )}
-            style={{ paddingTop: "1.5rem", paddingBottom: "1.5rem" }}
-          >
-            <CalendarIcon className="mr-2 h-4 w-4" />
+          <div className="flex rounded-lg bg-white p-4">
+            <div className="flex items-center justify-center rounded-lg p-1">
+              <div className="h-[25px] w-[25px]">
+                <CalendarClock />
+              </div>
+            </div>
+
             {date?.from ? (
               date.to ? (
-                <>
-                  <p>{format(date.from, "LLL dd, y")} -</p>
+                <div className="ml-4 flex flex-wrap items-center text-start text-sm font-medium text-gray-400">
+                  <p>{format(date.from, "LLL dd, y")} -&nbsp;</p>
                   <p>{format(date.to, "LLL dd, y")}</p>
-                </>
+                </div>
               ) : (
-                format(date.from, "LLL dd, y")
+                <p className="ml-4 flex flex-wrap items-center text-start text-sm font-medium text-gray-400">
+                  {format(date.from, "LLL dd, y")}
+                </p>
               )
             ) : (
-              <span>Pick a date</span>
+              <span className="ml-4 flex flex-wrap items-center text-start text-sm font-medium text-gray-400">
+                Pick a date
+              </span>
             )}
-          </Button>
+          </div>
         </PopoverTrigger>
         <PopoverContent
           className="flex w-auto flex-col items-center p-0"

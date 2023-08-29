@@ -1,42 +1,25 @@
 "use client";
 
 import React, { useState, useContext } from "react";
-
+import { Modal } from "../Modal";
 import { ScheduleContext } from "@/lib/scheduleContext";
 import { AuthUserContext } from "@/lib/authContext";
+import { v4 as uuidv4 } from "uuid";
 
-import { Modal } from "../Modal";
 import { Location } from "./Location";
 
 import { DatePickerWithRange } from "../ui/datepicker";
-import { Button } from "../ui/button";
-
-import { cn } from "@/lib/utils";
-import { v4 as uuidv4 } from "uuid";
 
 import { StickyNote, Sunrise } from "lucide-react";
 
-// Bucket URL from Storage in Firebase Console
-const BUCKET_URL = "gs://whatarewedoing-7e3f5.appspot.com";
-
 export const AddScheduleModal = ({ onShow, onClose }) => {
   const { user } = useContext(AuthUserContext);
-  const { addDate, addSchedule } = useContext(ScheduleContext);
+  const { addSchedule } = useContext(ScheduleContext);
 
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [selectedDates, setSelectedDates] = useState(null);
-
-  // const addDateHandler = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     await addDate({ selectedDates });
-  //   } catch (e) {
-  //     console.log(e.message);
-  //   }
-  // };
 
   const addScheduleHandler = async (e) => {
     e.preventDefault();
@@ -54,7 +37,6 @@ export const AddScheduleModal = ({ onShow, onClose }) => {
     };
 
     try {
-      // Write to Firebase
       await addSchedule(selectedDates, newActivity, user.uid);
 
       // Reset the form fields
@@ -69,26 +51,31 @@ export const AddScheduleModal = ({ onShow, onClose }) => {
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
-      {/* Modal Toggle */}
-      <section className="mt-24 max-h-[calc(100vh-12rem)] px-6">
+      <section className="mb-10 mt-24 overflow-auto px-6">
         <form
           onSubmit={addScheduleHandler}
-          className="flex flex-col justify-center gap-10 overflow-y-auto"
+          className="flex flex-col justify-center gap-12"
         >
           {/* Title */}
-          <div className="flex flex-col items-start justify-start">
-            <label className="text-sm font-medium ">
-              What are you doing?...
+          <div className="flex flex-col gap-4">
+            <label htmlFor="title" className="font-medium">
+              What are you doing? <span className="text-red-500">*</span>
             </label>
 
-            <div className="flex w-full items-center gap-4 rounded-lg border p-4 text-sm ">
-              <Sunrise className="h-4 w-4 flex-shrink-0" />
+            <div className="flex rounded-lg bg-white p-4">
+              <div className="flex items-center justify-center rounded-lg p-1">
+                <div className="h-[25px] w-[25px]">
+                  <Sunrise />
+                </div>
+              </div>
+
               <input
                 type="text"
                 placeholder="eg. Gym, Tan, Laundry at..."
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full "
+                className="ml-4 w-full text-sm font-medium"
+                required
                 style={{
                   textDecoration: "unset",
                   border: "unset",
@@ -101,8 +88,10 @@ export const AddScheduleModal = ({ onShow, onClose }) => {
           </div>
 
           {/* Maps & Places API */}
-          <div>
-            <label className="text-sm font-medium">Where to?...</label>
+          <div className="flex flex-col gap-4">
+            <label className="font-medium">
+              Where? <span className="text-red-500">*</span>
+            </label>
             <Location
               selectedLocation={selectedLocation}
               setSelectedLocation={setSelectedLocation}
@@ -110,25 +99,30 @@ export const AddScheduleModal = ({ onShow, onClose }) => {
           </div>
 
           {/* Search Results */}
-          <div>
-            <label className="text-sm font-medium">When?...</label>
+          <div className="flex flex-col gap-4">
+            <label className="font-medium">
+              When? <span className="text-red-500">*</span>
+            </label>
             <DatePickerWithRange setSelectedDates={setSelectedDates} />
           </div>
 
           {/* Text Area */}
-          <div>
-            <label className="text-sm font-medium">
-              Any last things to note?...
-            </label>
+          <div className="flex flex-col gap-4">
+            <label className="font-medium">Notes</label>
 
-            <div className="flex w-full items-start gap-4 rounded-lg border p-4 text-sm ">
-              <StickyNote className="h-4 w-4 flex-shrink-0" />
+            <div className="flex rounded-lg bg-white p-4">
+              <div className="flex items-center justify-center rounded-lg p-1">
+                <div className="h-[25px] w-[25px]">
+                  <StickyNote />
+                </div>
+              </div>
+
               <textarea
                 placeholder="eg. Don't forget to bring sunscreen..."
                 maxLength="250"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="w-full "
+                className="ml-4 w-full text-sm font-medium"
                 style={{
                   textDecoration: "unset",
                   border: "unset",
@@ -140,18 +134,20 @@ export const AddScheduleModal = ({ onShow, onClose }) => {
           </div>
 
           {/* Buttons */}
-          <div className="mb-10 flex items-center justify-center gap-4">
-            <Button
-              variant="outline"
-              className={cn("w-1/4 font-normal text-gray-500")}
+          <div className="flex items-center justify-center gap-4">
+            <button
+              className="w-1/4 rounded-md border bg-white p-3 text-gray-500"
               type="button"
               onClick={() => onClose(false)}
             >
               Cancel
-            </Button>
-            <Button className={cn(" w-3/4")} type="submit">
-              Add to Schedule
-            </Button>
+            </button>
+            <button
+              className="w-3/4 rounded-md bg-black p-3 font-medium text-white"
+              type="submit"
+            >
+              Submit Schedule
+            </button>
           </div>
         </form>
       </section>

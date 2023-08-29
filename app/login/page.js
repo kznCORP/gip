@@ -21,7 +21,7 @@ export default function Login() {
       <Logo />
 
       <section>
-        <div className="flex h-screen flex-col items-center justify-between gap-8 px-6">
+        <div className="flex h-screen flex-col items-center justify-between gap-8 bg-white px-6">
           <div className="mt-48 w-full">
             <h1 className="text-center text-3xl font-medium">
               Make sense out of planning.

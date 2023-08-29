@@ -359,7 +359,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
               type="submit"
               onClick={() => setIsSubmitClicked(true)}
             >
-              Submit Item
+              Submit Expense
             </button>
           </div>
         </form>
