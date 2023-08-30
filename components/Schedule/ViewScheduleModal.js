@@ -2,15 +2,7 @@ import React, { useContext, useState } from "react";
 import { ScheduleContext } from "@/lib/scheduleContext";
 
 import { Modal } from "../Modal";
-import {
-  Trash2,
-  CalendarClock,
-  StickyNote,
-  Star,
-  MapPin,
-  StarIcon,
-  Compass,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { dateFormatter, timeFormatter } from "@/lib/utils";
 
 export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
@@ -33,85 +25,84 @@ export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
-      <article className="mt-8 border-2 border-red-500">
-        <div>
+      <article className="mb-10 mt-12 px-6">
+        {/* Schedule Image */}
+        <div className="flex flex-col items-center justify-center rounded-lg bg-white ">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={activity?.selectedLocation?.photoUrl}
             alt={`${activity?.selectedLocation?.name} Google Review image.`}
-            className="w-full rounded-t-3xl object-cover"
+            className="w-full rounded-lg object-cover"
             width={350}
-            height={350}
-            style={{ height: "350px", width: "100%" }}
+            height={150}
+            style={{ height: "250px", width: "100%" }}
             loading="lazy"
           />
         </div>
 
-        <section className="relative z-20 -mt-6 rounded-t-3xl border-t bg-white px-6 pb-10 shadow-inner">
-          <div className="mb-1 mt-3 flex items-center justify-center">
-            <div className="h-[3px] w-1/5 items-center rounded-full bg-black"></div>
+        {/* Schedule Title */}
+        <div className="mt-4 flex h-24 flex-col items-center justify-center rounded-lg bg-white p-6">
+          <p className="uppercase text-gray-400" style={{ fontSize: "10px" }}>
+            Activity Name
+          </p>
+          <p className="text-lg font-medium">{activity?.title}</p>
+        </div>
+
+        {/* Location */}
+        <div className="mt-4 flex h-24 gap-4">
+          <div className="flex w-3/4 flex-col items-center justify-center rounded-lg bg-white p-6">
+            <p className="uppercase text-gray-400" style={{ fontSize: "10px" }}>
+              Location
+            </p>
+            <p className="text-center text-sm font-medium">
+              {activity?.selectedLocation?.address}
+            </p>
           </div>
 
-          <div className="mb-6 flex w-full items-center justify-between pt-8">
-            <div className="flex items-center gap-4">
-              <h2 className="text-2xl font-medium">{activity?.title}</h2>
-            </div>
-            <button
-              type="button"
-              onClick={() => deleteActivityHandler(activity?.id)}
-            >
-              <Trash2 className="h-4 w-4 " />
-            </button>
-          </div>
-
-          <div>
-            <div className="inline-flex items-center gap-4 rounded-xl bg-slate-50 p-4">
-              <div className="rounded-full bg-white">
-                <MapPin className="h-5 w-5 text-blue-600" strokeWidth={2.5} />
-              </div>
-              <p className="text-xs font-medium">
-                {activity?.selectedLocation?.address}
-              </p>
-            </div>
-            <div className="mt-2 inline-flex  items-center gap-4 rounded-xl bg-slate-50 p-4">
-              <div className="rounded-full bg-white">
-                <CalendarClock
-                  className="h-5 w-5 flex-shrink-0 text-orange-600 "
-                  strokeWidth={2.5}
-                />
-              </div>
-
-              <p className="text-xs font-medium ">
-                {timeFormatter(schedule?.selectedDates?.from)} — {"  "}
-                {dateFormatter(schedule.selectedDates.from)}
-              </p>
-            </div>
-          </div>
-
-          {activity?.notes && (
-            <div className="w-full">
-              <p className="mb-2 mt-10 text-sm font-medium">Reminders</p>
-              <div className="flex w-full flex-col items-start justify-start gap-4 rounded-xl border p-4 ">
-                <p className="text-blue-gray text-xs">{activity?.notes}</p>
-              </div>
-            </div>
-          )}
-
-          <div className="w-full">
+          {/* Button */}
+          <div className="flex h-full w-1/4 flex-col items-center justify-center self-center rounded-lg bg-white ">
             <a
               href={activity?.selectedLocation?.url}
               target="_blank"
               rel="noreferrer"
             >
-              <div className="mt-10 flex items-center justify-center gap-2 rounded-xl border border-gray-800 p-4">
-                <Compass className="h-5 w-5 flex-shrink-0" />
-                <p className="text-blue-gray text-sm font-medium">
+              <div className="flex flex-col items-center justify-center rounded-lg">
+                <ArrowUpRight className="h-6 w-6 flex-shrink-0" />
+                <p className="font-medium" style={{ fontSize: "10px" }}>
                   Open in Maps
                 </p>
               </div>
             </a>
           </div>
-        </section>
+        </div>
+
+        {/* Reminders */}
+        <div className="mt-4 flex h-24 gap-4">
+          {/* Date */}
+          <div className="flex h-full w-1/4 flex-col items-center justify-center self-center rounded-lg bg-white p-6">
+            <p className="uppercase text-gray-400" style={{ fontSize: "10px" }}>
+              Date
+            </p>
+            <p className="text-center text-xs font-medium ">
+              {timeFormatter(schedule?.selectedDates?.from)}
+            </p>
+            <p className="text-center text-xs font-medium ">
+              {dateFormatter(schedule.selectedDates.from)}
+            </p>
+          </div>
+
+          {activity?.notes && (
+            <div className="flex w-3/4 flex-col items-center justify-center rounded-lg bg-white p-6">
+              <p
+                className="uppercase text-gray-400"
+                style={{ fontSize: "10px" }}
+              >
+                Reminders
+              </p>
+              <p className="text-xs font-medium">{activity?.notes}</p>
+            </div>
+          )}
+        </div>
       </article>
     </Modal>
   );

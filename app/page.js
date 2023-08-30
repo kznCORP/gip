@@ -44,9 +44,7 @@ export default function Home() {
    *
    *  To-Do:
    *
-   *  [ ] Finish Packing List Rework
-   *    [ ] Progress Bar for each Icon
-   *    [x] Fix Icons disappearing for every data entry.
+   *  [ ] Finish Schedule Modal.
    *
    *  [ ] Add media breakpoints for transitioning to Tablet View.
    *    [ ] Packing List

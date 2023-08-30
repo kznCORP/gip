@@ -73,14 +73,14 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
 
           {/* Total Expense */}
           <div className="mt-4 flex h-24 flex-col items-center justify-center rounded-lg bg-white">
+          <p className="uppercase text-gray-400" style={{ fontSize: "10px" }}>
+              Total Amt. Spent
+            </p>
             <p
               className="text-lg font-medium"
               style={{ color: `${expense.color}` }}
             >
               {currencyFormatter(expense.total)}
-            </p>
-            <p className="uppercase text-gray-400" style={{ fontSize: "10px" }}>
-              Total Amt. Spent
             </p>
           </div>
 
