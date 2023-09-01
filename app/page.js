@@ -30,6 +30,7 @@ export default function Home() {
   } = useContext(ScheduleContext);
 
   const [showAddScheduleModal, setShowAddScheduleModal] = useState(false);
+  const [selectedDateFilter, setSelectedDateFilter] = useState("All");
 
   const [today, setToday] = useState(new Date());
   const formattedToday = format(today, "MMMM dd");
@@ -43,8 +44,7 @@ export default function Home() {
   /**
    *
    *  To-Do:
-   *
-   *  [ ] Finish Schedule Modal.
+   
    *
    *  [ ] Add media breakpoints for transitioning to Tablet View.
    *    [ ] Packing List
@@ -68,7 +68,7 @@ export default function Home() {
         {/* Add Schedule */}
         <section className="sticky top-0 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
-            <h2 className="text-xl font-medium">Schedule</h2>
+            <h2 className="text-2xl font-medium">Schedule</h2>
             <div className="flex gap-4">
               {/* Modal Toggle */}
               <button
@@ -87,9 +87,20 @@ export default function Home() {
           className="mt-8 flex items-center gap-3 overflow-x-auto p-0.5"
           type="button"
         >
-          <button onClick={() => setIsFilterApplied(false)}>
-            <div className="flex h-[75px] items-center justify-center rounded-xl bg-white px-5">
-              <p className="text-sm font-medium ">All</p>
+          <button
+            onClick={() => {
+              setIsFilterApplied(false);
+              setSelectedDateFilter("All");
+            }}
+          >
+            <div
+              className={`flex h-[75px] w-[75px] items-center justify-center rounded-xl ${
+                selectedDateFilter == "All"
+                  ? "bg-blue-600 text-white"
+                  : "bg-white"
+              }`}
+            >
+              <p className="font-medium ">All</p>
             </div>
           </button>
 
@@ -99,11 +110,19 @@ export default function Home() {
                 <button
                   key={index}
                   type="button"
-                  className=""
-                  onClick={() => applyFilter(date)}
+                  onClick={() => {
+                    setSelectedDateFilter(date.day);
+                    applyFilter(date);
+                  }}
                 >
-                  <div className="flex h-[75px] flex-col items-center justify-between rounded-xl bg-white px-5 py-3">
-                    <p className="text-xs font-medium">
+                  <div
+                    className={`flex h-[75px] w-[75px] flex-col items-center justify-center rounded-xl ${
+                      selectedDateFilter == date.day
+                        ? "bg-blue-600 text-white"
+                        : "bg-white"
+                    }`}
+                  >
+                    <p className="text-sm font-medium ">
                       {date.month.substring(0, 3)}
                     </p>
                     <p className="text-sm font-semibold uppercase ">
@@ -115,10 +134,9 @@ export default function Home() {
             })}
 
           <button type="button" onClick={() => setShowAddScheduleModal(true)}>
-            <div className="flex h-[75px] items-center justify-center rounded-xl border border-dashed border-gray-200 px-5">
-              {/* Set Dates Input */}
+            <div className="flex h-[75px] w-[75px] items-center justify-center rounded-xl bg-white">
               <p className="text-sm font-medium uppercase ">
-                <PlusCircle className="h-4 w-4 text-gray-400" strokeWidth={2} />
+                <PlusCircle className="h-4 w-4" strokeWidth={2.5} />
               </p>
             </div>
           </button>

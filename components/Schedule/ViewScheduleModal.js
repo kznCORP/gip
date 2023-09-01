@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { ScheduleContext } from "@/lib/scheduleContext";
 
 import { Modal } from "../Modal";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Trash2 } from "lucide-react";
 import { dateFormatter, timeFormatter } from "@/lib/utils";
 
 export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
@@ -102,6 +102,17 @@ export const ViewScheduleModal = ({ onShow, onClose, schedule, activity }) => {
               <p className="text-xs font-medium">{activity?.notes}</p>
             </div>
           )}
+        </div>
+
+        <div className="bottom-0 mt-24 flex items-center justify-center">
+          <button
+            type="button"
+            className="flex items-center rounded p-4 text-xs text-red-400 hover:bg-rose-500 hover:text-white"
+            onClick={() => deleteActivityHandler(activity.id)}
+          >
+            Delete Activity
+            <Trash2 className="ml-1 h-4 w-4 flex-shrink-0 text-red-400" />
+          </button>
         </div>
       </article>
     </Modal>
