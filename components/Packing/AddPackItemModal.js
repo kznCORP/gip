@@ -93,7 +93,7 @@ export const AddPackItemModal = ({ onShow, onClose }) => {
 
   return (
     <Modal onShow={onShow} onClose={onClose}>
-      <section className="mb-10 mt-24 overflow-auto px-6">
+      <section className="mb-10 mt-12 overflow-auto px-6">
         <form
           onSubmit={addPackingItemHandler}
           className="flex flex-col justify-center gap-12"
