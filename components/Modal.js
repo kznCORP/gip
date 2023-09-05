@@ -6,7 +6,7 @@ export const Modal = ({ onShow, onClose, children }) => {
     <>
       {onShow && (
         <div
-          className="fixed inset-0 z-50 overflow-y-auto md:relative md:border-2 md:border-red-500"
+          className="fixed inset-0 z-50 overflow-y-auto md:relative md:border-2 md:border-red-500 md:w-1/2"
           style={{ backgroundColor: "#F6F6F6" }}
         >
           <div className="mt-4 px-6 pt-4">
