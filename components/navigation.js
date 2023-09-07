@@ -11,7 +11,7 @@ import {
 
 export const Navigation = () => {
   return (
-    <nav className="fixed bottom-0 left-1/2 z-50 -translate-x-1/2 transform p-4">
+    <nav className="fixed bottom-0 left-1/2 z-40 -translate-x-1/2 transform p-4">
       <ul className="flex items-center justify-evenly rounded-full bg-neutral-900  opacity-90 backdrop-blur">
         <li className="mx-2 rounded-lg p-4">
           <Link href="#">

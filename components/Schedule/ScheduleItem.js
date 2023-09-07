@@ -20,7 +20,12 @@ export const ScheduleItem = ({ schedule, position }) => {
 
       {schedule.activities &&
         schedule.activities.map((activity) => (
-          <section key={activity.id} className="flex gap-4">
+          <section
+            key={activity.id}
+            className={`flex gap-4  ${
+              showScheduleModal ? "md:w-1/2" : "md:w-full"
+            }`}
+          >
             <button
               onClick={() => {
                 setShowScheduleModal(true);
