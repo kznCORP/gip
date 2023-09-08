@@ -1,7 +1,37 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ModalContext } from "@/lib/modalContext";
 import { ArrowLeftCircle } from "lucide-react";
 
 export const Modal = ({ onShow, onClose, children }) => {
+  const { isModalClicked } = useContext(ModalContext);
+
+  console.log(isModalClicked);
+  /**
+   *
+   *  Create a global state variable that checks viewport (mobile, tablet, desktop)
+   *
+   *  If Modal is clicked, update global state in reference to specific viewport
+   *
+   *  If viewport is mobile, display Modal's width to 100%
+   *
+   *  If viewport is tablet, display Modal's width to 50% and on the right.
+   *
+   *  If viewport is desktop, display Modal's width to 20% and on the right.
+   *
+   *
+   *  [isModalClicked, setIsModalClicked] = useState(false);
+   *
+   *  Once you click a Modal; run setIsModalClicked(!isModalClicked);
+   *
+   *  For all components, check isModalClicked
+   *
+   *  If yes, apply styles according to viewport width
+   *
+   *  `${ isModalClicked ? "md:w-1/2 lg:w-1/5" : "md:w-full lg:w-full"}`
+   *
+   *
+   * */
+
   return (
     <>
       {onShow && (

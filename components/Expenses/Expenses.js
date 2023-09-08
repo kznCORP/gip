@@ -66,36 +66,35 @@ export const Expenses = () => {
 
   return (
     <>
-      <section className="md:flex md:flex-row-reverse">
-        <AddExpenseModal
-          onShow={showAddExpenseModal}
-          onClose={() => setShowAddExpenseModal(false)}
-        />
+      <AddExpenseModal
+        onShow={showAddExpenseModal}
+        onClose={() => setShowAddExpenseModal(false)}
+      />
 
-        <article
-          className={`mb-24 px-4 ${
-            showAddExpenseModal ? "md:w-1/2" : "md:w-full"
-          }`}
-          id="expenses"
-        >
-          {/* Add Expense */}
-          <section className="sticky top-0 pt-4 backdrop-blur-sm">
-            <div className="mb-5 flex items-center justify-between pb-3 ">
-              <h2 className="text-xl  font-medium">Expenses</h2>
-              <div className="flex gap-4">
-                {/* Modal Toggle */}
-                <button
-                  data-modal-target="authentication-modal"
-                  className="flex  items-center   gap-2   rounded-full bg-blue-600 text-sm font-medium text-white"
-                  onClick={() => setShowAddExpenseModal(true)}
-                >
-                  <PlusCircle className="h-6 w-6" />
-                </button>
-              </div>
+      <article
+        className={`mb-24 px-4 ${
+          showAddExpenseModal ? "md:w-1/2" : "md:w-full"
+        }`}
+        id="expenses"
+      >
+        {/* Add Expense */}
+        <section className="sticky top-0 pt-4 backdrop-blur-sm">
+          <div className="mb-5 flex items-center justify-between pb-3 ">
+            <h2 className="text-xl  font-medium">Expenses</h2>
+            <div className="flex gap-4">
+              {/* Modal Toggle */}
+              <button
+                data-modal-target="authentication-modal"
+                className="flex  items-center   gap-2   rounded-full bg-blue-600 text-sm font-medium text-white"
+                onClick={() => setShowAddExpenseModal(true)}
+              >
+                <PlusCircle className="h-6 w-6" />
+              </button>
             </div>
-          </section>
+          </div>
+        </section>
 
-          {/* <section>
+        {/* <section>
           <div className="my-5 flex items-center justify-between rounded-lg bg-violet-50 p-5">
             <p className="text-xs leading-snug">
               Displays all expenses paid - organized in labels, allocating each
@@ -106,65 +105,62 @@ export const Expenses = () => {
           </div>
         </section> */}
 
-          <section className="mb-8 mt-6 flex flex-col justify-start rounded-lg bg-white p-6">
-            <div>
-              <h4 className="text-sm font-medium text-gray-800">
-                Total Spendings
+        <section className="mb-8 mt-6 flex flex-col justify-start rounded-lg bg-white p-6">
+          <div>
+            <h4 className="text-sm font-medium text-gray-800">
+              Total Spendings
+            </h4>
+            <h4 className="text-sm font-medium text-gray-300">All Expenses</h4>
+          </div>
+
+          <div className="mt-6">
+            <p className="text-sm font-medium text-gray-800">
+              {currencyFormatter(balance)}
+            </p>
+          </div>
+
+          <Bar
+            data={lineChartData}
+            options={CHART_OPTIONS}
+            className="mt-12 border-b border-l"
+            height={125}
+          />
+        </section>
+
+        {/* List of Expenses */}
+        <section>
+          <div className="mb-8 mt-16">
+            <div className="flex items-center justify-between">
+              <h4 className="text-xs font-semibold uppercase text-gray-400">
+                Categories
               </h4>
-              <h4 className="text-sm font-medium text-gray-300">
-                All Expenses
+              <h4 className="text-xs font-medium uppercase text-gray-300">
+                Expenses
               </h4>
             </div>
+          </div>
 
-            <div className="mt-6">
-              <p className="text-sm font-medium text-gray-800">
-                {currencyFormatter(balance)}
-              </p>
+          {/* Expense Container */}
+          <div className="flex flex-col">
+            {expenses.length == 0 && (
+              <button
+                type="button"
+                onClick={() => setShowAddExpenseModal(true)}
+                className="flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-white py-8"
+              >
+                <PlusCircle className="h-5 w-5" strokeWidth={2} />
+                <p className="text-sm font-medium ">Add Expense</p>
+              </button>
+            )}
+
+            <div className="flex flex-col gap-4 md:flex-row md:gap-4">
+              {expenses.map((expense, index) => (
+                <ExpenseCategoryItem key={index} expense={expense} />
+              ))}
             </div>
-
-            <Bar
-              data={lineChartData}
-              options={CHART_OPTIONS}
-              className="mt-12 border-b border-l"
-              height={125}
-            />
-          </section>
-
-          {/* List of Expenses */}
-          <section>
-            <div className="mb-8 mt-16">
-              <div className="flex items-center justify-between">
-                <h4 className="text-xs font-semibold uppercase text-gray-400">
-                  Categories
-                </h4>
-                <h4 className="text-xs font-medium uppercase text-gray-300">
-                  Expenses
-                </h4>
-              </div>
-            </div>
-
-            {/* Expense Container */}
-            <div className="flex flex-col">
-              {expenses.length == 0 && (
-                <button
-                  type="button"
-                  onClick={() => setShowAddExpenseModal(true)}
-                  className="flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-white py-8"
-                >
-                  <PlusCircle className="h-5 w-5" strokeWidth={2} />
-                  <p className="text-sm font-medium ">Add Expense</p>
-                </button>
-              )}
-
-              <div className="flex flex-col gap-4">
-                {expenses.map((expense, index) => (
-                  <ExpenseCategoryItem key={index} expense={expense} />
-                ))}
-              </div>
-            </div>
-          </section>
-        </article>
-      </section>
+          </div>
+        </section>
+      </article>
     </>
   );
 };

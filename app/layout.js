@@ -2,12 +2,14 @@ import "./globals.css";
 
 import { AuthContextProvider } from "@/lib/authContext";
 import { FinanceContextProvider } from "@/lib/financeContext";
+import { ModalContextProvider } from "@/lib/modalContext";
 import { PackingContextProvider } from "@/lib/packingContext";
 import { ScheduleContextProvider } from "@/lib/scheduleContext";
 
 const allComponents = [
   AuthContextProvider,
   FinanceContextProvider,
+  ModalContextProvider,
   PackingContextProvider,
   ScheduleContextProvider,
 ];

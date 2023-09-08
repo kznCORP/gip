@@ -21,6 +21,14 @@ export default function Home() {
     }
   }, [router, user, loading]);
 
+  /**
+   *
+   * [KNOWN BUG]
+   *
+   * During initial render, Hydration failed because page.js' initial UI doesn't match what is in the server.
+   *
+   * */
+
   return (
     <>
       <Header />

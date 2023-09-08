@@ -1,20 +1,29 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthUserContext } from "@/lib/authContext";
+import { useRouter } from "next/navigation";
 
 export const Header = () => {
-  const [showSettings, setShowSettings] = useState(false);
+  const router = useRouter();
   const { user, loading, logout } = useContext(AuthUserContext);
+
+  const [showSettings, setShowSettings] = useState(false);
 
   const handleProfilePictureClick = () => {
     setShowSettings((prevShowSettings) => !prevShowSettings);
   };
 
+  useEffect(() => {
+    if (!user && !loading) {
+      router.push("/login");
+    }
+  }, [router, user, loading]);
+
   return (
     <header className="flex justify-between p-4">
       {user && !loading && (
-        <button onClick={handleProfilePictureClick}>
+        <div onClick={handleProfilePictureClick}>
           <div className="flex items-center gap-2">
             {/* Profile picture */}
             <div className="h-[40px] w-[40px] overflow-hidden rounded-full border">
@@ -28,17 +37,19 @@ export const Header = () => {
             </div>
             <p className="text-sm">Hi, {user.displayName}</p>
           </div>
-        </button>
+        </div>
       )}
 
-      {showSettings && (
-        <button
-          className="rounded-full border border-red-600 px-4 text-sm text-red-500"
-          onClick={logout}
-        >
-          Log Out
-        </button>
-      )}
+      <div>
+        {showSettings && (
+          <button
+            className="rounded-full border border-red-600 px-4 text-sm text-red-500"
+            onClick={logout}
+          >
+            Log Out
+          </button>
+        )}
+      </div>
     </header>
   );
 };

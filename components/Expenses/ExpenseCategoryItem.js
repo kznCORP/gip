@@ -23,7 +23,7 @@ export const ExpenseCategoryItem = ({ expense }) => {
         className="cursor-pointer"
         onClick={() => setShowExpenseModal(true)}
       >
-        <div className="flex items-center justify-between gap-6 rounded-lg bg-white p-5">
+        <div className="flex items-center justify-between gap-6 rounded-lg bg-white p-5 md:border-2 md:border-red-500">
           {/* Icon */}
           <div
             className="flex h-1/2 items-center justify-center rounded-lg p-4"

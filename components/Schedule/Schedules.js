@@ -47,6 +47,11 @@ export const Schedules = () => {
    *    [x] Expenses
    *    [x] Schedule
    *
+   *  [ ] Add media breakpoints for transitioning to Desktop View.
+   *    [ ] Packing List
+   *    [ ] Expenses
+   *    [ ] Schedule
+   *
    *
    */
 
