@@ -2,8 +2,10 @@
 
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
 import { AuthUserContext } from "@/lib/authContext";
 import { ScheduleContext } from "@/lib/scheduleContext";
+import { ModalContext } from "@/lib/modalContext";
 
 import { ScheduleItem } from "@/components/Schedule/ScheduleItem";
 
@@ -15,6 +17,7 @@ import { format } from "date-fns";
 export const Schedules = () => {
   const router = useRouter();
   const { user, loading } = useContext(AuthUserContext);
+  const { isModalOpen, clickedModal } = useContext(ModalContext);
   const {
     schedules,
     filteredDates,
@@ -25,7 +28,6 @@ export const Schedules = () => {
     selectedDate,
   } = useContext(ScheduleContext);
 
-  const [showAddScheduleModal, setShowAddScheduleModal] = useState(false);
   const [selectedDateFilter, setSelectedDateFilter] = useState("All");
 
   const [today, setToday] = useState(new Date());
@@ -41,12 +43,6 @@ export const Schedules = () => {
    *
    *  To-Do:
    *
-   *
-   *  [x] Add media breakpoints for transitioning to Tablet View.
-   *    [x] Packing List
-   *    [x] Expenses
-   *    [x] Schedule
-   *
    *  [ ] Add media breakpoints for transitioning to Desktop View.
    *    [ ] Packing List
    *    [ ] Expenses
@@ -58,14 +54,14 @@ export const Schedules = () => {
   return (
     <>
       <AddScheduleModal
-        onShow={showAddScheduleModal}
-        onClose={() => setShowAddScheduleModal(false)}
+        onShow={isModalOpen}
+        onClose={() => clickedModal(false)}
       />
 
       <article
         className={`mb-24 px-4 ${
-          showAddScheduleModal ? "md:w-1/2" : "md:w-full"
-        }`}
+          isModalOpen ? "md:w-1/2 lg:w-2/3" : "md:w-full lg:w-full"
+        } md:border-l`}
         id="schedules"
       >
         {/* Add Schedule */}
@@ -77,7 +73,7 @@ export const Schedules = () => {
               <button
                 data-modal-target="authentication-modal"
                 className="flex  items-center   gap-2   rounded-full bg-blue-600  text-sm font-medium text-white"
-                onClick={() => setShowAddScheduleModal(true)}
+                onClick={() => clickedModal(true)}
               >
                 <PlusCircle className="h-6 w-6" />
               </button>
@@ -136,7 +132,7 @@ export const Schedules = () => {
               );
             })}
 
-          <button type="button" onClick={() => setShowAddScheduleModal(true)}>
+          <button type="button" onClick={() => clickedModal(true)}>
             <div className="flex h-[75px] w-[75px] items-center justify-center rounded-xl bg-white">
               <p className="text-sm font-medium uppercase ">
                 <PlusCircle className="h-4 w-4" strokeWidth={2.5} />
@@ -186,7 +182,7 @@ export const Schedules = () => {
           {schedules.length == 0 && filteredSchedules.length == 0 && (
             <button
               type="button"
-              onClick={() => setShowAddScheduleModal(true)}
+              onClick={() => clickedModal(true)}
               className="flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-white py-8"
             >
               <PlusCircle className="h-5 w-5" strokeWidth={2} />

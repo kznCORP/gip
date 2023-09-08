@@ -31,7 +31,7 @@ export default function Home() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Navigation />
       <Schedules />
       <Expenses />
@@ -88,10 +88,15 @@ export default function Home() {
  * [x] Create choice of Icons
  *
  *
+ * [x] Add media breakpoints for transitioning to Tablet View.
+ *    [x] Packing List
+ *    [x] Expenses
+ *    [x] Schedule
+ *
  *
  * Up Next.
  *
- *  [ ] Add media breakpoints for transitioning to Tablet View.
+ *  [ ] Add media breakpoints for transitioning to Desktop View.
  *    [ ] Packing List
  *    [ ] Expenses
  *    [ ] Schedule

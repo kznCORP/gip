@@ -21,6 +21,8 @@ import { AddExpenseModal } from "@/components/Expenses/AddExpenseModal";
 
 import { FinanceContext } from "@/lib/financeContext";
 import { AuthUserContext } from "@/lib/authContext";
+import { ModalContext } from "@/lib/modalContext";
+
 import { CHART_OPTIONS, currencyFormatter } from "@/lib/utils";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
@@ -32,8 +34,8 @@ export const Expenses = () => {
   const router = useRouter();
   const { expenses } = useContext(FinanceContext);
   const { user, loading } = useContext(AuthUserContext);
+  const { isModalOpen, clickedModal } = useContext(ModalContext);
 
-  const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
   const [balance, setBalance] = useState(0);
 
   const lineChartData = {
@@ -67,14 +69,14 @@ export const Expenses = () => {
   return (
     <>
       <AddExpenseModal
-        onShow={showAddExpenseModal}
-        onClose={() => setShowAddExpenseModal(false)}
+        onShow={isModalOpen}
+        onClose={() => clickedModal(false)}
       />
 
       <article
         className={`mb-24 px-4 ${
-          showAddExpenseModal ? "md:w-1/2" : "md:w-full"
-        }`}
+          isModalOpen ? "md:w-1/2 lg:w-2/3" : "md:w-full lg:w-full"
+        } md:border-l md:shadow`}
         id="expenses"
       >
         {/* Add Expense */}
@@ -86,7 +88,7 @@ export const Expenses = () => {
               <button
                 data-modal-target="authentication-modal"
                 className="flex  items-center   gap-2   rounded-full bg-blue-600 text-sm font-medium text-white"
-                onClick={() => setShowAddExpenseModal(true)}
+                onClick={() => clickedModal(true)}
               >
                 <PlusCircle className="h-6 w-6" />
               </button>
@@ -145,7 +147,7 @@ export const Expenses = () => {
             {expenses.length == 0 && (
               <button
                 type="button"
-                onClick={() => setShowAddExpenseModal(true)}
+                onClick={() => clickedModal(true)}
                 className="flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-white py-8"
               >
                 <PlusCircle className="h-5 w-5" strokeWidth={2} />

@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+
+import { ModalContext } from "@/lib/modalContext";
 
 import { ViewExpenseModal } from "./ViewExpenseModal";
 import { Icons } from "../Icons";
@@ -8,20 +10,20 @@ import { Icons } from "../Icons";
 import { currencyFormatter } from "@/lib/utils";
 
 export const ExpenseCategoryItem = ({ expense }) => {
-  const [showExpenseModal, setShowExpenseModal] = useState(false);
+  const { isModalOpen, clickedModal } = useContext(ModalContext);
 
   return (
     <>
       <ViewExpenseModal
-        onShow={showExpenseModal}
-        onClose={() => setShowExpenseModal(false)}
+        onShow={isModalOpen}
+        onClose={() => clickedModal(false)}
         expense={expense}
       />
 
       <section
         type="button"
         className="cursor-pointer"
-        onClick={() => setShowExpenseModal(true)}
+        onClick={() => clickedModal(true)}
       >
         <div className="flex items-center justify-between gap-6 rounded-lg bg-white p-5 md:border-2 md:border-red-500">
           {/* Icon */}

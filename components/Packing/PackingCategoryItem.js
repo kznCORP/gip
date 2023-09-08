@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+
+import { ModalContext } from "@/lib/modalContext";
 
 import { ViewPackingModal } from "./ViewPackingModal";
 import { Icons } from "../Icons";
@@ -8,20 +10,20 @@ import { Icons } from "../Icons";
 import { ChevronDown } from "lucide-react";
 
 export const PackingCategoryItem = ({ packingItem }) => {
-  const [showPackingModal, setShowPackingModal] = useState(false);
+  const { isModalOpen, clickedModal } = useContext(ModalContext);
 
   return (
     <>
       <ViewPackingModal
-        onShow={showPackingModal}
-        onClose={() => setShowPackingModal(false)}
+        onShow={isModalOpen}
+        onClose={() => clickedModal(false)}
         packingItem={packingItem}
       />
 
       <section
         type="button"
         className="cursor-pointer"
-        onClick={() => setShowPackingModal(true)}
+        onClick={() => clickedModal(true)}
       >
         {/* Packing Category */}
         <div className="flex items-center justify-between gap-6 rounded-lg bg-white p-5">

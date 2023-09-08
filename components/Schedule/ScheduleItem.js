@@ -1,34 +1,33 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+
+import { ModalContext } from "@/lib/modalContext";
+
 import { ViewScheduleModal } from "./ViewScheduleModal";
 import { timeFormatter } from "@/lib/utils";
+
 import { Clock, MoveRight } from "lucide-react";
 
 export const ScheduleItem = ({ schedule, position }) => {
-  const [showScheduleModal, setShowScheduleModal] = useState(false);
+  const { isModalOpen, clickedModal } = useContext(ModalContext);
   const [selectedActivity, setSelectedActivity] = useState(null);
 
   return (
     <>
       <ViewScheduleModal
-        onShow={showScheduleModal}
-        onClose={() => setShowScheduleModal(false)}
+        onShow={isModalOpen}
+        onClose={() => clickedModal(false)}
         schedule={schedule}
         activity={selectedActivity}
       />
 
       {schedule.activities &&
         schedule.activities.map((activity) => (
-          <section
-            key={activity.id}
-            className={`flex gap-4  ${
-              showScheduleModal ? "md:w-1/2" : "md:w-full"
-            }`}
-          >
+          <section key={activity.id} className="flex gap-4">
             <button
               onClick={() => {
-                setShowScheduleModal(true);
+                clickedModal(true);
                 setSelectedActivity(activity);
               }}
               className="mb-4 w-full rounded-xl"
