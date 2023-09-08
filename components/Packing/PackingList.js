@@ -39,7 +39,7 @@ export const PackingList = () => {
       <article
         className={`mb-24 px-4 ${
           isModalOpen ? "md:w-1/2 lg:w-2/3" : "md:w-full lg:w-full"
-        } md:border-l`}
+        } `}
         id="packing-list"
       >
         {/* Add Packing Item */}

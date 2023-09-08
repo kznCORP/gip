@@ -11,7 +11,7 @@ export const Modal = ({ onShow, onClose, children }) => {
     <>
       {onShow && (
         <div
-          className={`fixed bottom-0 right-0 top-0 z-50 h-full w-full overflow-y-auto border ${
+          className={`fixed bottom-0 right-0 top-0 z-50 h-full w-full overflow-y-auto ${
             isModalOpen ? "md:w-1/2 lg:w-1/3" : "md:w-full lg:w-full"
           } md:border-l md:shadow`}
           style={{ backgroundColor: "#F6F6F6" }}

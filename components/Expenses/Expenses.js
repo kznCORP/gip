@@ -76,7 +76,7 @@ export const Expenses = () => {
       <article
         className={`mb-24 px-4 ${
           isModalOpen ? "md:w-1/2 lg:w-2/3" : "md:w-full lg:w-full"
-        } md:border-l md:shadow`}
+        } `}
         id="expenses"
       >
         {/* Add Expense */}
@@ -124,7 +124,7 @@ export const Expenses = () => {
           <Bar
             data={lineChartData}
             options={CHART_OPTIONS}
-            className="mt-12 border-b border-l"
+            className="mt-12"
             height={125}
           />
         </section>
