@@ -69,7 +69,7 @@ export const Expenses = () => {
   return (
     <>
       <AddExpenseModal
-        onShow={isModalOpen}
+        onShow={isModalOpen == "add-expense-item"}
         onClose={() => clickedModal(false)}
       />
 
@@ -88,7 +88,7 @@ export const Expenses = () => {
               <button
                 data-modal-target="authentication-modal"
                 className="flex  items-center   gap-2   rounded-full bg-blue-600 text-sm font-medium text-white"
-                onClick={() => clickedModal(true)}
+                onClick={() => clickedModal("add-expense-item")}
               >
                 <PlusCircle className="h-6 w-6" />
               </button>
@@ -147,7 +147,7 @@ export const Expenses = () => {
             {expenses.length == 0 && (
               <button
                 type="button"
-                onClick={() => clickedModal(true)}
+                onClick={() => clickedModal("add-expense-item")}
                 className="flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-white py-8"
               >
                 <PlusCircle className="h-5 w-5" strokeWidth={2} />

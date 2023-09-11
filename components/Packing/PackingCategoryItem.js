@@ -15,7 +15,7 @@ export const PackingCategoryItem = ({ packingItem }) => {
   return (
     <>
       <ViewPackingModal
-        onShow={isModalOpen}
+        onShow={isModalOpen == packingItem.id}
         onClose={() => clickedModal(false)}
         packingItem={packingItem}
       />
@@ -23,7 +23,7 @@ export const PackingCategoryItem = ({ packingItem }) => {
       <section
         type="button"
         className="cursor-pointer"
-        onClick={() => clickedModal(true)}
+        onClick={() => clickedModal(packingItem.id)}
       >
         {/* Packing Category */}
         <div className="flex items-center justify-between gap-6 rounded-lg bg-white p-5">

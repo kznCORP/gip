@@ -15,7 +15,7 @@ export const ExpenseCategoryItem = ({ expense }) => {
   return (
     <>
       <ViewExpenseModal
-        onShow={isModalOpen}
+        onShow={isModalOpen == expense.id}
         onClose={() => clickedModal(false)}
         expense={expense}
       />
@@ -23,7 +23,7 @@ export const ExpenseCategoryItem = ({ expense }) => {
       <section
         type="button"
         className="cursor-pointer"
-        onClick={() => clickedModal(true)}
+        onClick={() => clickedModal(expense.id)}
       >
         <div className="flex items-center justify-between gap-6 rounded-lg bg-white p-5 md:border-2 md:border-red-500">
           {/* Icon */}

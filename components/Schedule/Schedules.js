@@ -54,7 +54,7 @@ export const Schedules = () => {
   return (
     <>
       <AddScheduleModal
-        onShow={isModalOpen}
+        onShow={isModalOpen == "add-schedule-item"}
         onClose={() => clickedModal(false)}
       />
 
@@ -73,7 +73,7 @@ export const Schedules = () => {
               <button
                 data-modal-target="authentication-modal"
                 className="flex  items-center   gap-2   rounded-full bg-blue-600  text-sm font-medium text-white"
-                onClick={() => clickedModal(true)}
+                onClick={() => clickedModal("add-schedule-item")}
               >
                 <PlusCircle className="h-6 w-6" />
               </button>
@@ -132,7 +132,10 @@ export const Schedules = () => {
               );
             })}
 
-          <button type="button" onClick={() => clickedModal(true)}>
+          <button
+            type="button"
+            onClick={() => clickedModal("add-schedule-item")}
+          >
             <div className="flex h-[75px] w-[75px] items-center justify-center rounded-xl bg-white">
               <p className="text-sm font-medium uppercase ">
                 <PlusCircle className="h-4 w-4" strokeWidth={2.5} />
@@ -182,7 +185,7 @@ export const Schedules = () => {
           {schedules.length == 0 && filteredSchedules.length == 0 && (
             <button
               type="button"
-              onClick={() => clickedModal(true)}
+              onClick={() => clickedModal("add-schedule-item")}
               className="flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-white py-8"
             >
               <PlusCircle className="h-5 w-5" strokeWidth={2} />

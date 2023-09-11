@@ -16,7 +16,7 @@ export const ScheduleItem = ({ schedule, position }) => {
   return (
     <>
       <ViewScheduleModal
-        onShow={isModalOpen}
+        onShow={isModalOpen == schedule.id}
         onClose={() => clickedModal(false)}
         schedule={schedule}
         activity={selectedActivity}
@@ -27,7 +27,7 @@ export const ScheduleItem = ({ schedule, position }) => {
           <section key={activity.id} className="flex gap-4">
             <button
               onClick={() => {
-                clickedModal(true);
+                clickedModal(schedule.id);
                 setSelectedActivity(activity);
               }}
               className="mb-4 w-full rounded-xl"

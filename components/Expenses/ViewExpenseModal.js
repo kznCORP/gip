@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useContext, useState } from "react";
+
 import { FinanceContext } from "@/lib/financeContext";
+import { ModalContext } from "@/lib/modalContext";
 
 import { Modal } from "../Modal";
 import { AddExpenseModal } from "./AddExpenseModal";
@@ -11,10 +13,9 @@ import { PlusCircle, Trash2 } from "lucide-react";
 import { currencyFormatter, dateFormatter } from "@/lib/utils";
 
 export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
+  const { isModalOpen, clickedModal } = useContext(ModalContext);
   const { deleteExpenseItem, deleteExpenseCategory } =
     useContext(FinanceContext);
-
-  const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
 
   //Delete Expense Category in Firebase
   const deleteExpenseCategoryHandler = async () => {
@@ -45,8 +46,8 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
   return (
     <>
       <AddExpenseModal
-        onShow={showAddExpenseModal}
-        onClose={() => setShowAddExpenseModal(false)}
+        onShow={isModalOpen == "add-expense-item"}
+        onClose={() => clickedModal(false)}
       />
 
       <Modal onShow={onShow} onClose={onClose}>
@@ -73,7 +74,7 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
 
           {/* Total Expense */}
           <div className="mt-4 flex h-24 flex-col items-center justify-center rounded-lg bg-white">
-          <p className="uppercase text-gray-400" style={{ fontSize: "10px" }}>
+            <p className="uppercase text-gray-400" style={{ fontSize: "10px" }}>
               Total Amt. Spent
             </p>
             <p
@@ -101,7 +102,7 @@ export const ViewExpenseModal = ({ onShow, onClose, expense }) => {
               className="flex h-full w-1/5 items-center justify-center self-center rounded-lg bg-white"
               onClick={() => {
                 onClose();
-                setShowAddExpenseModal(true);
+                clickedModal("add-expense-item");
               }}
             >
               <PlusCircle className="h-6 w-6 flex-shrink-0" />
