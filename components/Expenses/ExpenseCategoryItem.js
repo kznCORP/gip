@@ -22,10 +22,10 @@ export const ExpenseCategoryItem = ({ expense }) => {
 
       <section
         type="button"
-        className="cursor-pointer"
+        className={`cursor-pointer ${isModalOpen ? "md:w-full" : ""}`}
         onClick={() => clickedModal(expense.id)}
       >
-        <div className="flex items-center justify-between gap-6 rounded-lg bg-white p-5 md:border-2 md:border-red-500">
+        <div className="flex w-full items-center justify-between gap-6 rounded-lg bg-white p-5 md:border-2 md:border-red-500">
           {/* Icon */}
           <div
             className="flex h-1/2 items-center justify-center rounded-lg p-4"

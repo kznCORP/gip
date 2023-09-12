@@ -143,23 +143,21 @@ export const Expenses = () => {
           </div>
 
           {/* Expense Container */}
-          <div className="flex flex-col">
-            {expenses.length == 0 && (
-              <button
-                type="button"
-                onClick={() => clickedModal("add-expense-item")}
-                className="flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-white py-8"
-              >
-                <PlusCircle className="h-5 w-5" strokeWidth={2} />
-                <p className="text-sm font-medium ">Add Expense</p>
-              </button>
-            )}
+          {expenses.length == 0 && (
+            <button
+              type="button"
+              onClick={() => clickedModal("add-expense-item")}
+              className="flex w-full flex-col items-center justify-center gap-2 rounded-lg bg-white py-8"
+            >
+              <PlusCircle className="h-5 w-5" strokeWidth={2} />
+              <p className="text-sm font-medium ">Add Expense</p>
+            </button>
+          )}
 
-            <div className="flex flex-col gap-4 md:flex-row md:gap-4">
-              {expenses.map((expense, index) => (
-                <ExpenseCategoryItem key={index} expense={expense} />
-              ))}
-            </div>
+          <div className="flex flex-col flex-wrap gap-4 md:flex-row ">
+            {expenses.map((expense, index) => (
+              <ExpenseCategoryItem key={index} expense={expense} />
+            ))}
           </div>
         </section>
       </article>

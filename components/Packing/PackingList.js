@@ -98,7 +98,7 @@ export const PackingList = () => {
               </h4>
             </div>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col flex-wrap gap-4 md:flex-row">
             {packingItems.map((item, index) => (
               <PackingCategoryItem key={index} packingItem={item} />
             ))}

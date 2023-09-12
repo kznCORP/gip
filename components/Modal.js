@@ -2,7 +2,7 @@
 
 import React, { useContext } from "react";
 import { ModalContext } from "@/lib/modalContext";
-import { ArrowLeftCircle } from "lucide-react";
+import { X } from "lucide-react";
 
 export const Modal = ({ onShow, onClose, children }) => {
   const { isModalOpen, clickedModal } = useContext(ModalContext);
@@ -16,21 +16,20 @@ export const Modal = ({ onShow, onClose, children }) => {
           } md:border-l md:shadow`}
           style={{ backgroundColor: "#F6F6F6" }}
         >
-          <div className="mt-4 px-6 pt-4">
+          <div className="px-6 pt-8">
             <button
               type="button"
               onClick={() => {
                 onClose();
                 clickedModal(false); // Handle the modal click event on button click
               }}
-              className="flex items-center gap-2"
+              className="flex w-full items-center justify-end gap-2"
             >
-              <ArrowLeftCircle
+              <X
                 className="h-6 w-6 flex-shrink-0"
-                strokeWidth={2}
+                strokeWidth={3}
                 color="black"
               />
-              <p className="text-xs font-medium">Go Back</p>
             </button>
           </div>
 
