@@ -23,19 +23,26 @@ export default function Home() {
 
   /**
    *
-   * [KNOWN BUG]
+   *  Current Progress:
+   *  See Expenses Modal for latest progression with to-do comments.
    *
-   * During initial render, Hydration failed because page.js' initial UI doesn't match what is in the server.
+   *
+   *  [ Bug ]
+   *  During initial render, Hydration failed because page.js' initial UI doesn't match what is in the server.
    *
    * */
 
   return (
     <>
-      <Header />
-      <Navigation />
-      <Schedules />
-      <Expenses />
-      <PackingList />
+      <div className="flex items-center justify-center">
+        <div className="w-full lg:max-w-screen-md xl:max-w-screen-lg">
+          <Header />
+          <Navigation />
+          <Schedules />
+          <Expenses />
+          <PackingList />
+        </div>
+      </div>
     </>
   );
 }

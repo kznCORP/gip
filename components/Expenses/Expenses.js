@@ -66,6 +66,16 @@ export const Expenses = () => {
     setBalance(newBalance);
   }, [expenses, router, user, loading]);
 
+  /**
+   *
+   * 
+   * 
+   *  To-Do:
+   *  [ ] Grow each Category item according to div width and viewport
+   *
+   * 
+   */
+
   return (
     <>
       <AddExpenseModal
@@ -75,8 +85,8 @@ export const Expenses = () => {
 
       <article
         className={`mb-24 px-4 ${
-          isModalOpen ? "md:w-1/2 lg:w-2/3" : "md:w-full lg:w-full"
-        } `}
+          isModalOpen ? "md:w-1/2 lg:w-3/4" : "md:w-full"
+        }`}
         id="expenses"
       >
         {/* Add Expense */}
@@ -85,13 +95,15 @@ export const Expenses = () => {
             <h2 className="text-xl  font-medium">Expenses</h2>
             <div className="flex gap-4">
               {/* Modal Toggle */}
-              <button
-                data-modal-target="authentication-modal"
-                className="flex  items-center   gap-2   rounded-full bg-blue-600 text-sm font-medium text-white"
-                onClick={() => clickedModal("add-expense-item")}
-              >
-                <PlusCircle className="h-6 w-6" />
-              </button>
+              {!isModalOpen && (
+                <button
+                  data-modal-target="authentication-modal"
+                  className="flex  items-center   gap-2   rounded-full bg-blue-600 text-sm font-medium text-white"
+                  onClick={() => clickedModal("add-expense-item")}
+                >
+                  <PlusCircle className="h-6 w-6" />
+                </button>
+              )}
             </div>
           </div>
         </section>
@@ -125,7 +137,7 @@ export const Expenses = () => {
             data={lineChartData}
             options={CHART_OPTIONS}
             className="mt-12"
-            height={125}
+            height={75}
           />
         </section>
 

@@ -39,18 +39,6 @@ export const Schedules = () => {
     }
   }, [router, user, loading]);
 
-  /**
-   *
-   *  To-Do:
-   *
-   *  [ ] Add media breakpoints for transitioning to Desktop View.
-   *    [ ] Packing List
-   *    [ ] Expenses
-   *    [ ] Schedule
-   *
-   *
-   */
-
   return (
     <>
       <AddScheduleModal
@@ -60,7 +48,7 @@ export const Schedules = () => {
 
       <article
         className={`mb-24 px-4 ${
-          isModalOpen ? "md:w-1/2 lg:w-2/3" : "md:w-full lg:w-full"
+          isModalOpen ? "md:w-1/2 lg:w-3/4" : "md:w-full"
         }`}
         id="schedules"
       >
@@ -70,13 +58,15 @@ export const Schedules = () => {
             <h2 className="text-2xl font-medium">Schedule</h2>
             <div className="flex gap-4">
               {/* Modal Toggle */}
-              <button
-                data-modal-target="authentication-modal"
-                className="flex  items-center   gap-2   rounded-full bg-blue-600  text-sm font-medium text-white"
-                onClick={() => clickedModal("add-schedule-item")}
-              >
-                <PlusCircle className="h-6 w-6" />
-              </button>
+              {!isModalOpen && (
+                <button
+                  data-modal-target="authentication-modal"
+                  className="flex  items-center   gap-2   rounded-full bg-blue-600  text-sm font-medium text-white"
+                  onClick={() => clickedModal("add-schedule-item")}
+                >
+                  <PlusCircle className="h-6 w-6" />
+                </button>
+              )}
             </div>
           </div>
         </section>

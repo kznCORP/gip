@@ -84,7 +84,6 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
       setExpenseName("");
       setSelectedCategory(null);
       setIsSubmitClicked(false);
-      onClose();
     } catch (e) {
       throw e;
     }
@@ -277,6 +276,7 @@ export const AddExpenseModal = ({ onShow, onClose }) => {
                         <button
                           key={index}
                           onClick={() => setSelectedIcon(icon)}
+                          type="button"
                         >
                           <div>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
