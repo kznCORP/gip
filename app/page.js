@@ -24,7 +24,7 @@ export default function Home() {
   /**
    *
    *  Current Progress:
-   *  See Expenses Modal for latest progression with to-do comments.
+   *  See Navigation for latest progression with to-do comments.
    *
    *
    *  [ Bug ]
@@ -100,13 +100,14 @@ export default function Home() {
  *    [x] Expenses
  *    [x] Schedule
  *
+ * [x] Add media breakpoints for transitioning to Desktop View.
+ *    [x] Packing List
+ *    [x] Expenses
+ *    [x] Schedule
+ *
  *
  * Up Next.
  *
- *  [ ] Add media breakpoints for transitioning to Desktop View.
- *    [ ] Packing List
- *    [ ] Expenses
- *    [ ] Schedule
  *
  *
  * [.] Stress test, bug hunt; refactor and fix.

@@ -100,7 +100,7 @@ export const PackingList = () => {
               </h4>
             </div>
           </div>
-          <div className="flex flex-col flex-wrap gap-4 md:flex-row">
+          <div className="flex flex-col flex-wrap md:flex-row">
             {packingItems.map((item, index) => (
               <PackingCategoryItem key={index} packingItem={item} />
             ))}
@@ -119,17 +119,24 @@ export const PackingList = () => {
         )}
 
         <section>
-          <div className="mb-8 mt-16 ">
-            <h4 className="text-sm font-medium text-gray-700">Items to Buy</h4>
+          <div className="mb-8 mt-16">
+            <div className="flex items-center justify-between">
+              <h4 className="text-xs font-semibold uppercase text-gray-400">
+                Things to Buy
+              </h4>
+              <h4 className="text-xs font-medium uppercase text-gray-300">
+                Packing List
+              </h4>
+            </div>
           </div>
 
-          <div className="mt-6 flex flex-col items-start justify-between gap-4">
+          <div className="mt-6 flex items-start gap-4">
             {unboughtItems.map((item) => (
               <div
                 key={item.id}
                 className="rounded-full bg-indigo-100 px-4 py-2"
               >
-                <p className="text-xs font-medium">{item.name}</p>
+                <p className="text-sm font-medium">{item.name}</p>
               </div>
             ))}
           </div>

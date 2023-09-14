@@ -22,7 +22,9 @@ export const PackingCategoryItem = ({ packingItem }) => {
 
       <section
         type="button"
-        className={`cursor-pointer ${isModalOpen ? "md:w-full" : ""}`}
+        className={`cursor-pointer ${
+          isModalOpen ? "md:w-full my-2" : "p-2 md:w-1/2"
+        }`}
         onClick={() => clickedModal(packingItem.id)}
       >
         {/* Packing Category */}

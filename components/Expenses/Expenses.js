@@ -66,16 +66,6 @@ export const Expenses = () => {
     setBalance(newBalance);
   }, [expenses, router, user, loading]);
 
-  /**
-   *
-   * 
-   * 
-   *  To-Do:
-   *  [ ] Grow each Category item according to div width and viewport
-   *
-   * 
-   */
-
   return (
     <>
       <AddExpenseModal
@@ -166,7 +156,7 @@ export const Expenses = () => {
             </button>
           )}
 
-          <div className="flex flex-col flex-wrap gap-4 md:flex-row ">
+          <div className="flex flex-col flex-wrap md:flex-row ">
             {expenses.map((expense, index) => (
               <ExpenseCategoryItem key={index} expense={expense} />
             ))}

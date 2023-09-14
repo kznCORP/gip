@@ -22,7 +22,9 @@ export const ExpenseCategoryItem = ({ expense }) => {
 
       <section
         type="button"
-        className={`cursor-pointer ${isModalOpen ? "md:w-full" : ""}`}
+        className={`cursor-pointer ${
+          isModalOpen ? "my-2 md:w-full" : "p-2 md:w-1/2"
+        }`}
         onClick={() => clickedModal(expense.id)}
       >
         <div className="flex w-full items-center justify-between gap-6 rounded-lg bg-white p-5">

@@ -9,6 +9,17 @@ import {
   Home,
 } from "lucide-react";
 
+/**
+ *
+ *  TO DO LIST
+ *
+ *  [ ] Create a left Sidebar Menu
+ *    [ ] Laptop View
+ *    [ ] Desktop View
+ *
+ *
+ * */
+
 export const Navigation = () => {
   return (
     <nav className="fixed bottom-0 left-1/2 z-40 -translate-x-1/2 transform p-4">
