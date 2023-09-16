@@ -35,7 +35,9 @@ export default function Home() {
   /**
    *
    *  Current Progress:
-   *  See Sidebar for latest progression with to-do comments.
+   *  [ ] Improve Laptop and Desktop UI & Spacing (maybe extra components for pieces of information)
+   *  [ ] Sidebar Menu and Navigation containing User Profile
+   *  [ ] Plan for Logout placements
    *
    *
    *  [ Bug ]
@@ -49,7 +51,7 @@ export default function Home() {
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
         <div
-          className={`lg:pl-20 ${isModalOpen ? "md:w-1/2 lg:w-2/3" : "w-full"}`}
+          className={`lg:pl-52 ${isModalOpen ? "md:w-1/2 lg:w-2/3" : "w-full"}`}
         >
           <Header />
           <Navigation />
@@ -121,7 +123,6 @@ export default function Home() {
  *    [x] Schedule
  *
  * [x] Create a left Sidebar Menu
- *    [ ] Sidebar Mobile View
  *    [x] Sidebar Laptop View
  *    [x] Sidebar Desktop View
  *

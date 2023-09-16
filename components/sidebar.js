@@ -12,33 +12,34 @@ import {
 
 export const Sidebar = ({ isOpen, toggleSidebar }) => {
   return (
-    <nav className="hidden lg:block lg:fixed lg:top-0 lg:h-screen lg:w-20 lg:bg-neutral-800">
-      <ul className="flex flex-col items-center justify-evenly mt-6">
-        <li className="mx-2 rounded-lg p-4">
-          <Link href="#">
-            <Home className="h-6 w-6 text-white" strokeWidth={1.5} />
+    <nav className="hidden h-screen lg:fixed lg:top-0 lg:block lg:w-52 lg:bg-white">
+      <ul className="mt-6 flex flex-col items-start justify-evenly gap-4">
+        <li className="mx-2 rounded-lg  p-4">
+          <Link href="#" className="flex items-center justify-center">
+            <Home className="h-6 w-6 text-black" strokeWidth={2} />
+            <p className="ml-6 text-sm font-medium">Home</p>
           </Link>
         </li>
-        <div
-          className="opacity-20"
-          style={{ border: "0.5px solid white", height: "56px" }}
-        ></div>
-        <li className="mx-2  rounded-lg p-4">
-          <Link href="#shedules">
-            <CalendarClock className="h-6 w-6 text-white" strokeWidth={1.5} />
+
+        <li className="mx-2 rounded-lg  p-4">
+          <Link href="#shedules" className="flex items-center justify-center">
+            <CalendarClock className="h-6 w-6 text-black" strokeWidth={2} />
+            <p className="ml-6 text-sm font-medium">Schedules</p>
           </Link>
         </li>
-        <li className="rounded-lg  p-4">
-          <Link href="#expenses">
-            <CircleDollarSign
-              className="h-6 w-6 text-white"
-              strokeWidth={1.5}
-            />
+        <li className="mx-2 rounded-lg  p-4">
+          <Link href="#expenses" className="flex items-center justify-center">
+            <CircleDollarSign className="h-6 w-6 text-black" strokeWidth={2} />
+            <p className="ml-6 text-sm font-medium">Expenses</p>
           </Link>
         </li>
-        <li className="mx-2  rounded-lg p-4">
-          <Link href="#packing-list">
-            <ClipboardList className="h-6 w-6 text-white" strokeWidth={1.5} />
+        <li className="mx-2  rounded-lg  p-4">
+          <Link
+            href="#packing-list"
+            className="flex items-center justify-center"
+          >
+            <ClipboardList className="h-6 w-6 text-black" strokeWidth={2} />
+            <p className="ml-6 text-sm font-medium">Packing List</p>
           </Link>
         </li>
       </ul>
