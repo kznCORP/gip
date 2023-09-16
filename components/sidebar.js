@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+
 import {
   CalendarClock,
   CircleDollarSign,
@@ -9,10 +10,10 @@ import {
   Home,
 } from "lucide-react";
 
-export const Navigation = () => {
+export const Sidebar = ({ isOpen, toggleSidebar }) => {
   return (
-    <nav className="fixed bottom-0 left-1/2 z-40 -translate-x-1/2 transform p-4 lg:hidden xl:hidden">
-      <ul className="flex items-center justify-evenly rounded-full bg-neutral-900  opacity-90 backdrop-blur">
+    <nav className="hidden lg:block lg:fixed lg:top-0 lg:h-screen lg:w-20 lg:bg-neutral-800">
+      <ul className="flex flex-col items-center justify-evenly mt-6">
         <li className="mx-2 rounded-lg p-4">
           <Link href="#">
             <Home className="h-6 w-6 text-white" strokeWidth={1.5} />

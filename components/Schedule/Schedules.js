@@ -46,16 +46,11 @@ export const Schedules = () => {
         onClose={() => clickedModal(false)}
       />
 
-      <article
-        className={`mb-24 px-4 ${
-          isModalOpen ? "md:w-1/2 lg:w-3/4" : "md:w-full"
-        }`}
-        id="schedules"
-      >
+      <article className="mb-24 px-4" id="schedules">
         {/* Add Schedule */}
         <section className="sticky top-0 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
-            <h2 className="text-2xl font-medium">Schedule</h2>
+            <h2 className="text-xl font-medium">Schedule</h2>
             <div className="flex gap-4">
               {/* Modal Toggle */}
               {!isModalOpen && (
@@ -71,9 +66,34 @@ export const Schedules = () => {
           </div>
         </section>
 
+        {/* Calendar */}
+        <section>
+          <div className="mt-16">
+            {isFilterApplied ? (
+              <div>
+                <h2 className="text-4xl font-semibold text-stone-700">
+                  {selectedDate.dateName},
+                </h2>
+                <h2 className="text-4xl font-semibold text-blue-600">
+                  {selectedDate.month} {selectedDate.day}
+                </h2>
+              </div>
+            ) : (
+              <div>
+                <h2 className="text-4xl font-semibold text-stone-700">
+                  Today,
+                </h2>
+                <h2 className="text-4xl font-semibold text-blue-600">
+                  {formattedToday}
+                </h2>
+              </div>
+            )}
+          </div>
+        </section>
+
         {/* Date Filters */}
         <section
-          className="mt-8 flex items-center gap-3 overflow-x-auto p-0.5"
+          className="mt-16 flex items-center gap-3 overflow-x-auto p-0.5"
           type="button"
         >
           <button
@@ -132,31 +152,6 @@ export const Schedules = () => {
               </p>
             </div>
           </button>
-        </section>
-
-        {/* Calendar */}
-        <section>
-          <div className="mt-16">
-            {isFilterApplied ? (
-              <div>
-                <h2 className="text-4xl font-semibold text-stone-700">
-                  {selectedDate.dateName},
-                </h2>
-                <h2 className="text-4xl font-semibold text-blue-600">
-                  {selectedDate.month} {selectedDate.day}
-                </h2>
-              </div>
-            ) : (
-              <div>
-                <h2 className="text-4xl font-semibold text-stone-700">
-                  Today,
-                </h2>
-                <h2 className="text-4xl font-semibold text-blue-600">
-                  {formattedToday}
-                </h2>
-              </div>
-            )}
-          </div>
         </section>
 
         {/* List of Schedules */}

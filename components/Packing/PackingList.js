@@ -36,12 +36,7 @@ export const PackingList = () => {
         onClose={() => clickedModal(false)}
       />
 
-      <article
-        className={`mb-24 px-4 ${
-          isModalOpen ? "md:w-1/2 lg:w-3/4" : "md:w-full"
-        }`}
-        id="packing-list"
-      >
+      <article className="mb-24 px-4" id="packing-list">
         {/* Add Packing Item */}
         <section className="sticky top-0 z-10 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">

@@ -1,11 +1,13 @@
 "use client";
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AuthUserContext } from "@/lib/authContext";
+import { ModalContext } from "@/lib/modalContext";
 
 import Header from "@/components/Header";
 
+import { Sidebar } from "@/components/sidebar";
 import { Navigation } from "@/components/navigation.js";
 import { Schedules } from "@/components/Schedule/Schedules";
 import { Expenses } from "@/components/Expenses/Expenses";
@@ -14,6 +16,9 @@ import { PackingList } from "@/components/Packing/PackingList";
 export default function Home() {
   const router = useRouter();
   const { user, loading } = useContext(AuthUserContext);
+  const { isModalOpen } = useContext(ModalContext);
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   useEffect(() => {
     if (!user && !loading) {
@@ -21,10 +26,16 @@ export default function Home() {
     }
   }, [router, user, loading]);
 
+  // Function to toggle the sidebar state
+  const toggleSidebar = () => {
+    console.log("clicked");
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   /**
    *
    *  Current Progress:
-   *  See Navigation for latest progression with to-do comments.
+   *  See Sidebar for latest progression with to-do comments.
    *
    *
    *  [ Bug ]
@@ -34,8 +45,12 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex items-center justify-center">
-        <div className="w-full lg:max-w-screen-md xl:max-w-screen-lg">
+      <div className="inline-flex w-full">
+        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+
+        <div
+          className={`lg:pl-20 ${isModalOpen ? "md:w-1/2 lg:w-2/3" : "w-full"}`}
+        >
           <Header />
           <Navigation />
           <Schedules />
@@ -104,6 +119,11 @@ export default function Home() {
  *    [x] Packing List
  *    [x] Expenses
  *    [x] Schedule
+ *
+ * [x] Create a left Sidebar Menu
+ *    [ ] Sidebar Mobile View
+ *    [x] Sidebar Laptop View
+ *    [x] Sidebar Desktop View
  *
  *
  * Up Next.
