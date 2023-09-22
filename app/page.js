@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { AuthUserContext } from "@/lib/authContext";
 import { ModalContext } from "@/lib/modalContext";
@@ -18,26 +18,22 @@ export default function Home() {
   const { user, loading } = useContext(AuthUserContext);
   const { isModalOpen } = useContext(ModalContext);
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
   useEffect(() => {
     if (!user && !loading) {
       router.push("/login");
     }
   }, [router, user, loading]);
 
-  // Function to toggle the sidebar state
-  const toggleSidebar = () => {
-    console.log("clicked");
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
   /**
    *
    *  Current Progress:
+   *  [ Important ] Check Navigation component for next steps
+   * 
    *  [ ] Improve Laptop and Desktop UI & Spacing (maybe extra components for pieces of information)
-   *  [ ] Sidebar Menu and Navigation containing User Profile
-   *  [ ] Plan for Logout placements
+   *  [x] Sidebar Menu and Navigation containing User Profile
+   *  [x] Plan for Logout placements - Refer to Figma Tablet
+   * 
+   * 
    *
    *
    *  [ Bug ]
@@ -48,7 +44,7 @@ export default function Home() {
   return (
     <>
       <div className="inline-flex w-full">
-        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        <Sidebar />
 
         <div
           className={`lg:pl-52 ${isModalOpen ? "md:w-1/2 lg:w-2/3" : "w-full"}`}
