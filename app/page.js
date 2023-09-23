@@ -5,8 +5,6 @@ import { useRouter } from "next/navigation";
 import { AuthUserContext } from "@/lib/authContext";
 import { ModalContext } from "@/lib/modalContext";
 
-import Header from "@/components/Header";
-
 import { Sidebar } from "@/components/sidebar";
 import { Navigation } from "@/components/navigation.js";
 import { Schedules } from "@/components/Schedule/Schedules";
@@ -27,17 +25,7 @@ export default function Home() {
   /**
    *
    *  Current Progress:
-   *  [ Important ] Check Navigation component for next steps
-   * 
    *  [ ] Improve Laptop and Desktop UI & Spacing (maybe extra components for pieces of information)
-   *  [x] Sidebar Menu and Navigation containing User Profile
-   *  [x] Plan for Logout placements - Refer to Figma Tablet
-   * 
-   * 
-   *
-   *
-   *  [ Bug ]
-   *  During initial render, Hydration failed because page.js' initial UI doesn't match what is in the server.
    *
    * */
 
@@ -49,7 +37,6 @@ export default function Home() {
         <div
           className={`lg:pl-52 ${isModalOpen ? "md:w-1/2 lg:w-2/3" : "w-full"}`}
         >
-          <Header />
           <Navigation />
           <Schedules />
           <Expenses />
@@ -121,6 +108,7 @@ export default function Home() {
  * [x] Create a left Sidebar Menu
  *    [x] Sidebar Laptop View
  *    [x] Sidebar Desktop View
+ *    [x] Sidebar Menu and Navigation containing User Profile
  *
  *
  * Up Next.
