@@ -38,7 +38,7 @@ export default function SignIn() {
       <Logo />
 
       <section className="flex items-center justify-center bg-white">
-        <div className="flex h-screen w-full flex-col items-center justify-center gap-8 sm:w-3/4">
+        <div className="flex h-screen w-full max-w-lg flex-col items-center justify-center gap-8">
           <div className="mb-6 mt-12 w-2/3 text-center">
             <h2 className="text-2xl font-medium">Welcome Back</h2>
             <p className="mt-2 text-xs font-light text-gray-400">
@@ -94,7 +94,6 @@ export default function SignIn() {
               Login with Email
             </button>
           </form>
-
           <div className=" flex w-2/3 items-center justify-between gap-6">
             <div className="h-[1px] w-full bg-gray-200"></div>
             <p className="flex-shrink-0 whitespace-nowrap text-xs font-light text-gray-400">
@@ -102,7 +101,6 @@ export default function SignIn() {
             </p>
             <div className="h-[1px] w-full bg-gray-200"></div>
           </div>
-
           <button
             className="flex w-2/3 items-center justify-center gap-4 rounded-full border border-gray-500 p-3 text-sm font-medium"
             onClick={googleLoginHandler}
@@ -110,7 +108,6 @@ export default function SignIn() {
             <FcGoogle className="h-4 w-4 flex-shrink-0" />
             Continue With Google
           </button>
-
           <div className=" w-1/2 text-center text-xs font-light">
             <p>By clicking continue, you agree to our</p>
             <div>
