@@ -38,8 +38,8 @@ export default function SignUp() {
     <>
       <Logo />
 
-      <section className="flex items-center justify-center bg-white">
-        <div className="flex h-screen w-full max-w-lg flex-col items-center justify-center gap-8">
+      <section className="flex h-screen items-center justify-center bg-white">
+        <div className="flex h-3/4 w-full max-w-lg flex-col items-center justify-center gap-8 rounded-xl md:border">
           <div className="mb-6 mt-12 w-2/3 text-center">
             <h2 className="text-2xl font-medium">Create an Account</h2>
             <p className="mt-2 text-xs font-light text-gray-400">
@@ -129,7 +129,7 @@ export default function SignUp() {
             Sign up with Google
           </button>
 
-          <div className=" w-1/2 text-center text-xs font-light">
+          <div className="mb-12 w-1/2 text-center text-xs font-light">
             <p>By clicking continue, you agree to our</p>
             <div>
               <Link href="#" className="border-b border-gray-500">

@@ -48,6 +48,7 @@ export const Schedules = () => {
 
       <article className="mb-24 px-4" id="schedules">
         {/* Add Schedule */}
+
         <section className="sticky top-0 pt-4 backdrop-blur-sm">
           <div className="mb-5 flex items-center justify-between pb-3 ">
             <h2 className="text-xl font-medium">Schedule</h2>
@@ -67,8 +68,8 @@ export const Schedules = () => {
         </section>
 
         {/* Calendar */}
-        <section>
-          <div className="mt-16">
+        <section className="my-8 flex flex-col justify-start rounded-lg bg-white py-8 text-center lg:text-left lg:pl-4">
+          <div>
             {isFilterApplied ? (
               <div>
                 <h2 className="text-4xl font-semibold text-stone-700">
@@ -93,7 +94,7 @@ export const Schedules = () => {
 
         {/* Date Filters */}
         <section
-          className="mt-16 flex items-center gap-3 overflow-x-auto p-0.5"
+          className="flex items-center gap-3 overflow-x-auto p-0.5"
           type="button"
         >
           <button
@@ -156,7 +157,7 @@ export const Schedules = () => {
 
         {/* List of Schedules */}
         <section>
-          <div className="mb-8 mt-16">
+          <div className="mb-8 mt-8">
             <div className="flex items-center justify-between">
               <h4 className="text-xs font-semibold uppercase text-gray-400">
                 Activities
