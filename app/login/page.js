@@ -7,7 +7,7 @@ import Logo from "@/components/Logo";
 import Link from "next/link";
 import Image from "next/image";
 
-import imageAsset from "/assets/dual.jpg";
+import imageAsset from "../../assets/Dual.jpg";
 
 export default function Login() {
   return (
